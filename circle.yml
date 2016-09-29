@@ -1,6 +1,7 @@
 deployment:
-  release:
-    tag: /[0-9]+(\.[0-9]+)*/
+  production:
+    branch: master
+    #tag: /[0-9]+(\.[0-9]+)*/ Possibly switch to this later to only deploy on version release
     owner: CS3398-Arctic
     commands:
       - ssh $SSH_USERNAME@64.137.249.182 "~/update_site.sh"
