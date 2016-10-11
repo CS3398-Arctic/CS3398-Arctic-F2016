@@ -13,4 +13,11 @@ from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "slamnotes.settings")
 
-application = get_wsgi_application()
+_application = get_wsgi_application()
+
+def application (environ, start_response):
+    # Pass environment variables to Django
+    os.environ['SECRET_KEY'] = environ['SECRET_KEY']
+    os.environ['DATABASE_USERNAME'] = environ['DATABASE_USERNAME']
+    os.environ['DATABASE_PASSWORD'] = environ['DATABASE_PASSWORD']
+    return _application(environ, start_response)
