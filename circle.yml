@@ -7,4 +7,4 @@ deployment:
       - ssh $SSH_USERNAME@64.137.249.182 "~/update_site.sh"
 machine:
   python:
-    version: pypy-3.4.3
+    version: 3.4.3
