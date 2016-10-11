@@ -10,6 +10,7 @@ def loadNote(id):
     newNote = note()
     note_data = search_database.findNoteByID(id)
     newNote.id = id
+    newNote.body = note_data['body']
     newNote.author = note_data['author']
     newNote.school = note_data['school']
     newNote.major = note_data['major']
