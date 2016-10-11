@@ -1,6 +1,6 @@
 import itertools
 import datetime
-from . import search_database
+import search_database
 
 class note:
     pass
