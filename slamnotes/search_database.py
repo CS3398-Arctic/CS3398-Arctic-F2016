@@ -9,7 +9,7 @@ def findNoteByID(num):
 	cursor.execute(query)
 	for(note_body, created_by, note_date) in cursor:
 		note_dict = {
-			'body' = note_body(),
+			'body' = note_body.decode('utf-8'),
 			'author' = created_by,
 			'note_date' = note_date,
 			}
