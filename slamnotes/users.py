@@ -2,7 +2,8 @@
 Module to handle users.
 """
 
-import database
+import database_search
+import database_store
 from django.contrib.auth.hashers import check_password, make_password
 
 class user:
@@ -32,11 +33,11 @@ def load_user (id = None, username = None):
     if id is not None:
         if type(id) is not int:
             raise TypeError("expected integer")
-        user_data = database.find_user_by_id(id)
+        user_data = database_search.find_user_by_id(id)
     else:
         if type(username) is not str:
             raise TypeError("expected string")
-        user_data = database.find_user_by_username(username)
+        user_data = database_search.find_user_by_username(username)
     
     the_user = user()
     
@@ -76,11 +77,11 @@ def user_exists (id = None, username = None):
         if id is not None:
             if type(id) is not int:
                 raise TypeError("expected integer")
-            database.find_user_by_id(id)
+            database_search.find_user_by_id(id)
         else:
             if type(username) is not str:
                 raise TypeError("expected string")
-            database.find_user_by_username(username)
+            database_search.find_user_by_username(username)
     except (KeyError, IndexError):
         # The user does not exist, return False.
         return False
