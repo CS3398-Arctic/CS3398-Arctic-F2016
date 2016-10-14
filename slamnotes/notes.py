@@ -1,46 +1,194 @@
-"""
-Module to handle notes.
-"""
-
-import database
+import itertools
+import datetime
+import database_store
+import database_search
 
 class note:
-    """Object to hold a note's information."""
-    pass
-    
+	pass
 
-def load_note (id):
-    """Load a note by id, returns a note object or None.
-    
-    Keyword arguments:
-    id -- the id of the note to load
-    """
-    
-    if not note_exists(id):
-        # No note with given id exists. 
-        return None
-    
-    the_note = note()
-    note_data = database.find_note_by_id(id)
-    
-    the_note.id = id
-    the_note.body = note_data['body']
-    the_note.author = note_data['author']
-    #the_note.school = note_data['school']
-    #the_note.major = note_data['major']
-    #the_note.course = note_data['course']
-    #the_note.instr = note_data['instr']
-    #the_note.unit = note_data['unit']
-    #the_note.section = note_data['section']
-    the_note.note_date = note_data['note_date']
-    
-    return the_note
-    
-def note_exists (id):
-    """Check if a note exists by id, returns True or False.
-    
-    Keyword arguments:
-    id -- the id of the note to check for
-    """
-    
-    return database.findNoteByID(id) is not None
+def store_note(body, author, school, major, course, instr, unit, section):
+	"""Definition of class note. Defines note attributes and then stores
+	note object into store_database.storeNote()
+	"""
+	newNote = note()
+	newNote.note_body = body
+	newNote.created_by = author
+	newNote.note_school = school
+	newNote.note_major = major
+	newNote.note_class = course
+	newNote.note_instr = instr
+	newNote.note_unit = unit
+	newNote.note_section = section
+	store_database.storeNote(newNote)      
+	
+def load_note_by_name(name):
+	"""Creates dictionary of note that was found by author inside the 
+	database_search.py file. Stores attributes found on Mariadb and stores them
+	in dictionary's attributes. Returns the dictionary.
+	"""
+	newNote = note()
+	note_data = database_search.find_note_by_user(name)
+	newNote.id = note_data['id']
+	newNote.body = note_data['body']
+	newNote.author = note_data['author']
+	newNote.school = note_data['school']
+	newNote.major = note_data['major']
+	newNote.course = note_data['course']
+	newNote.instr = note_data['instr']
+	newNote.unit = note_data['unit']
+	newNote.section = note_data['section']
+	newNote.date = note_data['date']
+	return newNote
+	
+def load_note_by_school(school):
+	"""Creates dictionary of note that was found by school inside the 
+	database_search.py file. Stores attributes found on Mariadb and stores them
+	in dictionary's attributes. Returns the dictionary.
+	"""
+	newNote = note()
+	note_data = database_search.find_note_by_school(school)
+	newNote.id = note_data['id']
+	newNote.body = note_data['body']
+	newNote.author = note_data['author']
+	newNote.school = note_data['school']
+	newNote.major = note_data['major']
+	newNote.course = note_data['course']
+	newNote.instr = note_data['instr']
+	newNote.unit = note_data['unit']
+	newNote.section = note_data['section']
+	newNote.date = note_data['date']
+	return newNote
+	
+def load_note_by_major(major):
+	"""Creates dictionary of note that was found by major inside the 
+	database_search.py file. Stores attributes found on Mariadb and stores them
+	in dictionary's attributes. Returns the dictionary.
+	"""
+	newNote = note()
+	note_data = database_search.find_note_by_major(major)
+	newNote.id = note_data['id']
+	newNote.body = note_data['body']
+	newNote.author = note_data['author']
+	newNote.school = note_data['school']
+	newNote.major = note_data['major']
+	newNote.course = note_data['course']
+	newNote.instr = note_data['instr']
+	newNote.unit = note_data['unit']
+	newNote.section = note_data['section']
+	newNote.date = note_data['date']
+	return newNote
+
+def load_note_by_course(course):
+	"""Creates dictionary of note that was found by course inside the 
+	database_search.py file. Stores attributes found on Mariadb and stores them
+	in dictionary's attributes. Returns the dictionary.
+	"""
+	newNote = note()
+	note_data = database_search.find_note_by_course(course)
+	newNote.id = note_data['id']
+	newNote.body = note_data['body']
+	newNote.author = note_data['author']
+	newNote.school = note_data['school']
+	newNote.major = note_data['major']
+	newNote.course = note_data['course']
+	newNote.instr = note_data['instr']
+	newNote.unit = note_data['unit']
+	newNote.section = note_data['section']
+	newNote.date = note_data['date']
+	return newNote
+
+def load_note_by_instr(instr):
+	"""Creates dictionary of note that was found by instructor inside the 
+	database_search.py file. Stores attributes found on Mariadb and stores them
+	in dictionary's attributes. Returns the dictionary.
+	"""
+	newNote = note()
+	note_data = database_search.find_note_by_instr(instr)
+	newNote.id = note_data['id']
+	newNote.body = note_data['body']
+	newNote.author = note_data['author']
+	newNote.school = note_data['school']
+	newNote.major = note_data['major']
+	newNote.course = note_data['course']
+	newNote.instr = note_data['instr']
+	newNote.unit = note_data['unit']
+	newNote.section = note_data['section']
+	newNote.date = note_data['date']
+	return newNote	
+	
+def load_note_by_unit(unit):
+	"""Creates dictionary of note that was found by unit inside the 
+	database_search.py file. Stores attributes found on Mariadb and stores them
+	in dictionary's attributes. Returns the dictionary.
+	"""
+	newNote = note()
+	note_data = database_search.find_note_by_unit(unit)
+	newNote.id = note_data['id']
+	newNote.body = note_data['body']
+	newNote.author = note_data['author']
+	newNote.school = note_data['school']
+	newNote.major = note_data['major']
+	newNote.course = note_data['course']
+	newNote.instr = note_data['instr']
+	newNote.unit = note_data['unit']
+	newNote.section = note_data['section']
+	newNote.date = note_data['date']
+	return newNote	
+
+def load_note_by_section(section):
+	"""Creates dictionary of note that was found by section inside the 
+	database_search.py file. Stores attributes found on Mariadb and stores them
+	in dictionary's attributes. Returns the dictionary.
+	"""
+	newNote = note()
+	note_data = database_search.find_note_by_section(section)
+	newNote.id = note_data['id']
+	newNote.body = note_data['body']
+	newNote.author = note_data['author']
+	newNote.school = note_data['school']
+	newNote.major = note_data['major']
+	newNote.course = note_data['course']
+	newNote.instr = note_data['instr']
+	newNote.unit = note_data['unit']
+	newNote.section = note_data['section']
+	newNote.date = note_data['date']
+	return newNote
+	
+def load_note_by_id(id):
+	"""Creates dictionary of note that was found by ID inside the 
+	database_search.py file. Stores attributes found on Mariadb and stores them
+	in dictionary's attributes. Returns the dictionary.
+	"""
+	newNote = note()
+	note_data = database_search.find_note_by_id(id)
+	newNote.id = note_data['id']
+	newNote.body = note_data['body']
+	newNote.author = note_data['author']
+	newNote.school = note_data['school']
+	newNote.major = note_data['major']
+	newNote.course = note_data['course']
+	newNote.instr = note_data['instr']
+	newNote.unit = note_data['unit']
+	newNote.section = note_data['section']
+	newNote.date = note_data['date']
+	return newNote
+
+#No build for this yet, if you're calling this and it's not working, that's why.
+def load_note_by_date(date):
+	"""Creates dictionary of note that was found by date inside the 
+	database_search.py file. Stores attributes found on Mariadb and stores them
+	in dictionary's attributes. Returns the dictionary.
+	"""
+	newNote = note()
+	note_data = database_search.find_note_by_date(date)
+	newNote.id = note_data['id']
+	newNote.body = note_data['body']
+	newNote.author = note_data['author']
+	newNote.school = note_data['school']
+	newNote.major = note_data['major']
+	newNote.course = note_data['course']
+	newNote.instr = note_data['instr']
+	newNote.unit = note_data['unit']
+	newNote.section = note_data['section']
+	newNote.date = note_data['date']
+	return newNote
