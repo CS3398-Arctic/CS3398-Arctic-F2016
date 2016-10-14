@@ -8,7 +8,7 @@ class note:
 
 def store_note(body, author, school, major, course, instr, unit, section):
 	"""Definition of class note. Defines note attributes and then stores
-	note object into store_database.storeNote()
+	note object into database_store.storeNote()
 	"""
 	newNote = note()
 	newNote.note_body = body
@@ -19,26 +19,17 @@ def store_note(body, author, school, major, course, instr, unit, section):
 	newNote.note_instr = instr
 	newNote.note_unit = unit
 	newNote.note_section = section
-	store_database.storeNote(newNote)      
-	
+	database_store.store_note(newNote)     
+
 def load_note_by_name(name):
 	"""Creates dictionary of note that was found by author inside the 
 	database_search.py file. Stores attributes found on Mariadb and stores them
 	in dictionary's attributes. Returns the dictionary.
 	"""
 	newNote = note()
-	note_data = database_search.find_note_by_user(name)
-	newNote.id = note_data['id']
-	newNote.body = note_data['body']
-	newNote.author = note_data['author']
-	newNote.school = note_data['school']
-	newNote.major = note_data['major']
-	newNote.course = note_data['course']
-	newNote.instr = note_data['instr']
-	newNote.unit = note_data['unit']
-	newNote.section = note_data['section']
-	newNote.date = note_data['date']
-	return newNote
+	notes_found = []
+	database_search.find_note_by_user(name, notes_found)
+	return notes_found	
 	
 def load_note_by_school(school):
 	"""Creates dictionary of note that was found by school inside the 
@@ -46,18 +37,9 @@ def load_note_by_school(school):
 	in dictionary's attributes. Returns the dictionary.
 	"""
 	newNote = note()
-	note_data = database_search.find_note_by_school(school)
-	newNote.id = note_data['id']
-	newNote.body = note_data['body']
-	newNote.author = note_data['author']
-	newNote.school = note_data['school']
-	newNote.major = note_data['major']
-	newNote.course = note_data['course']
-	newNote.instr = note_data['instr']
-	newNote.unit = note_data['unit']
-	newNote.section = note_data['section']
-	newNote.date = note_data['date']
-	return newNote
+	notes_found = []
+	database_search.find_note_by_school(school, notes_found)
+	return notes_found
 	
 def load_note_by_major(major):
 	"""Creates dictionary of note that was found by major inside the 
@@ -65,18 +47,9 @@ def load_note_by_major(major):
 	in dictionary's attributes. Returns the dictionary.
 	"""
 	newNote = note()
-	note_data = database_search.find_note_by_major(major)
-	newNote.id = note_data['id']
-	newNote.body = note_data['body']
-	newNote.author = note_data['author']
-	newNote.school = note_data['school']
-	newNote.major = note_data['major']
-	newNote.course = note_data['course']
-	newNote.instr = note_data['instr']
-	newNote.unit = note_data['unit']
-	newNote.section = note_data['section']
-	newNote.date = note_data['date']
-	return newNote
+	notes_found = []
+	database_search.find_note_by_major(major, notes_found)
+	return notes_found
 
 def load_note_by_course(course):
 	"""Creates dictionary of note that was found by course inside the 
@@ -84,18 +57,9 @@ def load_note_by_course(course):
 	in dictionary's attributes. Returns the dictionary.
 	"""
 	newNote = note()
-	note_data = database_search.find_note_by_course(course)
-	newNote.id = note_data['id']
-	newNote.body = note_data['body']
-	newNote.author = note_data['author']
-	newNote.school = note_data['school']
-	newNote.major = note_data['major']
-	newNote.course = note_data['course']
-	newNote.instr = note_data['instr']
-	newNote.unit = note_data['unit']
-	newNote.section = note_data['section']
-	newNote.date = note_data['date']
-	return newNote
+	notes_found = []
+	database_search.find_note_by_course(course, notes_found)
+	return notes_found
 
 def load_note_by_instr(instr):
 	"""Creates dictionary of note that was found by instructor inside the 
@@ -103,18 +67,9 @@ def load_note_by_instr(instr):
 	in dictionary's attributes. Returns the dictionary.
 	"""
 	newNote = note()
-	note_data = database_search.find_note_by_instr(instr)
-	newNote.id = note_data['id']
-	newNote.body = note_data['body']
-	newNote.author = note_data['author']
-	newNote.school = note_data['school']
-	newNote.major = note_data['major']
-	newNote.course = note_data['course']
-	newNote.instr = note_data['instr']
-	newNote.unit = note_data['unit']
-	newNote.section = note_data['section']
-	newNote.date = note_data['date']
-	return newNote	
+	notes_found = []
+	note_data = database_search.find_note_by_instr(instr, notes_found)
+	return notes_found
 	
 def load_note_by_unit(unit):
 	"""Creates dictionary of note that was found by unit inside the 
@@ -122,18 +77,9 @@ def load_note_by_unit(unit):
 	in dictionary's attributes. Returns the dictionary.
 	"""
 	newNote = note()
-	note_data = database_search.find_note_by_unit(unit)
-	newNote.id = note_data['id']
-	newNote.body = note_data['body']
-	newNote.author = note_data['author']
-	newNote.school = note_data['school']
-	newNote.major = note_data['major']
-	newNote.course = note_data['course']
-	newNote.instr = note_data['instr']
-	newNote.unit = note_data['unit']
-	newNote.section = note_data['section']
-	newNote.date = note_data['date']
-	return newNote	
+	notes_found = []
+	database_search.find_note_by_unit(unit, notes_found)
+	return notes_found
 
 def load_note_by_section(section):
 	"""Creates dictionary of note that was found by section inside the 
@@ -141,18 +87,9 @@ def load_note_by_section(section):
 	in dictionary's attributes. Returns the dictionary.
 	"""
 	newNote = note()
-	note_data = database_search.find_note_by_section(section)
-	newNote.id = note_data['id']
-	newNote.body = note_data['body']
-	newNote.author = note_data['author']
-	newNote.school = note_data['school']
-	newNote.major = note_data['major']
-	newNote.course = note_data['course']
-	newNote.instr = note_data['instr']
-	newNote.unit = note_data['unit']
-	newNote.section = note_data['section']
-	newNote.date = note_data['date']
-	return newNote
+	notes_found = []
+	database_search.find_note_by_section(section, notes_found)
+	return notes_found
 	
 def load_note_by_id(id):
 	"""Creates dictionary of note that was found by ID inside the 
@@ -160,18 +97,9 @@ def load_note_by_id(id):
 	in dictionary's attributes. Returns the dictionary.
 	"""
 	newNote = note()
-	note_data = database_search.find_note_by_id(id)
-	newNote.id = note_data['id']
-	newNote.body = note_data['body']
-	newNote.author = note_data['author']
-	newNote.school = note_data['school']
-	newNote.major = note_data['major']
-	newNote.course = note_data['course']
-	newNote.instr = note_data['instr']
-	newNote.unit = note_data['unit']
-	newNote.section = note_data['section']
-	newNote.date = note_data['date']
-	return newNote
+	notes_found = []
+	note_data = database_search.find_note_by_id(id, notes_found)
+	return notes_found
 
 #No build for this yet, if you're calling this and it's not working, that's why.
 def load_note_by_date(date):
@@ -180,15 +108,6 @@ def load_note_by_date(date):
 	in dictionary's attributes. Returns the dictionary.
 	"""
 	newNote = note()
-	note_data = database_search.find_note_by_date(date)
-	newNote.id = note_data['id']
-	newNote.body = note_data['body']
-	newNote.author = note_data['author']
-	newNote.school = note_data['school']
-	newNote.major = note_data['major']
-	newNote.course = note_data['course']
-	newNote.instr = note_data['instr']
-	newNote.unit = note_data['unit']
-	newNote.section = note_data['section']
-	newNote.date = note_data['date']
-	return newNote
+	notes_found = []
+	database_search.find_note_by_date(date, notes_found)
+	return notes_found
