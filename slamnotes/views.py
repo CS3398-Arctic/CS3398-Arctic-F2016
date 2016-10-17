@@ -6,7 +6,7 @@ Several function-based views. For more information please see:
 from django.http import HttpResponse
 from django.template.response import TemplateResponse
 from django.shortcuts import render
-from .models import NoteForm
+from .models import Note, NoteForm
 import datetime
 
 
