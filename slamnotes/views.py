@@ -11,6 +11,7 @@ import datetime
 
 
 def index(request):
+    """Home page view"""
     return render(request, 'index.html')
 
 
@@ -35,14 +36,15 @@ def view_note_id(request, note_id):
 
 
 def note_test(request):
+    """Note test page view"""
+    body_text = ""
+
     if request.method == 'POST':
         form = NoteForm(request.POST, request.FILES)
-        body_text = form.cleaned_data['body_text']
         if form.is_valid():
-            pass
+            body_text = form.cleaned_data['body_text']
     else:
         form = NoteForm()
-        body_text = ""
 
     return render(request, 'note_test.html',
                   {
