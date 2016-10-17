@@ -37,8 +37,8 @@ def view_note_id(request, note_id):
 
 def note_test(request):
     """Note test page view"""
-    most_recent_note = Note.objects.latest('id')
-    all_notes = Note.objects.order_by('-id')
+    # most_recent_note = Note.objects.latest('id')
+    all_notes = Note.objects.all().order_by('-id')
     # body_text = most_recent_note.body_text
 
     if request.method == 'POST':
