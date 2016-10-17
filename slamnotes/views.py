@@ -38,8 +38,8 @@ def view_note_id(request, note_id):
 def note_test(request):
     """Note test page view"""
     most_recent_note = Note.objects.latest('id')
-    #most_recent_note = Note.objects.order_by('-id').reverse()[0]
-    body_text = most_recent_note.body_text
+    all_notes = Note.objects.order_by('-id')
+    # body_text = most_recent_note.body_text
 
     if request.method == 'POST':
         form = NoteForm(request.POST, request.FILES)
@@ -52,5 +52,6 @@ def note_test(request):
     return render(request, 'note_test.html',
                   {
                       'form': form,
-                      'body_text': body_text,
+                      # 'body_text': body_text,
+                      'notes': all_notes,
                   })
