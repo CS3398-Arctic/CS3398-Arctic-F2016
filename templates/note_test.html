@@ -30,8 +30,12 @@
         <div class="main-container">
             <div class="main wrapper clearfix">
                 <article class="note">
-                   <p>Sample note text.</p>
-                   <p>Bacon ipsum dolor amet incididunt irure veniam tenderloin. Kielbasa ham hock tail adipisicing pastrami. Nisi aute enim salami incididunt cupim. Commodo landjaeger beef ribs turducken magna ea, pastrami ut jerky pariatur corned beef nisi. Pork belly boudin flank short ribs, leberkas strip steak turkey spare ribs laboris dolor cillum. Kevin veniam irure laborum flank ham hock dolore ribeye deserunt venison bresaola boudin capicola ut duis. Frankfurter ad nulla, labore flank anim capicola nisi.</p>
+                    {% if body_text %} {# Display body_text if it's not empty. #}
+                    <p>{{ body_text }}</p>
+                    {% else %} {# Display default note text. #}
+                    <p>Sample note text.</p>
+                    <p>Bacon ipsum dolor amet incididunt irure veniam tenderloin. Kielbasa ham hock tail adipisicing pastrami. Nisi aute enim salami incididunt cupim. Commodo landjaeger beef ribs turducken magna ea, pastrami ut jerky pariatur corned beef nisi. Pork belly boudin flank short ribs, leberkas strip steak turkey spare ribs laboris dolor cillum. Kevin veniam irure laborum flank ham hock dolore ribeye deserunt venison bresaola boudin capicola ut duis. Frankfurter ad nulla, labore flank anim capicola nisi.</p>
+                    {% endif %}
                 </article>
             </div> <!-- #main -->
         </div> <!-- #main-container -->

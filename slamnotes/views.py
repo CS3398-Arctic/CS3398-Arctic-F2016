@@ -37,7 +37,13 @@ def view_note_id(request, note_id):
 def note_test(request):
     if request.method == 'POST':
         formset = NoteForm(request.POST, request.FILES)
+        body_text = NoteForm.cleaned_data['body_text']
     else:
         formset = NoteForm()
+        body_text = ""
 
-    return render(request, 'note_test.html', {'formset': formset})
+    return render(request, 'note_test.html',
+                  {
+                      'formset': formset,
+                      'body_text': body_text,
+                  })
