@@ -37,13 +37,14 @@ def view_note_id(request, note_id):
 
 def note_test(request):
     """Note test page view"""
-    body_text = ""
+    most_recent_note = Note.object.order_by('-created_date')[0]
+    body_text = most_recent_note.body_text
 
     if request.method == 'POST':
         form = NoteForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            body_text = form.cleaned_data['body_text']
+            # body_text = form.cleaned_data['body_text']
     else:
         form = NoteForm()
 
