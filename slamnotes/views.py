@@ -14,15 +14,15 @@ def index(request):
 
 
 def view_time(request):
-	now = datetime.datetime.now()
-	html = "<html><body>Current Time: %s.</body></html>" % now
-	return HttpResponse(html)
+    now = datetime.datetime.now()
+    html = "<html><body>Current Time: %s.</body></html>" % now
+    return HttpResponse(html)
 
 
 def text_body_view(request):
     most_recent_note = Note.object.order_by('-created_date')[:5]
     output = ', '.join([n.body_text for n in most_recent_note])
-   return HttpResponse(output)
+    return HttpResponse(output)
 
 
 #def view_text_body(request):
@@ -30,7 +30,7 @@ def text_body_view(request):
 
 
 def view_note_id(request, note_id):
-	return HttpResponse("Note ID: %s." % note_id)
+    return HttpResponse("Note ID: %s." % note_id)
 
 
 def note_test(request):
