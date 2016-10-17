@@ -12,7 +12,7 @@ from django.forms import ModelForm, Textarea
 class School(models.Model):
     """School model"""
     name = models.CharField(max_length=100)
-    website = models.CharField(max_length=100, validators=URLValidator)
+    website = models.CharField(max_length=100, validators=[URLValidator,])
 
     def __str__(self):
         return self.name
