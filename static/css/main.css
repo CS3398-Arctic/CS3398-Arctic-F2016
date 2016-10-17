@@ -171,10 +171,6 @@ body.full-height {
     max-width: 600px;
 }
 
-.full-height .main article {
-    width: 100%;
-}
-
 .full-height > .footer-container {
     height: 102px;
     text-align: center;
@@ -191,8 +187,12 @@ body.full-height {
 }
 
 article.note {
+    border-top: 20px solid #f7ecbe;
     background-color: #ffffd6;
-    padding: 0 5% 10px;
+    float: none;
+    padding: 10px 5%;
+    max-width: 600px;
+    width: 100%;
     -webkit-box-shadow: 0 5px 10px #aaa;
     -moz-box-shadow: 0 5px 10px #aaa;
     box-shadow: 0 5px 10px #aaa;
