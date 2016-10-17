@@ -86,6 +86,9 @@ class NoteForm(ModelForm):
     class Meta:
         model = Note
         fields = ['body_text']
+        labels = {
+            'body_text': '',
+        }
         widgets = {
             'body_text': Textarea(attrs={'placeholder': 'Write a note...'}),
         }

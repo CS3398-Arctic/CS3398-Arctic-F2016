@@ -39,6 +39,7 @@
         <div class="footer-container">
             <footer class="wrapper">
                 <form method="post" action="">
+                    {% csrf_token %}
                     {{ formset }}
                     <input type="submit" value="Post">
                 </form>
