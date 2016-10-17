@@ -4,6 +4,7 @@ Django models for slamnotes project.
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator, URLValidator
+from django.forms import ModelForm, Textarea
 
 
 class Note(models.Model):
@@ -76,3 +77,12 @@ class Day(models.Model):
 
     def __str__(self):
         return self.date
+
+
+class NoteForm(ModelForm):
+    class Meta:
+        model = Note
+        fields = ['body_text']
+        widgets = {
+            'name': Textarea(attrs={'placeholder': 'Write a note...'}),
+        }

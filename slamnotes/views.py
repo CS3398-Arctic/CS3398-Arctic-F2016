@@ -6,6 +6,7 @@ Several function-based views. For more information please see:
 from django.http import HttpResponse
 from django.template.response import TemplateResponse
 from django.shortcuts import render
+from .models import NoteForm
 import datetime
 
 
@@ -25,8 +26,8 @@ def text_body_view(request):
     return HttpResponse(output)
 
 
-#def view_text_body(request):
-#	return TemplateResponse(request, 'notes/index.html', {})
+# def view_text_body(request):
+#     return TemplateResponse(request, 'notes/index.html', {})
 
 
 def view_note_id(request, note_id):
@@ -34,4 +35,9 @@ def view_note_id(request, note_id):
 
 
 def note_test(request):
-    return render(request, 'note_test.html')
+    if request.method == 'POST':
+        formset = NoteForm(request.POST, request.FILES)
+    else:
+        formset = NoteForm()
+
+    return render(request, 'note_test.html', {'formset': formset})

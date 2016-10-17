@@ -38,8 +38,9 @@
 
         <div class="footer-container">
             <footer class="wrapper">
-                <textarea placeholder="Write a note..."></textarea>
-                <input type="submit" value="Post">
+                <form method="post" action="">
+                    {{ formset }}
+                </form>
             </footer>
         </div>
 
