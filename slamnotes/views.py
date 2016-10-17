@@ -43,6 +43,7 @@ def note_test(request):
         form = NoteForm(request.POST, request.FILES)
         if form.is_valid():
             body_text = form.cleaned_data['body_text']
+            epic_variable = "WARMACHINEROX"
     else:
         form = NoteForm()
 
