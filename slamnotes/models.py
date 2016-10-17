@@ -1,22 +1,12 @@
-"""
-Django models for slamnotes project.
+"""slamnotes Models Configuration
+
+Several class-based models. For more information please see:
+    https://docs.djangoproject.com/en/1.10/topics/db/models/
 """
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator, URLValidator
 from django.forms import ModelForm, Textarea
-
-
-class Note(models.Model):
-    """Note model"""
-    body_text = models.TextField()
-    author = models.ForeignKey(User)
-    section = models.ForeignKey(Section)
-    day = models.ForeignKey(Day)
-    created_date = models.DateField()
-
-    def __str__(self):
-        return self.body_text
 
 
 class School(models.Model):
@@ -26,6 +16,15 @@ class School(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Instructor(models.Model):
+    """Instructor model"""
+    name_first = models.CharField(max_length=30)
+    name_last = models.CharField(max_length=40)
+
+    def __str__(self):
+        return self.name_first + self.name_last
 
 
 class Course(models.Model):
@@ -43,15 +42,6 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
-
-
-class Instructor(models.Model):
-    """Instructor model"""
-    name_first = models.CharField(max_length=30)
-    name_last = models.CharField(max_length=40)
-
-    def __str__(self):
-        return self.name_first + self.name_last
 
 
 class Section(models.Model):
@@ -77,6 +67,18 @@ class Day(models.Model):
 
     def __str__(self):
         return self.date
+
+
+class Note(models.Model):
+    """Note model"""
+    body_text = models.TextField()
+    author = models.ForeignKey(User)
+    section = models.ForeignKey(Section)
+    day = models.ForeignKey(Day)
+    created_date = models.DateField()
+
+    def __str__(self):
+        return self.body_text
 
 
 class NoteForm(ModelForm):
