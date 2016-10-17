@@ -19,7 +19,7 @@ from django.views.generic import TemplateView
 
 from . import views
 
-urlpatmpterns = [
+urlpatterns = [
     # url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt',
