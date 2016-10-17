@@ -1,0 +1,9 @@
+# Ignore compiled Python
+**/*.pyc
+**/__pycache__/
+
+# Ignore Python virtualenv
+**/slamnotesenv/
+
+# Ignore PyCharm project details
+.idea/
