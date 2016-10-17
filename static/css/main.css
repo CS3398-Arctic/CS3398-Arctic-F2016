@@ -154,6 +154,9 @@ nav a:hover {
    Author's custom styles
    ========================================================================== */
 
+body.full-height {
+    overflow: hidden;
+}
 
 .full-height > .header-container {
     height: 76px;
