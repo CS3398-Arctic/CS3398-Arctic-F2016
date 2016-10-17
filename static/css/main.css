@@ -160,6 +160,8 @@ body.full-height {
 
 .full-height > .header-container {
     height: 76px;
+    position: relative;
+    z-index: 1;
 }
 
 .full-height > .main-container {
@@ -171,6 +173,20 @@ body.full-height {
     max-width: 600px;
 }
 
+.full-height article.note {
+    border-top: 20px solid #f7ecbe;
+    background-color: #ffffd6;
+    float: none;
+    padding: 10px 5%;
+    max-width: 500px;
+    width: 100%;
+    -webkit-box-shadow: 0 5px 10px #aaa;
+    -moz-box-shadow: 0 5px 10px #aaa;
+    box-shadow: 0 5px 10px #aaa;
+    text-align: left;
+    margin: 0 auto;
+}
+
 .full-height > .footer-container {
     height: 102px;
     text-align: center;
@@ -178,24 +194,15 @@ body.full-height {
 
 .full-height .footer-container footer {
     color: inherit;
+    padding: 0;
 }
 
 .full-height .footer-container textarea {
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
     resize: none;
-}
-
-article.note {
-    border-top: 20px solid #f7ecbe;
-    background-color: #ffffd6;
-    float: none;
-    padding: 10px 5%;
-    max-width: 600px;
-    width: 100%;
-    -webkit-box-shadow: 0 5px 10px #aaa;
-    -moz-box-shadow: 0 5px 10px #aaa;
-    box-shadow: 0 5px 10px #aaa;
+    height: 85px;
+    margin-bottom: 7px;
 }
 
 /* ==========================================================================
