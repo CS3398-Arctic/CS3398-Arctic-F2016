@@ -72,10 +72,10 @@ class Day(models.Model):
 class Note(models.Model):
     """Note model"""
     body_text = models.TextField()
-    author = models.ForeignKey(User, blank=True)
-    section = models.ForeignKey(Section, blank=True)
-    day = models.ForeignKey(Day, blank=True)
-    created_date = models.DateField(blank=True)
+    author = models.ForeignKey(User, null=True, blank=True)
+    section = models.ForeignKey(Section, null=True, blank=True)
+    day = models.ForeignKey(Day, null=True, blank=True)
+    created_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.body_text
