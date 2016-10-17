@@ -12,7 +12,7 @@ from django.forms import ModelForm, Textarea
 class School(models.Model):
     """School model"""
     name = models.CharField(max_length=100)
-    website = models.CharField()  # TODO - Figure out why this isn't working: validators=URLValidator)
+    website = models.CharField(max_length=100, validators=URLValidator)
 
     def __str__(self):
         return self.name
@@ -32,7 +32,7 @@ class Course(models.Model):
     school = models.ForeignKey(School)
     instructor = models.ForeignKey(Instructor)
     title = models.CharField(max_length=100)
-    prefix = models.CharField()
+    prefix = models.CharField(max_length=2)
     number = models.PositiveIntegerField(
         validators=[
             MaxValueValidator(9999),
@@ -72,10 +72,10 @@ class Day(models.Model):
 class Note(models.Model):
     """Note model"""
     body_text = models.TextField()
-    author = models.ForeignKey(User)
-    section = models.ForeignKey(Section)
-    day = models.ForeignKey(Day)
-    created_date = models.DateField()
+    author = models.ForeignKey(User, blank=True)
+    section = models.ForeignKey(Section, blank=True)
+    day = models.ForeignKey(Day, blank=True)
+    created_date = models.DateField(blank=True)
 
     def __str__(self):
         return self.body_text
