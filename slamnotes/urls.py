@@ -22,8 +22,9 @@ from . import views
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
-	url(r'^$', views.view_time)
-	url(r'^$', views.view_text_body, )
+	url(r'^view-time$', views.view_time)
+	url(r'^view-text-body$', views.view_text_body, )
+    url(r'^note-test$', views.note_test, name='note_test'),
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt',
         content_type='text/plain')),
 ]
