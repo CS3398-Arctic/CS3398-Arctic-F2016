@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'slamnotes.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'slamnotes',
+        'NAME': os.environ.get('DATABASE_NAME'),
         'USER': os.environ.get('DATABASE_USERNAME'),
         'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
         'HOST': 'localhost',

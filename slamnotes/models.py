@@ -72,7 +72,7 @@ class Day(models.Model):
 class Note(models.Model):
     """Note model"""
     body_text = models.TextField()
-    the_author = models.ForeignKey(User, blank=True)
+    author = models.ForeignKey(User, blank=True)
     section = models.ForeignKey(Section, blank=True)
     day = models.ForeignKey(Day, blank=True)
     created_date = models.DateField(blank=True)
@@ -82,9 +82,10 @@ class Note(models.Model):
 
 
 class NoteForm(ModelForm):
+    """Note model form"""
     class Meta:
         model = Note
         fields = ['body_text']
         widgets = {
-            'name': Textarea(attrs={'placeholder': 'Write a note...'}),
+            'body_text': Textarea(attrs={'placeholder': 'Write a note...'}),
         }
