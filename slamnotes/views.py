@@ -44,6 +44,9 @@ def note_test(request):
     if request.method == 'POST':
         form = NoteForm(request.POST, request.FILES)
         if form.is_valid():
+            now = datetime.datetime.now()
+            html = "<html><body>Current Time: %s.</body></html>" % now
+            return HttpResponse(html)
             # form.save()
             # body_text = form.cleaned_data['body_text']
     else:
