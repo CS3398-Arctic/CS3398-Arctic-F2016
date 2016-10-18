@@ -126,7 +126,7 @@ nav a:hover {
 
 .main {
     padding: 30px 0;
-    min-height: calc(100vh - 300px);
+    min-height: calc(100vh - 274px);
 }
 
 .main article h1 {
@@ -171,7 +171,6 @@ body.full-height {
 
 .full-height .header-container .title {
     font-size: 1.5rem;
-    margin: 16px 0;
 }
 
 .full-height > .main-container {
