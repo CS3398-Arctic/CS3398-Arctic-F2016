@@ -44,7 +44,7 @@ def note_test(request):
     if request.method == 'POST':
         form = NoteForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            # form.save()
             # body_text = form.cleaned_data['body_text']
     else:
         form = NoteForm()
