@@ -31,6 +31,7 @@
             <div class="main wrapper clearfix">
                 {% for note in notes %} {# Display all notes. #}
                 <article class="note">
+                    <p>{{  notes.__len__ }}</p>
                     <p>{{ note.body_text }}</p> {# Display note text. #}
                 </article>
                 {% endfor %}
