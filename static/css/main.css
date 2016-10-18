@@ -159,9 +159,9 @@ body.full-height {
 }
 
 .full-height > .header-container {
-    -webkit-box-shadow: 0 5px 10px rgba(170, 170, 170, 0.70);
-    -moz-box-shadow: 0 5px 10px rgba(170, 170, 170, 0.70);
-    box-shadow: 0 5px 10px rgba(170, 170, 170, 0.70);
+    -webkit-box-shadow: 0 1px 2px rgba(170, 170, 170, 0.70);
+    -moz-box-shadow: 0 1px 2px rgba(170, 170, 170, 0.70);
+    box-shadow: 0 1px 2px rgba(170, 170, 170, 0.70);
     border-bottom-width: 10px;
     height: 58px;
     position: relative;
@@ -179,27 +179,25 @@ body.full-height {
 }
 
 .full-height .main {
-    max-width: 600px;
 }
 
 .full-height article.note {
-    border-top: 20px solid #f7ecbe;
+    border: 1px solid #f7ecbe;
     background-color: #ffffd6;
     float: none;
     padding: 10px 5%;
     max-width: 500px;
     width: 100%;
-    -webkit-box-shadow: 0 5px 10px rgba(170, 170, 170, 0.70);
-    -moz-box-shadow: 0 5px 10px rgba(170, 170, 170, 0.70);
-    box-shadow: 0 5px 10px rgba(170, 170, 170, 0.70);
-    text-align: left;
     margin: 0 auto 20px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .full-height > .footer-container {
-    -webkit-box-shadow: 0 -5px 10px rgba(170, 170, 170, 0.70);
-    -moz-box-shadow: 0 -5px 10px rgba(170, 170, 170, 0.70);
-    box-shadow: 0 -5px 10px rgba(170, 170, 170, 0.70);
+    -webkit-box-shadow: 0 -1px 2px rgba(170, 170, 170, 0.70);
+    -moz-box-shadow: 0 -1px 2px rgba(170, 170, 170, 0.70);
+    box-shadow: 0 -1px 2px rgba(170, 170, 170, 0.70);
     border-top-width: 10px;
     height: 102px;
     text-align: center;
