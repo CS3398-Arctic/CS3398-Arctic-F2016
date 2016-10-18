@@ -1,4 +1,5 @@
-<!doctype html>
+{% load static from staticfiles %}
+<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
@@ -9,12 +10,12 @@
         <title>Note Test - Slam e-Notes</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="apple-touch-icon" href="{% url 'static/images/apple-touch-icon.png' %}">
+        <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
 
-        <link rel="stylesheet" href="{% url 'static/css/normalize.min.css' %}">
-        <link rel="stylesheet" href="{% url 'static/css/main.css?1476680402' %}">
+        <link rel="stylesheet" href="{% static 'css/normalize.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/main.css?1476680402' %}">
 
-        <script src="{% url 'static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
+        <script src="{% static 'js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
     </head>
     <body class="full-height">
         <!--[if lt IE 8]>
@@ -50,7 +51,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="{% url 'static/js/vendor/jquery-1.11.2.min.js' %}"><\/script>')</script>
 
-        <script src="{% url 'static/js/main.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
