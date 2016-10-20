@@ -31,18 +31,17 @@
             </header>
         </div>
 
-{% block content %}
-<form method="post" action=".">
-  {% csrf_token %}
-  {{ form.as_p }}
 
-  <input type="submit" value="{% trans 'Log in' %}" />
-  <input type="hidden" name="next" value="{{ next }}" />
-</form>
-
-<p>{% trans "Forgot password" %}? {% trans "Reset it" %}</a>!</p>
-<p>{% trans "Not member" %}? {% trans "Register" %}</a>!</p>
-{% endblock %}
+        {% block content %}
+            <form method="post" action=".">
+                {% csrf_token %}
+                {{ form.as_p }}
+                Username: <input type="text" name="username" value=""><br>
+                Password: <input type="text" name="password" value=""><br>
+                <input type="submit" value="{% trans 'Log in' %}" />
+                <input type="hidden" name="next" value="{{ next }}" />
+            </form>
+        {% endblock %}
 
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
