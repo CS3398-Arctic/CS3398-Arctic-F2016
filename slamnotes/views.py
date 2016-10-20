@@ -58,5 +58,5 @@ def note_test(request):
 
 def user_test(request):
     """user test page view"""
-    return render(request, 'registration\login.html')
+    return render(request, 'registration/login.html')
 
