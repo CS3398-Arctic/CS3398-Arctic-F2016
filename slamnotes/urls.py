@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^view-time$', views.view_time),
     url(r'^note-test$', views.note_test, name='note-test'),
-    url(r'^user-test/', views.user_test, name='user-test'),
+    url(r'^user-test/$', views.user_test, name='user-test'),
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt',
         content_type='text/plain')),
 ]
