@@ -27,10 +27,6 @@ def text_body_view(request):
     return HttpResponse(output)
 
 
-# def view_text_body(request):
-#     return TemplateResponse(request, 'notes/index.html', {})
-
-
 def view_note_id(request, note_id):
     return HttpResponse("Note ID: %s." % note_id)
 
@@ -58,3 +54,9 @@ def note_test(request):
                       # 'body_text': body_text,
                       'notes': all_notes,
                   })
+
+
+def user_test(request):
+    """user test page view"""
+    return render(request, 'registration\login.html')
+

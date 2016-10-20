@@ -6,6 +6,7 @@ Several class-based models. For more information please see:
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator, URLValidator
+from django.contrib.auth.hashers import PBKDF2PasswordHasher
 from django.forms import ModelForm, Textarea
 
 
@@ -92,3 +93,14 @@ class NoteForm(ModelForm):
         widgets = {
             'body_text': Textarea(attrs={'placeholder': 'Write a note...'}),
         }
+
+
+class User(models.Model):
+    """User model"""
+    username = models.CharField(max_length=32)
+    first_name = models.CharField(max_length=32)
+    last_name = models.CharField(max_length=32)
+    user_school = models.CharField(max_length=100)
+
+
+
