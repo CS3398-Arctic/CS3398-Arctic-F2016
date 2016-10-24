@@ -102,5 +102,5 @@ class User(models.Model):
     last_name = models.CharField(max_length=32)
     user_school = models.CharField(max_length=100)
 
-
+# hello
 
