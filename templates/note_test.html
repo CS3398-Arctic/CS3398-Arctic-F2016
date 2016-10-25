@@ -42,11 +42,17 @@
 
         <div class="footer-container">
             <footer class="wrapper">
+                {% if user.is_authenticated %}
                 <form method="post" action="">
                     {% csrf_token %}
                     {{ form }}
                     <input type="submit" value="Post">
                 </form>
+                {% else %}
+                <p>
+                    You must be logged in to post notes.
+                </p>
+                {% endif %}
             </footer>
         </div>
 

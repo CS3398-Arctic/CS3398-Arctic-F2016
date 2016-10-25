@@ -40,15 +40,14 @@ def note_test(request):
         form = NoteForm(request.POST, request.FILES)
         if request.user.is_authenticated() and form.is_valid():
             form.save()
-            body_text = form.cleaned_data['body_text']
     else:
         form = NoteForm()
 
     return render(request, 'note_test.html',
                   {
                       'form': form,
-                      'body_text': body_text,
                       'notes': all_notes,
+                      'user': request.user,
                   })
 
 
