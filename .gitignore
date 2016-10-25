@@ -7,3 +7,9 @@
 
 # Ignore PyCharm project details
 .idea/
+
+# Local migrations
+slamnotes/migrations/
+
+# Static files created with collectstatic
+templates/static/

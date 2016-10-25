@@ -3,10 +3,9 @@
 Several class-based models. For more information please see:
     https://docs.djangoproject.com/en/1.10/topics/db/models/
 """
-from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator, URLValidator
-from django.contrib.auth.hashers import PBKDF2PasswordHasher
+from django.db import models
 from django.forms import ModelForm, Textarea
 
 
@@ -101,6 +100,3 @@ class User(models.Model):
     first_name = models.CharField(max_length=32)
     last_name = models.CharField(max_length=32)
     user_school = models.CharField(max_length=100)
-
-# hello
-
