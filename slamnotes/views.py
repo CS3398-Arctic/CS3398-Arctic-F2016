@@ -8,7 +8,7 @@ import datetime
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from .models import Note, NoteForm
+from .models import Note, NoteForm, User, UserForm
 
 
 def index(request):
@@ -53,4 +53,21 @@ def note_test(request):
 
 def user_test(request):
     """user test page view"""
-    return render(request, 'registration/login.html')
+    return render(request, 'login.html')
+
+
+def create_account(request):
+    """account creation page"""
+    if request.method == 'POST':
+        user = UserForm(request.POST, request.FILES)
+        if user.is_valid():
+            user.save()
+            return render(request, 'account_created.html')
+    else:
+        user = UserForm()
+    return render(request, 'create_account.html')
+
+
+def account_created(request):
+    """account created test page"""
+    return render(request, 'account_created.html')

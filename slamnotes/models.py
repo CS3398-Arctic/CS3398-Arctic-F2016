@@ -96,7 +96,22 @@ class NoteForm(ModelForm):
 
 class User(models.Model):
     """User model"""
+    user_email = models.CharField(max_length=32)
     username = models.CharField(max_length=32)
-    first_name = models.CharField(max_length=32)
-    last_name = models.CharField(max_length=32)
-    user_school = models.CharField(max_length=100)
+    password = models.CharField(max_length=32)
+
+    def __str__(self):
+        return self.User
+
+
+class UserForm(ModelForm):
+    """User model form"""
+    class Meta:
+        model = User
+        fields = ['user_email', 'username', 'password']
+        labels = {
+            'user_email': '',
+            'username': '',
+            'password': '',
+        }
+
