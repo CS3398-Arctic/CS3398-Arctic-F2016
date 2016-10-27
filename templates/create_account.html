@@ -31,10 +31,7 @@
             <h3>Create user account.</h3>
             {% csrf_token %}
             {{ form.as_p }}
-            Email: <input type="text" name="email" value=""><br>
-            Username: <input type="text" name="username" value=""><br>
-            Password: <input type="text" name="password" value=""><br>
-            <input type="submit" value="{% trans 'Create Account' %}" />
+            <input type="submit" value="Create Account" />
         </form>
     {% endblock %}
 
