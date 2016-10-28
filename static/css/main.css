@@ -225,6 +225,102 @@ form#create-account-form {
     margin: 100px auto 0;
     width: 200px;
 }
+
+/* ==========================================================================
+
+   ========================================================================== */
+
+
+.session-list {
+  height: calc(100vh - 108px);
+  overflow-y: hidden;
+}
+.session-list h3 {
+  padding: 5px 0 5px 10px;
+  font-size: 16px;
+  margin: 5px 10px 5px 0;
+  color: #DDD;
+  font-family: Segoe UI;
+  font-weight: 100;
+}
+.sidebar-container {
+  position: fixed;
+  height: 100vh;
+  z-index: 1;
+  width: 232px;
+  background: #415568;
+  top: 0;
+  box-shadow: 0 -1px 2px rgba(170, 170, 170, 0.70);
+  color: white;
+  font-family: Segoe UI Light, sans-serif;
+}
+.sidebar-container h2 {
+  font-size: 17px;
+  padding: 14px 0 20px 10px;
+  cursor: pointer;
+  height: 24px;
+  overflow: hidden;
+  margin: 0;
+}
+.session-list:hover {
+  overflow-y: scroll;
+}
+.session-list .viewing {
+  color: white;
+  background-color: #7591e1;
+}
+.class-title {
+  padding: 10px 0 10px 10px;
+  margin: 0 10px 0 0;
+  font-size: 13px;
+  border-bottom: 2px solid #6f8898;
+  font-family: Segoe UI, sans-serif;
+  font-weight: 600;
+  color: #DDD;
+}
+.session-list:hover h3 {
+  margin-right: 0;
+}
+.courses {
+  border-bottom: 2px solid #6f8898;
+  margin-right: 10px;
+}
+.courses > h2 {
+  display: block;
+}
+.courses > * > h2 {
+  display: none;
+  padding: 0 20px 20px 10px;
+}
+.courses:hover > h2 {
+  border-bottom:none;
+}
+.courses > h2:after {
+  content: '▼';
+  color: #6f8898;
+  float: right;
+}
+.courses:hover > h2:after {
+  content: '✕';
+}
+h2.add-new:after {
+  content: '+';
+  color: white;
+  float: left;
+  padding-right: 6px;
+}
+.courses:hover > * > h2 {
+  display: block;
+}
+.courses-other {
+  position: absolute;
+  background-color: #415568;
+  width: 100%;
+}
+.courses:hover .courses-other {
+    height: 100vh;
+}
+
 /* ==========================================================================
    Media Queries
    ========================================================================== */
@@ -313,6 +409,10 @@ form#create-account-form {
     .wrapper {
         width: 1026px; /* 1140px - 10% for margins */
         margin: 0 auto;
+    }
+
+    .full-height .wrapper {
+        width: 868px;
     }
 }
 

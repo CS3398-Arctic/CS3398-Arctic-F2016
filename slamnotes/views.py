@@ -4,6 +4,7 @@ Several function-based views. For more information please see:
     https://docs.djangoproject.com/en/1.10/topics/http/views/
 """
 import datetime
+
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -32,8 +33,8 @@ def view_note_id(request, note_id):
     return HttpResponse("Note ID: %s." % note_id)
 
 
-def note_test(request):
-    """Note test page view"""
+def channel(request):
+    """Channel view"""
     all_notes = Note.objects.order_by('-id')
 
     if request.method == 'POST':
@@ -43,7 +44,7 @@ def note_test(request):
     else:
         form = NoteForm()
 
-    return render(request, 'note_test.html',
+    return render(request, 'channel.html',
                   {
                       'form': form,
                       'notes': all_notes,
