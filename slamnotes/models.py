@@ -6,7 +6,7 @@ Several class-based models. For more information please see:
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator, URLValidator
 from django.db import models
-from django.forms import ModelForm, Textarea, PasswordInput
+from django.forms import ModelForm, Textarea, PasswordInput, EmailInput, TextInput
 
 
 class School(models.Model):
@@ -99,11 +99,17 @@ class UserForm(ModelForm):
     class Meta:
         model = User
         fields = ['email', 'username', 'password']
+
         labels = {
             'email': '',
             'username': '',
             'password': '',
         }
+        help_texts = {
+            'username': '',
+        }
         widgets = {
-            'password': PasswordInput(),
+            'email': EmailInput(attrs={'placeholder': 'Email'}),
+            'username': TextInput(attrs={'placeholder': 'Username'}),
+            'password': PasswordInput(attrs={'placeholder': 'Password'}),
         }
