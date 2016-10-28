@@ -113,3 +113,22 @@ class UserForm(ModelForm):
             'username': TextInput(attrs={'placeholder': 'Username'}),
             'password': PasswordInput(attrs={'placeholder': 'Password'}),
         }
+
+
+class LoginForm(ModelForm):
+    """Login model form"""
+    class Meta:
+        model = User
+        fields = ['email', 'password']
+
+        labels = {
+            'email': '',
+            'password': '',
+        }
+        help_texts = {
+            'username': '',
+        }
+        widgets = {
+            'email': EmailInput(attrs={'placeholder': 'Email'}),
+            'password': PasswordInput(attrs={'placeholder': 'Password'}),
+        }

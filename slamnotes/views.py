@@ -4,12 +4,11 @@ Several function-based views. For more information please see:
     https://docs.djangoproject.com/en/1.10/topics/http/views/
 """
 import datetime
-
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from .models import Note, NoteForm, UserForm
+from .models import Note, NoteForm, UserForm, LoginForm
 
 
 def index(request):
@@ -67,6 +66,21 @@ def create_account(request):
     else:
         form = UserForm()
     return render(request, 'create_account.html',
+                  {
+                      'form': form,
+                  })
+
+
+def login(request):
+    """login page"""
+    if request.method == 'POST':
+        form = LoginForm(request.POST, request.FILES)
+        if form.is_valid():
+            User.objects.login(**form.cleaned_data)
+            return render(request, 'login_successful.html')
+    else:
+        form = LoginForm()
+    return render(request, 'login.html',
                   {
                       'form': form,
                   })
