@@ -1,8 +1,4 @@
-"""slamnotes Views Configuration
 
-Several function-based views. For more information please see:
-    https://docs.djangoproject.com/en/1.10/topics/http/views/
-"""
 import datetime
 from django.contrib.auth.models import User
 from django.http import HttpResponse
