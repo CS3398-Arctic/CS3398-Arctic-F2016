@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^channel/1$', views.channel, name='channel'),
     url(r'^user-test$', views.user_test, name='user-test'),
     url(r'^create-account$', views.create_account, name='create-account'),
+    url(r'^login', views.login, name='login'),
     url(r'^account-created$', views.account_created, name='account-created'),
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt',
         content_type='text/plain')),
