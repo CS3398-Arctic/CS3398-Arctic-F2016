@@ -8,21 +8,27 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from .models import Note, NoteForm, UserForm, LoginForm
+from .models import Note, NoteForm, SignupForm, LoginForm
 
 
 def index(request):
     """Home page view"""
     if request.method == 'POST':
         form_login = LoginForm(request.POST, request.FILES)
+        form_signup = SignupForm(request.POST, request.FILES)
         if form_login.is_valid():
             User.objects.login(**form_login.cleaned_data)
             return render(request, 'login_successful.html')
+        elif form_signup.is_valid():
+            User.objects.create_user(**form_signup.cleaned_data)
+            return render(request, 'account_created.html')
     else:
         form_login = LoginForm()
+        form_signup = SignupForm()
     return render(request, 'index.html',
                   {
                       'form_login': form_login,
+                      'form_signup': form_signup,
                   })
 
 
@@ -69,12 +75,12 @@ def user_test(request):
 def create_account(request):
     """account creation page"""
     if request.method == 'POST':
-        form = UserForm(request.POST, request.FILES)
+        form = SignupForm(request.POST, request.FILES)
         if form.is_valid():
             User.objects.create_user(**form.cleaned_data)
             return render(request, 'account_created.html')
     else:
-        form = UserForm()
+        form = SignupForm()
     return render(request, 'create_account.html',
                   {
                       'form': form,

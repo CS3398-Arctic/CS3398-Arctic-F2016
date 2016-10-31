@@ -67,6 +67,12 @@
                             {{ form_login.as_p }}
                             <input type="submit" value="Login" />
                         </form>
+                        <form id="create-account-form" method="post" action=".">
+                            <h3>Sign up.</h3>
+                            {% csrf_token %}
+                            {{ form_signup.as_p }}
+                            <input type="submit" value="Create Account" />
+                        </form>
                  </aside>
             </div> <!-- #main -->
         </div> <!-- #main-container -->

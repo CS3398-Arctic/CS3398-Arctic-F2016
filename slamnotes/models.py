@@ -94,7 +94,7 @@ class NoteForm(ModelForm):
         }
 
 
-class UserForm(ModelForm):
+class SignupForm(ModelForm):
     """User model form"""
     class Meta:
         model = User
