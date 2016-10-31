@@ -295,19 +295,18 @@ form#create-account-form {
 .courses:hover > h2 {
   border-bottom:none;
 }
-.courses > h2:after {
+.courses > h2::after {
   content: '▼';
   color: #6f8898;
   float: right;
 }
-.courses:hover > h2:after {
+.courses:hover > h2::after {
   content: '✕';
 }
-h2.add-new:after {
+h2.courses-add::before {
   content: '+';
   color: white;
-  float: left;
-  padding-right: 6px;
+  margin-right: 6px;
 }
 .courses:hover > * > h2 {
   display: block;
@@ -450,10 +449,11 @@ h2.add-new:after {
     visibility: hidden;
 }
 
-.clearfix:before,
-.clearfix:after {
-    content: " ";
-    display: table;
+.clearfix::before,
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: block;
 }
 
 .clearfix:after {
@@ -470,8 +470,8 @@ h2.add-new:after {
 
 @media print {
     *,
-    *:before,
-    *:after {
+    *::before,
+    *::after {
         background: transparent !important;
         color: #000 !important;
         box-shadow: none !important;
@@ -483,16 +483,16 @@ h2.add-new:after {
         text-decoration: underline;
     }
 
-    a[href]:after {
+    a[href]::after {
         content: " (" attr(href) ")";
     }
 
-    abbr[title]:after {
+    abbr[title]::after {
         content: " (" attr(title) ")";
     }
 
-    a[href^="#"]:after,
-    a[href^="javascript:"]:after {
+    a[href^="#"]::after,
+    a[href^="javascript:"]::after {
         content: "";
     }
 
