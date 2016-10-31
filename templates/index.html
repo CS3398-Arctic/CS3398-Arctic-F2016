@@ -56,12 +56,18 @@
                             <li>Search through notes.</li>
                             <li>Upload handwritten notes.</li>
                         </ul>
+                        <h3>About Us</h3>
+                    <p>Hi, we're Team Arctic. <a href="https://github.com/CS3398-Arctic/CS3398-Arctic-F2016/">Follow development on GitHub!</a></p>
                     </section>
                 </article>
                 <aside>
-                    <h3>About Us</h3>
-                    <p>Hi, we're Team Arctic. <a href="https://github.com/CS3398-Arctic/CS3398-Arctic-F2016/">Follow development on GitHub!</a></p>
-                </aside>
+                        <form id="login-form" method="post" action=".">
+                            <h3>Login.</h3>
+                            {% csrf_token %}
+                            {{ form_login.as_p }}
+                            <input type="submit" value="Login" />
+                        </form>
+                 </aside>
             </div> <!-- #main -->
         </div> <!-- #main-container -->
 

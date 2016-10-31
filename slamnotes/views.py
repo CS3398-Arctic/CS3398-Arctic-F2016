@@ -13,7 +13,17 @@ from .models import Note, NoteForm, UserForm, LoginForm
 
 def index(request):
     """Home page view"""
-    return render(request, 'index.html')
+    if request.method == 'POST':
+        form_login = LoginForm(request.POST, request.FILES)
+        if form_login.is_valid():
+            User.objects.login(**form_login.cleaned_data)
+            return render(request, 'login_successful.html')
+    else:
+        form_login = LoginForm()
+    return render(request, 'index.html',
+                  {
+                      'form_login': form_login,
+                  })
 
 
 def view_time(request):
