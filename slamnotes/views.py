@@ -4,6 +4,7 @@ Several function-based views. For more information please see:
     https://docs.djangoproject.com/en/1.10/topics/http/views/
 """
 import datetime
+
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -25,6 +26,7 @@ def index(request):
     else:
         form_login = LoginForm()
         form_signup = SignupForm()
+
     return render(request, 'index.html',
                   {
                       'form_login': form_login,

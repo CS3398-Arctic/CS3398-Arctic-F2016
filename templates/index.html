@@ -61,13 +61,13 @@
                     </section>
                 </article>
                 <aside>
-                        <form id="login-form" method="post" action=".">
+                        <form id="login-form" method="post">
                             <h3>Login.</h3>
                             {% csrf_token %}
                             {{ form_login.as_p }}
                             <input type="submit" value="Login" />
                         </form>
-                        <form id="create-account-form" method="post" action=".">
+                        <form id="create-account-form" method="post">
                             <h3>Sign up.</h3>
                             {% csrf_token %}
                             {{ form_signup.as_p }}
