@@ -216,3 +216,12 @@ class LoginForm(ModelForm):
             'email': EmailInput(attrs={'placeholder': 'Email'}),
             'password': PasswordInput(attrs={'placeholder': 'Password'}),
         }
+
+
+class LogoutForm(ModelForm):
+    """Logout model form"""
+    class Meta:
+        model = User
+        fields = ['is_active']
+
+        labels = { 'is_active': '',}

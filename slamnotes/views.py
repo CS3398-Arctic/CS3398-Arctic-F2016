@@ -7,7 +7,8 @@ Several function-based views. For more information please see:
 # import datetime
 
 from django.contrib.auth import authenticate, login
-from django.shortcuts import render
+from django.contrib.auth import logout as auth_logout
+from django.shortcuts import render, redirect
 
 from .models import Note, NoteForm, SignupForm, LoginForm, User
 
@@ -67,3 +68,9 @@ def channel(request):
                       'notes': all_notes,
                       'user': request.user,
                   })
+
+
+def logout(request):
+    """Logout view"""
+    auth_logout(request)
+    return redirect('index')

@@ -64,6 +64,7 @@
                     {% if user.is_authenticated %}
                     <p>
                         Welcome, {{ user.email }}.
+                        <a href="{% url 'logout' %}">Log out.</a>
                     </p>
                     {% else %}
                         {% if account_created %}
@@ -88,7 +89,7 @@
                         <input type="submit" name="login-form" value="Log in" />
                     </form>
                     <form id="signup-form" method="post">
-                        <h3>Sign Up</h3>
+                        <h3>Sign Up With Texas State Email</h3>
                         {% csrf_token %}
                         {{ form_signup.as_p }}
                         <input type="submit" name="signup-form" value="Create Account" />
