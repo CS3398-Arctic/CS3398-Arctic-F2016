@@ -88,6 +88,9 @@ DATABASES = {
     }
 }
 
+# Custom user model
+# https://docs.djangoproject.com/en/1.10/topics/auth/customizing/#auth-custom-user
+AUTH_USER_MODEL = 'slamnotes.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators

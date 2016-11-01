@@ -6,23 +6,34 @@ Several function-based views. For more information please see:
 
 # import datetime
 
-from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render
 
-from .models import Note, NoteForm, SignupForm, LoginForm
+from .models import Note, NoteForm, SignupForm, LoginForm, User
 
 
 def index(request):
     """Home page view"""
     account_created = False
+    invalid_login = False
 
     if request.method == 'POST':
-        form_login = LoginForm(request.POST, request.FILES)
-        form_signup = SignupForm(request.POST, request.FILES)
+        form_login = LoginForm(request.POST) if "login-form" in request.POST else LoginForm()
+        form_signup = SignupForm(request.POST) if "signup-form" in request.POST else SignupForm()
 
-        if "login-form" in request.POST and form_login.is_valid():
-            User.objects.login(**form_login.cleaned_data)
+        if "login-form" in request.POST:
+            # Log user in
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+            user = authenticate(email=email, password=password)
+            if user is not None:
+                login(request, user)
+            else:
+                # Return an 'invalid login' error message.
+                invalid_login = True
+
         elif "signup-form" in request.POST and form_signup.is_valid():
+            # Create new account
             User.objects.create_user(**form_signup.cleaned_data)
             account_created = True
     else:
@@ -34,6 +45,7 @@ def index(request):
                       'form_login': form_login,
                       'form_signup': form_signup,
                       'account_created': account_created,
+                      'invalid_login': invalid_login,
                   })
 
 
