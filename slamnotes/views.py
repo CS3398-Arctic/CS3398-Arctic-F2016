@@ -56,7 +56,8 @@ def channel(request):
     if request.method == 'POST':
         form = NoteForm(request.POST, request.FILES)
         if request.user.is_authenticated() and form.is_valid():
-            form.save()
+            body_text = form.cleaned_data['body_text']
+            Note.objects.create(body_text=body_text, author=request.user)
     else:
         form = NoteForm()
 

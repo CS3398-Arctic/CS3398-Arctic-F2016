@@ -35,6 +35,10 @@
                 {% for note in notes %} {# Display all notes. #}
                 <article class="note">
                     <p>{{ note.body_text }}</p> {# Display note text. #}
+                    <p>{{ note.created_date }}</p> {# Display note created date. #}
+                    {% if user.is_authenticated %}
+                    <p>{{ note.author.email }}</p> {# Display note author's email for logged-in users. #}
+                    {% endif %}
                 </article>
                 {% endfor %}
             </div> <!-- #main -->

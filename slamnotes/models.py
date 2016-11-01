@@ -164,7 +164,7 @@ class Day(models.Model):
 class Note(models.Model):
     """Note model"""
     body_text = models.TextField()
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL)
     section = models.ForeignKey(Section, null=True, blank=True)
     day = models.ForeignKey(Day, null=True, blank=True)
     created_date = models.DateTimeField('date created', default=timezone.now)
