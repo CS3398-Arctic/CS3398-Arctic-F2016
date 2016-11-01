@@ -54,12 +54,12 @@ def channel(request):
     all_notes = Note.objects.order_by('-id')
 
     if request.method == 'POST':
-        form = NoteForm(request.POST, request.FILES)
-        if request.user.is_authenticated() and form.is_valid():
-            body_text = form.cleaned_data['body_text']
+        posted_form = NoteForm(request.POST, request.FILES)
+        if request.user.is_authenticated() and posted_form.is_valid():
+            body_text = posted_form.cleaned_data['body_text']
             Note.objects.create(body_text=body_text, author=request.user)
-    else:
-        form = NoteForm()
+    
+    form = NoteForm()
 
     return render(request, 'channel.html',
                   {
