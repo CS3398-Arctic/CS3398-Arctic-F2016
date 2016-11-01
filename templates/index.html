@@ -61,18 +61,29 @@
                     </section>
                 </article>
                 <aside>
-                        <form id="login-form" method="post">
-                            <h3>Login.</h3>
-                            {% csrf_token %}
-                            {{ form_login.as_p }}
-                            <input type="submit" value="Login" />
-                        </form>
-                        <form id="create-account-form" method="post">
-                            <h3>Sign up.</h3>
-                            {% csrf_token %}
-                            {{ form_signup.as_p }}
-                            <input type="submit" value="Create Account" />
-                        </form>
+                    {% if user.is_authenticated %}
+                    <p>
+                        Signed in as {{ user.username }}.
+                    </p>
+                    {% else %}
+                        {% if account_created %}
+                    <p>
+                        Account created successfully.
+                    </p>
+                        {% endif %}
+                    <form id="login-form" method="post">
+                        <h3>Log In</h3>
+                        {% csrf_token %}
+                        {{ form_login.as_p }}
+                        <input type="submit" name="login-form" value="Log in" />
+                    </form>
+                    <form id="signup-form" method="post">
+                        <h3>Sign Up</h3>
+                        {% csrf_token %}
+                        {{ form_signup.as_p }}
+                        <input type="submit" name="signup-form" value="Create Account" />
+                    </form>
+                    {% endif %}
                  </aside>
             </div> <!-- #main -->
         </div> <!-- #main-container -->

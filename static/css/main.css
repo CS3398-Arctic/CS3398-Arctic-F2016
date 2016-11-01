@@ -222,13 +222,9 @@ body.full-height {
 }
 
 form#create-account-form {
-    margin: 100px auto 0;
-    width: 200px;
 }
 
 form#login-form {
-    margin: 100px auto 0;
-    width: 200px;
 }
 
 /* ==========================================================================
