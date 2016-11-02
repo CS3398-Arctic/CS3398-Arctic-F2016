@@ -74,3 +74,4 @@ def logout(request):
     """Logout view"""
     auth_logout(request)
     return redirect('index')
+
