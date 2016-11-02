@@ -7,7 +7,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Note Test - Slam eNotes</title>
+        <title>Software Engineering - Slam eNotes</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
@@ -25,13 +25,27 @@
         <div class="header-container">
             <header class="wrapper clearfix">
                 <h1 class="title">
-                    <a href="{% url 'index' %}"><img src="{% static 'images/logo-short.png' %}" alt="Slam eNotes" height="48" /></a>
+                    <a href="{% url 'index' %}"><img src="{% static 'images/logo-short.png' %}" alt="Slam eNotes" height="38" /></a>
                 </h1>
             </header>
         </div>
 
         <div class="main-container">
             <div class="main wrapper clearfix">
+                {% if user.is_authenticated %}
+                <form id="note-form" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <p>
+                        <input type="submit" value="Post">
+                    </p>
+                </form>
+                {% else %}
+                <p>
+                    You must be logged in to post notes.
+                </p>
+                {% endif %}
+
                 {% for note in notes %} {# Display all notes. #}
                 <article class="note">
                     <p>{{ note.body_text }}</p> {# Display note text. #}
@@ -46,7 +60,7 @@
 
         <aside class="sidebar-container">
             <div class="courses">
-                <h2>CS 3398.002 - Softwa...</h2>
+                <h2>CS 3398.002 - Software Engineering</h2>
                 <div class="courses-other">
                     <h2 class="courses-add">Add new class</h2>
                 </div>
@@ -56,22 +70,6 @@
                 <h3 class="viewing">All Sessions</h3>
             </div>
         </aside>
-
-        <div class="footer-container">
-            <footer class="wrapper">
-                {% if user.is_authenticated %}
-                <form method="post" action="">
-                    {% csrf_token %}
-                    {{ form }}
-                    <input type="submit" value="Post">
-                </form>
-                {% else %}
-                <p>
-                    You must be logged in to post notes.
-                </p>
-                {% endif %}
-            </footer>
-        </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="{% static 'js/vendor/jquery-1.11.2.min.js' %}"><\/script>')</script>

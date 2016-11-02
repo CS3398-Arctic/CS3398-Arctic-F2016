@@ -182,7 +182,7 @@ class NoteForm(ModelForm):
             'body_text': '',
         }
         widgets = {
-            'body_text': Textarea(attrs={'placeholder': 'Write a note...'}),
+            'body_text': Textarea(attrs={'placeholder': 'Write a note...', 'cols': '', 'rows': ''}),
         }
 
 

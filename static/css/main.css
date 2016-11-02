@@ -163,8 +163,8 @@ body.full-height {
     -webkit-box-shadow: 0 1px 2px rgba(170, 170, 170, 0.70);
     -moz-box-shadow: 0 1px 2px rgba(170, 170, 170, 0.70);
     box-shadow: 0 1px 2px rgba(170, 170, 170, 0.70);
-    border-bottom-width: 10px;
-    height: 58px;
+    border-bottom-width: 3px;
+    height: 48px;
     position: relative;
     z-index: 1;
 }
@@ -173,8 +173,13 @@ body.full-height {
     font-size: 1.5rem;
 }
 
+.full-height .header-container .wrapper {
+    max-width: 100%;
+    margin-left: 252px;
+}
+
 .full-height > .main-container {
-    height: calc(100vh - 180px);
+    height: calc(100vh - 51px);
     overflow-y: scroll;
 }
 
@@ -182,7 +187,7 @@ body.full-height {
     min-height: inherit;
 }
 
-.full-height article.note {
+.full-height article.note, .full-height .main-container form {
     border: 1px solid #f7ecbe;
     background-color: #ffffd6;
     float: none;
@@ -209,16 +214,40 @@ body.full-height {
     padding: 0;
 }
 
-.full-height .footer-container textarea {
-    width: calc(100% - 70px);
-    max-width: 800px;
-    resize: none;
-    height: 85px;
-    margin-bottom: 7px;
+#note-form {
+    text-align: right;
 }
 
-.full-height .footer-container input[type=submit] {
-    vertical-align: top;
+.full-height .main-container textarea {
+    min-height: 85px;
+    width: 100%;
+
+    border: none;
+    margin-bottom: 7px;
+    outline: none;
+    resize: none;
+
+    background: none;
+    color: rgba(0,0,0, 0.5);
+
+    transition: color 0.2s;
+}
+
+.full-height .main-container textarea:focus {
+    color: black;
+    resize: vertical;
+}
+
+.full-height .main-container textarea:required {
+    box-shadow: none;
+}
+
+.full-height .main-container input[type=submit] {
+    border: none;
+    padding: 6px 12px;
+
+    background-color: #f7ecbe;
+    color: #333;
 }
 
 form#create-account-form {
@@ -228,97 +257,113 @@ form#login-form {
 }
 
 /* ==========================================================================
-
+   Channel Sidebar
    ========================================================================== */
 
+.sidebar-container {
+    position: fixed;
+    height: 100vh;
+    z-index: 1;
+    width: 232px;
+    background: #415568;
+    top: 0;
+    box-shadow: 0 -1px 2px rgba(170, 170, 170, 0.70);
+    color: white;
+    font-family: Segoe UI Light, sans-serif;
+}
+.sidebar-container h2 {
+    font-size: 17px;
+    padding: 14px 0 20px 10px;
+    cursor: pointer;
+    height: 24px;
+    overflow: hidden;
+    margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.courses {
+    border-bottom: 2px solid #6f8898;
+    margin-right: 10px;
+}
+
+.courses > h2 {
+    display: block;
+    padding-right: 20px;
+    position: relative;
+}
+.courses > h2::after {
+    position: absolute;
+    right: 0;
+
+    color: #6f8898;
+    content: '▼';
+}
+.courses:hover > h2::after {
+    content: '✕';
+}
+
+.courses > * > h2 {
+    display: none;
+    padding: 0 20px 20px 10px;
+}
+.courses:hover > h2 {
+    border-bottom:none;
+}
+.courses:hover > * > h2 {
+    display: block;
+}
+
+.courses-other {
+    position: absolute;
+    background-color: #415568;
+    width: 100%;
+}
+
+.courses:hover .courses-other {
+    height: 100vh;
+}
+
+h2.courses-add::before {
+    content: '+';
+    color: white;
+    margin-right: 6px;
+}
 
 .session-list {
   height: calc(100vh - 108px);
   overflow-y: hidden;
 }
+.session-list:hover {
+    overflow-y: scroll;
+}
+
+.class-title {
+    padding: 10px 0 10px 10px;
+    margin: 0 10px 0 0;
+    font-size: 13px;
+    border-bottom: 2px solid #6f8898;
+    font-family: Segoe UI, sans-serif;
+    font-weight: 600;
+    color: #DDD;
+}
+
 .session-list h3 {
   padding: 5px 0 5px 10px;
   font-size: 16px;
   margin: 5px 10px 5px 0;
   color: #DDD;
-  font-family: Segoe UI;
+  font-family: Segoe UI, sans-serif;
   font-weight: 100;
 }
-.sidebar-container {
-  position: fixed;
-  height: 100vh;
-  z-index: 1;
-  width: 232px;
-  background: #415568;
-  top: 0;
-  box-shadow: 0 -1px 2px rgba(170, 170, 170, 0.70);
-  color: white;
-  font-family: Segoe UI Light, sans-serif;
-}
-.sidebar-container h2 {
-  font-size: 17px;
-  padding: 14px 0 20px 10px;
-  cursor: pointer;
-  height: 24px;
-  overflow: hidden;
-  margin: 0;
-}
-.session-list:hover {
-  overflow-y: scroll;
-}
-.session-list .viewing {
-  color: white;
-  background-color: #7591e1;
-}
-.class-title {
-  padding: 10px 0 10px 10px;
-  margin: 0 10px 0 0;
-  font-size: 13px;
-  border-bottom: 2px solid #6f8898;
-  font-family: Segoe UI, sans-serif;
-  font-weight: 600;
-  color: #DDD;
-}
+
 .session-list:hover h3 {
-  margin-right: 0;
+    margin-right: 0;
 }
-.courses {
-  border-bottom: 2px solid #6f8898;
-  margin-right: 10px;
-}
-.courses > h2 {
-  display: block;
-}
-.courses > * > h2 {
-  display: none;
-  padding: 0 20px 20px 10px;
-}
-.courses:hover > h2 {
-  border-bottom:none;
-}
-.courses > h2::after {
-  content: '▼';
-  color: #6f8898;
-  float: right;
-}
-.courses:hover > h2::after {
-  content: '✕';
-}
-h2.courses-add::before {
-  content: '+';
-  color: white;
-  margin-right: 6px;
-}
-.courses:hover > * > h2 {
-  display: block;
-}
-.courses-other {
-  position: absolute;
-  background-color: #415568;
-  width: 100%;
-}
-.courses:hover .courses-other {
-    height: 100vh;
+
+.session-list .viewing {
+    color: white;
+    background-color: #7591e1;
 }
 
 /* ==========================================================================
