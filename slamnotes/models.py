@@ -8,7 +8,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 from django.core.mail import send_mail
 from django.core.validators import MinValueValidator, MaxValueValidator, URLValidator
 from django.db import models
-from django.forms import ModelForm, Textarea, PasswordInput, EmailInput
+from django.forms import ModelForm, Textarea, PasswordInput, EmailInput, ValidationError
 from django.utils import timezone
 
 
@@ -191,6 +191,14 @@ class SignupForm(ModelForm):
     class Meta:
         model = User
         fields = ['email', 'password']
+
+        def clean(self):
+            cleaned_data = super(SignupForm, self).clean()
+            data = cleaned_data['email']
+            if "@txstate.edu" not in data:
+                pass
+            raise ValidationError('Must be a txstate.edu address')
+            return cleaned_data
 
         labels = {
             'email': '',
