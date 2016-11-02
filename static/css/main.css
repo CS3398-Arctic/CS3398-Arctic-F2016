@@ -180,6 +180,7 @@ body.full-height {
 
 .full-height > .main-container {
     height: calc(100vh - 51px);
+    margin-left: 232px;
     overflow-y: scroll;
 }
 
@@ -187,17 +188,57 @@ body.full-height {
     min-height: inherit;
 }
 
-.full-height article.note, .full-height .main-container form {
-    border: 1px solid #f7ecbe;
-    background-color: #ffffd6;
-    float: none;
-    padding: 10px 5%;
+.full-height .login-required {
     max-width: 500px;
     width: 100%;
-    margin: 0 auto 20px;
+
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    margin: 0 auto 20px;
+    padding: 10px 5%;
+}
+
+.full-height .note, .full-height .main-container form {
+    max-width: 500px;
+    width: 100%;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    float: none;
+    padding: 10px 5%;
+    margin: 0 auto 20px;
+
+    border: 1px solid #f7ecbe;
+    background-color: #ffffd6;
+}
+
+.full-height .note:focus, .full-height .main-container form:focus {
+    box-shadow: 0 0 12px #BBB;
+    outline: none;
+}
+
+.full-height .note .note-actions {
+    height: 0;
+    overflow: hidden;
+}
+.full-height .note:focus .note-actions {
+    height: auto;
+}
+
+.note-date, .note-author {
+    display: block;
+
+    color: rgba(0,0,0, 0.5);
+    font-size: 0.9em;
+    font-style: italic;
+}
+.note-date {
+    float: right;
+}
+.note-author {
+    float: left;
 }
 
 .full-height > .footer-container {

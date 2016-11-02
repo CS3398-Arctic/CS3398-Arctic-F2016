@@ -37,21 +37,45 @@
                     {% csrf_token %}
                     {{ form.as_p }}
                     <p>
+                        <span class="note-author">{{ user.email }}</span>
                         <input type="submit" value="Post">
                     </p>
                 </form>
                 {% else %}
-                <p>
-                    You must be logged in to post notes.
+                <p class="login-required">
+                    You must be <a href="{% url 'index' %}#login-form">logged in</a> to post notes.
                 </p>
                 {% endif %}
 
+                {% now "Y" as current_year %}
+                {% now "M d, Y" as current_date %}
                 {% for note in notes %} {# Display all notes. #}
-                <article class="note">
+                <article id="note-{{ note.id }}" tabindex="0" class="note">
                     <p>{{ note.body_text }}</p> {# Display note text. #}
-                    <p>{{ note.created_date }}</p> {# Display note created date. #}
+                    <p class="clearfix">
+                        {% if user.is_authenticated %}
+                            {% if note.author == user %}
+                        <span class="note-author">You</span>
+                            {% else %}
+                        <span class="note-author">{{ note.author.email }}</span> {# Display note author's email for logged-in users. #}
+                            {% endif %}
+                        {% endif %}
+                        <span class="note-date"> {# Display note created date. #}
+                            {% with cd=note.created_date %}
+                            <time datetime="{{ cd|date:"c" }}">
+                                {% if cd|date:"M d, Y" == current_date %}
+                                    {{ cd|timesince }}
+                                {% else %} {# Intentionally ugly here to avoid whitespace between day and potential comma. #}
+                                    {{ cd|date:"M d" }}{% if cd|date:"Y" != current_year %}{{ cd|date:", Y" }}{% endif %}
+                                {% endif %}
+                            </time>
+                            {% endwith %}
+                        </span>
+                    </p>
                     {% if user.is_authenticated %}
-                    <p>{{ note.author.email }}</p> {# Display note author's email for logged-in users. #}
+                    <p class="note-actions">
+                        <a href="note?a=delete&id={{ note.id }}">delete</a>
+                    </p>
                     {% endif %}
                 </article>
                 {% endfor %}
