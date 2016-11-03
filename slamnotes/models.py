@@ -44,6 +44,11 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 
+def validate_txstate_email(value):
+    if '@txstate.edu' not in value:
+        raise ValidationError('Must be a @txstate.edu address')
+
+
 class User(AbstractBaseUser, PermissionsMixin):
     """
     A custom user class based on AbstractUser implementing a fully featured User model with
@@ -58,6 +63,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         error_messages={
             'unique': "A user with that email already exists.",
         },
+        validators=[validate_txstate_email]
     )
     first_name = models.CharField('first name', max_length=30, blank=True)
     last_name = models.CharField('last name', max_length=30, blank=True)
@@ -191,15 +197,6 @@ class SignupForm(ModelForm):
     class Meta:
         model = User
         fields = ['email', 'password']
-
-        def clean(self):
-            cleaned_data = super(SignupForm, self).clean()
-            data = cleaned_data['email']
-            if "@txstate.edu" not in data:
-                pass
-            raise ValidationError('Must be a txstate.edu address')
-            return cleaned_data
-
         labels = {
             'email': '',
             'password': '',
