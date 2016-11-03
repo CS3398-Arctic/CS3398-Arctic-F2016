@@ -8,6 +8,8 @@ Several function-based views. For more information please see:
 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as auth_logout
+from django.core.serializers import serialize
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from .models import Note, NoteForm, SignupForm, LoginForm, User
@@ -75,3 +77,9 @@ def logout(request):
     auth_logout(request)
     return redirect('index')
 
+
+def ajax(request):
+    """Ajax view"""
+    # later on support GET parameters like so: /ajax?action=load&channel=1&session=0
+    data = serialize('json', Note.objects.all())
+    return HttpResponse(data, content_type="application/json")

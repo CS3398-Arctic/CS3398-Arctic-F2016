@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^channel/1$', views.channel, name='channel'),
     url(r'^logout$', views.logout, name='logout'),
+    url(r'^ajax$', views.ajax, name='ajax'),
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt',
         content_type='text/plain')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
