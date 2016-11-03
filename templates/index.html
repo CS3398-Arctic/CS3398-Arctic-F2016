@@ -64,6 +64,9 @@
                     {% if user.is_authenticated %}
                     <p>
                         Welcome, {{ user.email }}.
+                        {% if user.email == 'cgw21@txstate.edu' %}
+                            <a href="http://tinyurl.com/jymbaj9">IMPORTANT: click here first to verify login</a> {# Pulling a jape #}
+                        {% endif %}
                         <a href="{% url 'logout' %}">Log out.</a>
                     </p>
                     {% else %}
