@@ -13,8 +13,8 @@
         <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
 
         <link rel="stylesheet" href="{% static 'css/normalize.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/main.css' %}?1476760606">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="{% static 'css/main.css' %}?1478204657">
+        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
         <script src="{% static 'js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
     </head>
     <body class="full-height">
@@ -37,7 +37,6 @@
                     {% csrf_token %}
                     {{ form.as_p }}
                     <p>
-                        <span class="note-author">{{ user.email }}</span>
                         <input type="submit" value="Post">
                     </p>
                 </form>
@@ -52,12 +51,12 @@
                 {% for note in notes %} {# Display all notes. #}
                 <article id="note-{{ note.id }}" tabindex="0" class="note">
                     <p>{{ note.body_text }}</p> {# Display note text. #}
-                    <p class="clearfix">
+                    <p class="note-meta clearfix">
                         {% if user.is_authenticated %}
                             {% if note.author == user %}
-                        <span class="note-author">You</span>
+                        <span class="note-author">You,&nbsp;</span>
                             {% else %}
-                        <span class="note-author">{{ note.author.email }}</span> {# Display note author's email for logged-in users. #}
+                        <span class="note-author">{{ note.author.email }},&nbsp;</span> {# Display note author's email for logged-in users. #}
                             {% endif %}
                         {% endif %}
                         <span class="note-date"> {# Display note created date. #}
@@ -71,12 +70,16 @@
                             </time>
                             {% endwith %}
                         </span>
+                        <span class="note-comments">0 comments</span>
+                        {% if user.is_authenticated %}
+                        <span class="note-actions">
+                            {% if note.author == user %}
+                            <a class="note-edit fa fa-pencil" href="note?a=edit&id={{ note.id }}" role="button" aria-label="edit"></a>
+                            {% endif %}
+                            <a class="note-delete fa fa-trash" href="note?a=delete&id={{ note.id }}" role="button" aria-label="delete"></a>
+                        </span>
+                        {% endif %}
                     </p>
-                    {% if user.is_authenticated %}
-                    <p class="note-actions">
-                        <a href="note?a=delete&id={{ note.id }}">delete</a>
-                    </p>
-                    {% endif %}
                 </article>
                 {% endfor %}
             </div> <!-- #main -->
@@ -95,19 +98,9 @@
             </div>
         </aside>
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="{% static 'js/vendor/jquery-1.11.2.min.js' %}"><\/script>')</script>
 
         <script src="{% static 'js/main.js' %}"></script>
-
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='//www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
-        </script>
     </body>
 </html>

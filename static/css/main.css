@@ -189,14 +189,10 @@ body.full-height {
 }
 
 .full-height .login-required {
-    max-width: 500px;
-    width: 100%;
-
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
     margin: 0 auto 20px;
     padding: 10px 5%;
+
+    text-align: center;
 }
 
 .full-height .note, .full-height .main-container form {
@@ -208,37 +204,76 @@ body.full-height {
     box-sizing: border-box;
     float: none;
     padding: 10px 5%;
+    position: relative;
     margin: 0 auto 20px;
 
     border: 1px solid #f7ecbe;
     background-color: #ffffd6;
 }
 
-.full-height .note:focus, .full-height .main-container form:focus {
-    box-shadow: 0 0 12px #BBB;
+.note:focus, .full-height .main-container form:focus {
+    box-shadow: 0 0 12px rgba(150, 150, 150, 0.2);
     outline: none;
 }
 
-.full-height .note .note-actions {
-    height: 0;
-    overflow: hidden;
-}
-.full-height .note:focus .note-actions {
-    height: auto;
-}
-
-.note-date, .note-author {
+.note-date, .note-author, .note-comments {
     display: block;
+    float: left;
 
     color: rgba(0,0,0, 0.5);
     font-size: 0.9em;
     font-style: italic;
 }
-.note-date {
+.note-comments {
     float: right;
 }
-.note-author {
-    float: left;
+
+.note-actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    display: block;
+    text-align: right;
+    padding: 2px 2px 0 0;
+    width: 100%;
+
+    font-size: 1.4rem;
+}
+
+.note-actions a, .note-actions a:link, .note-actions a:visited {
+    max-height: 0;
+
+    color: rgba(0,0,0, 0.4);
+    padding: 0 7px;
+    opacity: 0.0;
+    overflow: hidden;
+    text-decoration: none;
+
+    -webkit-transition: color 0.2s, opacity 0.2s, padding 0.2s step-end, max-height 0.2s step-end;
+    -moz-transition: color 0.2s, opacity 0.2s, padding 0.2s step-end, max-height 0.2s step-end;
+    -ms-transition: color 0.2s, opacity 0.2s, padding 0.2s step-end, max-height 0.2s step-end;
+    -o-transition: color 0.2s, opacity 0.2s, padding 0.2s step-end, max-height 0.2s step-end;
+    transition: color 0.2s, opacity 0.2s, padding 0.2s step-end, max-height 0.2s step-end;
+}
+.note:hover .note-actions a, .note:focus .note-actions a, .note .note-actions a:focus {
+    max-height: 2em; /* FIXME: kinda hacky, probably better to do with jQuery */
+    opacity: 1.0;
+    padding: 7px;
+
+    /* if cool sliding effect is wanted, mess with padding's transition time and remove padding's step-ends */
+    -webkit-transition: color 0.2s, opacity 0.2s, padding 1ms 0s step-end, max-height 1ms 0s step-end;
+    -moz-transition: color 0.2s, opacity 0.2s, padding 1ms 0s step-end, max-height 1ms 0s step-end;
+    -ms-transition: color 0.2s, opacity 0.2s, padding 1ms 0s step-end, max-height 1ms 0s step-end;
+    -o-transition: color 0.2s, opacity 0.2s, padding 1ms 0s step-end, max-height 1ms 0s step-end;
+    transition: color 0.2s, opacity 0.2s, padding 1ms 0s step-end, max-height 1ms 0s step-end;
+}
+.note-actions a:hover, .note-actions a:active {
+    color: rgba(0,0,0, 0.7);
+}
+
+.note-actions a:hover.note-delete, .note-actions a:active.note-delete {
+    color: rgba(255, 0, 0, 0.7);
 }
 
 .full-height > .footer-container {
@@ -271,6 +306,10 @@ body.full-height {
     background: none;
     color: rgba(0,0,0, 0.5);
 
+    -webkit-transition: color 0.2s;
+    -moz-transition: color 0.2s;
+    -ms-transition: color 0.2s;
+    -o-transition: color 0.2s;
     transition: color 0.2s;
 }
 
