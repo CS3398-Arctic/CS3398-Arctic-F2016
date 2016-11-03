@@ -136,8 +136,8 @@ class Course(models.Model):
         return self.title
 
 
-class Section(models.Model):
-    """Section model"""
+class Channel(models.Model):
+    """Channel model"""
     course = models.ForeignKey(Course, blank=True)
     instructor = models.ForeignKey(Instructor, blank=True)
     number = models.PositiveIntegerField(
@@ -153,8 +153,8 @@ class Section(models.Model):
         return self.special
 
 
-class Day(models.Model):
-    """Class day model"""
+class Session(models.Model):
+    """Class session model"""
     date = models.DateField()
 
     def __str__(self):
@@ -165,8 +165,8 @@ class Note(models.Model):
     """Note model"""
     body_text = models.TextField()
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
-    section = models.ForeignKey(Section, null=True, blank=True)
-    day = models.ForeignKey(Day, null=True, blank=True)
+    channel = models.ForeignKey(Channel, null=True, blank=True)
+    session = models.ForeignKey(Session, null=True, blank=True)
     created_date = models.DateTimeField('date created', default=timezone.now)
 
     def __str__(self):
@@ -216,12 +216,3 @@ class LoginForm(ModelForm):
             'email': EmailInput(attrs={'placeholder': 'Email'}),
             'password': PasswordInput(attrs={'placeholder': 'Password'}),
         }
-
-
-class LogoutForm(ModelForm):
-    """Logout model form"""
-    class Meta:
-        model = User
-        fields = ['is_active']
-
-        labels = { 'is_active': '',}
