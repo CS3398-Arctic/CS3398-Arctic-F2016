@@ -312,27 +312,27 @@ body.full-height {
 }
 
 .full-height .main-container textarea {
-    min-height: 85px;
+    min-height: 2em;
     width: 100%;
 
     border: none;
-    margin-bottom: 7px;
+    margin-bottom: -1.5em;
     outline: none;
+    overflow: hidden;
     resize: none;
 
     background: none;
     color: rgba(0,0,0, 0.5);
 
-    -webkit-transition: color 0.2s;
-    -moz-transition: color 0.2s;
-    -ms-transition: color 0.2s;
-    -o-transition: color 0.2s;
-    transition: color 0.2s;
+    -webkit-transition: color 0.2s, height 0.1s;
+    -moz-transition: color 0.2s, height 0.1s;
+    -ms-transition: color 0.2s, height 0.1s;
+    -o-transition: color 0.2s, height 0.1s;
+    transition: color 0.2s, height 0.1s;
 }
 
 .full-height .main-container textarea:focus {
     color: black;
-    resize: vertical;
 }
 
 .full-height .main-container textarea:required {
