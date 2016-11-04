@@ -48,40 +48,42 @@
 
                 {% now "Y" as current_year %}
                 {% now "M d, Y" as current_date %}
-                {% for note in notes %} {# Display all notes. #}
-                <article id="note-{{ note.id }}" tabindex="0" class="note">
-                    <p>{{ note.body_text }}</p> {# Display note text. #}
-                    <p class="note-meta clearfix">
-                        {% if user.is_authenticated %}
-                            {% if note.author == user %}
-                        <span class="note-author">You,&nbsp;</span>
-                            {% else %}
-                        <span class="note-author">{{ note.author.email }},&nbsp;</span> {# Display note author's email for logged-in users. #}
-                            {% endif %}
-                        {% endif %}
-                        <span class="note-date"> {# Display note created date. #}
-                            {% with cd=note.created_date %}
-                            <time datetime="{{ cd|date:"c" }}">
-                                {% if cd|date:"M d, Y" == current_date %}
-                                    {{ cd|timesince }}
-                                {% else %} {# Intentionally ugly here to avoid whitespace between day and potential comma. #}
-                                    {{ cd|date:"M d" }}{% if cd|date:"Y" != current_year %}{{ cd|date:", Y" }}{% endif %}
+                <div id="results">
+                    {% for note in notes %} {# Display all notes. #}
+                    <article id="note-{{ note.id }}" tabindex="0" class="note">
+                        <p>{{ note.body_text }}</p> {# Display note text. #}
+                        <p class="note-meta clearfix">
+                            {% if user.is_authenticated %}
+                                {% if note.author == user %}
+                            <span class="note-author">You,&nbsp;</span>
+                                {% else %}
+                            <span class="note-author">{{ note.author.email }},&nbsp;</span> {# Display note author's email for logged-in users. #}
                                 {% endif %}
-                            </time>
-                            {% endwith %}
-                        </span>
-                        <span class="note-comments">0 comments</span>
-                        {% if user.is_authenticated %}
-                        <span class="note-actions">
-                            {% if note.author == user %} {# Show the edit/delete buttons to the author #}
-                            <a class="note-edit fa fa-pencil" href="#" role="button" aria-label="edit"></a>
-                            <a class="note-delete fa fa-trash" href="#" role="button" aria-label="delete"></a>
                             {% endif %}
-                        </span>
-                        {% endif %}
-                    </p>
-                </article>
-                {% endfor %}
+                            <span class="note-date"> {# Display note created date. #}
+                                {% with cd=note.created_date %}
+                                <time datetime="{{ cd|date:"c" }}">
+                                    {% if cd|date:"M d, Y" == current_date %}
+                                        {{ cd|timesince }}
+                                    {% else %} {# Intentionally ugly here to avoid whitespace between day and potential comma. #}
+                                        {{ cd|date:"M d" }}{% if cd|date:"Y" != current_year %}{{ cd|date:", Y" }}{% endif %}
+                                    {% endif %}
+                                </time>
+                                {% endwith %}
+                            </span>
+                            <span class="note-comments">0 comments</span>
+                            {% if user.is_authenticated %}
+                            <span class="note-actions">
+                                {% if note.author == user %} {# Show the edit/delete buttons to the author #}
+                                <a class="note-edit fa fa-pencil" href="#" role="button" aria-label="edit"></a>
+                                <a class="note-delete fa fa-trash" href="#" role="button" aria-label="delete"></a>
+                                {% endif %}
+                            </span>
+                            {% endif %}
+                        </p>
+                    </article>
+                    {% endfor %}
+                </div>
             </div> <!-- #main -->
         </div> <!-- #main-container -->
 
@@ -108,6 +110,27 @@
             $("#courses-menu-toggle").click(function() {$("#courses").toggleClass('courses-menu-open');});
             $("#collapse-menu").click(function() {$(document.body).toggleClass('menu-closed');});
             $("#expand-menu").click(function() {$(document.body).toggleClass('menu-closed');});
+
+            var user = new Object();
+            user.is_authenticated = {% if user.is_authenticated %}true;
+            user.email = "{{ user.email }}";{% else %}false;{% endif %}
+
+            function ajaxLiveUpdate() {
+                $.ajax({
+                    url: '{% url 'ajax' %}',
+                    success: function(notes) {
+                        $('#results').html("");
+                        for (var i in notes) {
+                            outputNote(notes[i]);
+                        }
+                    },
+                    complete: function() {
+                        // Schedule the next request in 60 seconds
+                        setTimeout(ajaxLiveUpdate, 60 * 1000);
+                    }
+                });
+            }
         </script>
+        <script src="{% static 'js/channel.js' %}" onload="ajaxLiveUpdate"></script>
     </body>
 </html>

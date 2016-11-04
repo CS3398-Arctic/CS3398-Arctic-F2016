@@ -43,6 +43,9 @@ class UserManager(BaseUserManager):
 
         return self._create_user(email, password, **extra_fields)
 
+    def natural_key(self):
+        return self.email
+
 
 class User(AbstractBaseUser, PermissionsMixin):
     """
