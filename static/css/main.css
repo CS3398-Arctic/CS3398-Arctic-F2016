@@ -86,6 +86,7 @@ body {
 
 .title {
     color: #222;
+    float: left;
     margin: 5px 0;
 }
 
@@ -160,13 +161,22 @@ body.full-height {
 }
 
 .full-height > .header-container {
+    height: 48px;
+    padding-left: 252px;
+
+    border-bottom-width: 3px;
+    position: relative;
+    z-index: 1;
+
     -webkit-box-shadow: 0 1px 2px rgba(170, 170, 170, 0.70);
     -moz-box-shadow: 0 1px 2px rgba(170, 170, 170, 0.70);
     box-shadow: 0 1px 2px rgba(170, 170, 170, 0.70);
-    border-bottom-width: 3px;
-    height: 48px;
-    position: relative;
-    z-index: 1;
+
+    -webkit-transition: padding-left 0.2s;
+    -moz-transition: padding-left 0.2s;
+    -ms-transition: padding-left 0.2s;
+    -o-transition: padding-left 0.2s;
+    transition: padding-left 0.2s;
 }
 
 .full-height .header-container .title {
@@ -175,13 +185,19 @@ body.full-height {
 
 .full-height .header-container .wrapper {
     max-width: 100%;
-    margin-left: 252px;
+    margin: 0 auto;
 }
 
 .full-height > .main-container {
     height: calc(100vh - 51px);
     margin-left: 232px;
     overflow-y: scroll;
+
+    -webkit-transition: margin-left 0.2s;
+    -moz-transition: margin-left 0.2s;
+    -ms-transition: margin-left 0.2s;
+    -o-transition: margin-left 0.2s;
+    transition: margin-left 0.2s;
 }
 
 .full-height .main {
@@ -229,16 +245,16 @@ body.full-height {
 }
 
 .note-actions {
-    position: absolute;
-    top: 0;
-    right: 0;
-
-    display: block;
-    text-align: right;
-    padding: 2px 2px 0 0;
     width: 100%;
 
+    display: block;
+    padding: 2px 2px 0 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+
     font-size: 1.4rem;
+    text-align: right;
 }
 
 .note-actions a, .note-actions a:link, .note-actions a:visited {
@@ -277,11 +293,12 @@ body.full-height {
 }
 
 .full-height > .footer-container {
+    border-top-width: 10px;
+    height: 102px;
+
     -webkit-box-shadow: 0 -1px 2px rgba(170, 170, 170, 0.70);
     -moz-box-shadow: 0 -1px 2px rgba(170, 170, 170, 0.70);
     box-shadow: 0 -1px 2px rgba(170, 170, 170, 0.70);
-    border-top-width: 10px;
-    height: 102px;
     text-align: center;
 }
 
@@ -341,15 +358,29 @@ form#login-form {
    ========================================================================== */
 
 .sidebar-container {
-    position: fixed;
     height: 100vh;
-    z-index: 1;
     width: 232px;
-    background: #415568;
+
+    position: fixed;
     top: 0;
+    left: 0;
+    z-index: 1;
+
+    background: #415568;
     box-shadow: 0 -1px 2px rgba(170, 170, 170, 0.70);
     color: white;
     font-family: Segoe UI Light, sans-serif;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;;
+
+    -webkit-transition: left 0.2s;
+    -moz-transition: left 0.2s;
+    -ms-transition: left 0.2s;
+    -o-transition: left 0.2s;
+    transition: left 0.2s;
 }
 .sidebar-container h2 {
     font-size: 17px;
@@ -362,35 +393,43 @@ form#login-form {
     white-space: nowrap;
 }
 
-.courses {
+#courses {
     border-bottom: 2px solid #6f8898;
     margin-right: 10px;
 }
 
-.courses > h2 {
+#courses-menu-toggle {
     display: block;
     padding-right: 20px;
     position: relative;
+
+    color: #DDD;
 }
-.courses > h2::after {
+#courses-menu-toggle::after {
     position: absolute;
     right: 0;
 
     color: #6f8898;
     content: '▼';
 }
-.courses:hover > h2::after {
+#courses.courses-menu-open #courses-menu-toggle::after {
     content: '✕';
 }
+#courses-menu-toggle:hover {
+    color: white;
+}
+#courses-menu-toggle:hover::after {
+    color: #809aab;
+}
 
-.courses > * > h2 {
+#courses > * > h2 {
     display: none;
     padding: 0 20px 20px 10px;
 }
-.courses:hover > h2 {
+#courses.courses-menu-open > h2 {
     border-bottom:none;
 }
-.courses:hover > * > h2 {
+#courses.courses-menu-open > * > h2 {
     display: block;
 }
 
@@ -400,18 +439,23 @@ form#login-form {
     width: 100%;
 }
 
-.courses:hover .courses-other {
+#courses.courses-menu-open .courses-other {
     height: 100vh;
 }
 
-h2.courses-add::before {
+#courses-add {
+    color: #DDD;
+}
+#courses-add::before {
     content: '+';
-    color: white;
     margin-right: 6px;
+}
+#courses-add:hover {
+    color: white;
 }
 
 .session-list {
-  height: calc(100vh - 108px);
+  height: calc(100vh - 148px);
   overflow-y: hidden;
 }
 .session-list:hover {
@@ -444,6 +488,59 @@ h2.courses-add::before {
 .session-list .viewing {
     color: white;
     background-color: #7591e1;
+}
+
+#collapse-menu, #expand-menu {
+    color: #DDD;
+    font-family: FontAwesome, Segoe UI, sans-serif;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+#collapse-menu {
+    border-top: 2px solid #6f8898;
+    display: block;
+    margin: 0 10px 0 0;
+    padding: 10px 0 10px 10px;
+
+    font-family: FontAwesome, Segoe UI, sans-serif;
+}
+#collapse-menu::before, #expand-menu::before {
+    font-size: 1.1em;
+    padding-right: 10px;
+}
+
+#expand-menu {
+    bottom: 0;
+    left: -232px;
+    padding: 10px;
+    position: fixed;
+    text-decoration: none;
+
+    color: #333;
+    font-family: FontAwesome, Segoe UI, sans-serif;
+
+    -webkit-transition: left 0.2s;
+    -moz-transition: left 0.2s;
+    -ms-transition: left 0.2s;
+    -o-transition: left 0.2s;
+    transition: left 0.2s;
+}
+
+.menu-closed .header-container {
+    padding-left: 0;
+}
+
+.menu-closed .sidebar-container {
+    left: -232px;
+}
+
+.menu-closed .main-container {
+    margin-left: 0;
+}
+
+.menu-closed #expand-menu {
+    left: 0;
 }
 
 /* ==========================================================================
@@ -502,7 +599,6 @@ h2.courses-add::before {
    ============ */
 
     .title {
-        float: left;
     }
 
     nav {
