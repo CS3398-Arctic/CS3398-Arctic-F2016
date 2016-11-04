@@ -261,9 +261,9 @@ body.full-height {
     max-height: 0;
 
     color: rgba(0,0,0, 0.4);
-    padding: 0 7px;
     opacity: 0.0;
     overflow: hidden;
+    padding: 0 6px;
     text-decoration: none;
 
     -webkit-transition: color 0.2s, opacity 0.2s, padding 0.2s step-end, max-height 0.2s step-end;
@@ -275,7 +275,7 @@ body.full-height {
 .note:hover .note-actions a, .note:focus .note-actions a, .note .note-actions a:focus {
     max-height: 2em; /* FIXME: kinda hacky, probably better to do with jQuery */
     opacity: 1.0;
-    padding: 7px;
+    padding: 3px 6px;
 
     /* if cool sliding effect is wanted, mess with padding's transition time and remove padding's step-ends */
     -webkit-transition: color 0.2s, opacity 0.2s, padding 1ms 0s step-end, max-height 1ms 0s step-end;

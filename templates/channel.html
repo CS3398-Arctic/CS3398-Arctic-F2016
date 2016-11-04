@@ -73,10 +73,10 @@
                         <span class="note-comments">0 comments</span>
                         {% if user.is_authenticated %}
                         <span class="note-actions">
-                            {% if note.author == user %} {# Show the edit button to the author #}
+                            {% if note.author == user %} {# Show the edit/delete buttons to the author #}
                             <a class="note-edit fa fa-pencil" href="#" role="button" aria-label="edit"></a>
-                            {% endif %}
                             <a class="note-delete fa fa-trash" href="#" role="button" aria-label="delete"></a>
+                            {% endif %}
                         </span>
                         {% endif %}
                     </p>
