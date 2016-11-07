@@ -60,14 +60,14 @@ function outputNote(note) {
 
         if (hoursDiff > 0) { // Output hour
             timeHTML += hoursDiff + " hour";
-            if (hoursDiff > 1) // (s)
+            if (hoursDiff != 1) // (s)
                 timeHTML += "s";
             if (minsDiff != 0)
                 timeHTML += ", ";
         }
         if (minsDiff > 0) { // Output minute
             timeHTML += minsDiff + " minute";
-            if (minsDiff > 1) // (s)
+            if (minsDiff != 1) // (s)
                 timeHTML += "s";
         }
         else {console.log(minsDiff);}
