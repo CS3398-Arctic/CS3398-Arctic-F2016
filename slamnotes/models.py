@@ -63,6 +63,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         error_messages={
             'unique': "A user with that email already exists.",
         },
+        validators=[validate_txstate_email]
     )
     first_name = models.CharField('first name', max_length=30, blank=True)
     last_name = models.CharField('last name', max_length=30, blank=True)
