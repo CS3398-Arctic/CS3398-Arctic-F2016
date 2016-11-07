@@ -8,7 +8,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 from django.core.mail import send_mail
 from django.core.validators import MinValueValidator, MaxValueValidator, URLValidator
 from django.db import models
-from django.forms import ModelForm, Textarea, PasswordInput, EmailInput
+from django.forms import ModelForm, Textarea, PasswordInput, EmailInput, ValidationError
 from django.utils import timezone
 
 
@@ -42,6 +42,11 @@ class UserManager(BaseUserManager):
             raise ValueError('Superuser must have is_superuser=True.')
 
         return self._create_user(email, password, **extra_fields)
+
+
+def validate_txstate_email(value):
+    if '@txstate.edu' not in value:
+        raise ValidationError('Must be a @txstate.edu address')
 
 
 class User(AbstractBaseUser, PermissionsMixin):
