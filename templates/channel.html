@@ -75,8 +75,7 @@
                             {% if user.is_authenticated %}
                             <span class="note-actions">
                                 {% if note.author == user %} {# Show the edit/delete buttons to the author #}
-                                <a class="note-edit fa fa-pencil" href="#" role="button" aria-label="edit"></a>
-                                <a class="note-delete fa fa-trash" href="{% url 'ajax' %}?action=delete&note={{ note.id }}" role="button" aria-label="delete"></a>
+                                <a class="note-edit fa fa-pencil" href="#" role="button" aria-label="edit"></a><a class="note-delete fa fa-trash" href="{% url 'ajax' %}?action=delete&note={{ note.id }}" role="button" aria-label="delete"></a>
                                 {% endif %}
                             </span>
                             {% endif %}
@@ -113,18 +112,21 @@
             $("#collapse-menu").click(function() {$(document.body).toggleClass('menu-closed');});
             $("#expand-menu").click(function() {$(document.body).toggleClass('menu-closed');});
 
+            ajax_url = "{% url 'ajax' %}";
+
             var user = new Object();
             user.is_authenticated = {% if user.is_authenticated %}true;
             user.email = "{{ user.email }}";{% else %}false;{% endif %}
 
             function ajaxLiveUpdate() {
                 $.ajax({
-                    url: '{% url 'ajax' %}',
+                    url: '{% url 'ajax' %}?action=load&channel=1&session=all',
                     success: function(notes) {
                         $('#results').html("");
                         for (var i in notes) {
                             outputNote(notes[i]);
                         }
+                        applyNoteActions();
                     },
                     complete: function() {
                         // Schedule the next request in 60 seconds
@@ -132,7 +134,34 @@
                     }
                 });
             }
+            function ajaxSingleUpdate(action) {
+                $.ajax({
+                    url: '{% url 'ajax' %}?action=load&channel=1&session=all',
+                    success: function(notes) {
+                        $('#results').html("");
+                        for (var i in notes) {
+                            outputNote(notes[i]);
+                        }
+                        applyNoteActions();
+                    }
+                });
+            }
+            function ajaxDeleteNote(href, id) {
+                $.ajax({
+                    url: href + "?action=delete&note=" + id,
+                    success: function() {ajaxSingleUpdate();}
+                });
+            }
+            function applyNoteActions () {
+                $(".note-delete").click( function(event){
+                    event.preventDefault();
+                    ajaxDeleteNote($(this).prop("href"), $(this).parent().parent().parent().prop("id").substring(5));
+                    // FIXME parent parent parent, really? please fix this...
+                });
+            }
+
+            applyNoteActions();
         </script>
-        <script src="{% static 'js/channel.js' %}" onload="ajaxLiveUpdate"></script>
+        <script src="{% static 'js/channel.js' %}" onload="setTimeout(ajaxLiveUpdate, 5 * 1000)"></script>
     </body>
 </html>

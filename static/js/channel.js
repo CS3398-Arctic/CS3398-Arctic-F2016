@@ -70,7 +70,6 @@ function outputNote(note) {
             if (minsDiff != 1) // (s)
                 timeHTML += "s";
         }
-        else {console.log(minsDiff);}
     }
     else {  // Note was not created today
         timeHTML += monthAbbrs[createdDate.getMonth()] + " ";
@@ -106,7 +105,7 @@ function outputNote(note) {
     if (note.fields.author == user.email) { // This is one of user's notes, display appropriate actions
         var noteEdit = $("<a></a>", {
             "class": "note-edit fa fa-pencil",
-            href: "#",
+            href: "#", // FIXME: Does nothing, fix in Sprint 3.
             role: "button",
             "aria-label": "edit"
         });
@@ -114,7 +113,7 @@ function outputNote(note) {
 
         var noteDelete = $("<a></a>", {
             "class": "note-delete fa fa-trash",
-            href: "#",
+            href: ajax_url + "?action=delete&note=" + note.pk,
             role: "button",
             "aria-label": "delete"
         });
