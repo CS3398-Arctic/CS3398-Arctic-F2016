@@ -133,6 +133,21 @@ function outputNote(note) {
     $('#results').prepend(noteElement);
 }
 
+function ajaxPostForm() {
+    $.ajax({
+       type: "POST",
+       url: ajax_url,
+       data: $("#note-form").serialize(),
+       success: function() {
+           ajaxSingleUpdate();
+           $('#id_body_text').val('');
+       }
+     });
+}
+$("#note-post").click( function(event){
+    event.preventDefault();
+    ajaxPostForm();
+});
 
 function ajaxLiveUpdate() {
     $.ajax({

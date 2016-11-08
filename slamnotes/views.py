@@ -82,19 +82,27 @@ def ajax(request):
     """Ajax view"""
     # later on support GET parameters like so: /ajax?action=load&channel=1&session=0
     if request.GET.get('action', '') == 'delete':
+        # Delete note
         try:
             note_id = request.GET['note']
         except KeyError:
-            return
+            return HttpResponse('No changes occurred')
         note = get_object_or_404(Note, pk=note_id)
         if note.author == request.user or request.user.is_superuser:
             note.delete()
             return HttpResponse('Note Deleted')
         return HttpResponse('No changes occurred')
     elif request.GET.get('action', '') == 'load':
+        # Load note
         fields = ['body_text', 'created_date']
         if request.user.is_authenticated:
             fields.append('author')
         data = serialize('json', Note.objects.all(), fields=fields, use_natural_foreign_keys=True)
         return HttpResponse(data, content_type="application/json; charset=utf-8")
-
+    elif request.method == 'POST':
+        # Create note
+        posted_form = NoteForm(request.POST, request.FILES)
+        if request.user.is_authenticated() and posted_form.is_valid():
+            body_text = posted_form.cleaned_data['body_text']
+            Note.objects.create(body_text=body_text, author=request.user)
+    return HttpResponse('No changes occurred')
