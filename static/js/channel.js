@@ -70,7 +70,7 @@ function outputNote(note) {
             if (minsDiff != 0)
                 timeHTML += ", ";
         }
-        if (minsDiff > 0) { // Output minute
+        if ((hoursDiff > 0 && minsDiff > 0) || hoursDiff == 0) { // Output minute
             timeHTML += minsDiff + " minute";
             if (minsDiff != 1) // (s)
                 timeHTML += "s";
