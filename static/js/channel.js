@@ -1,5 +1,5 @@
 /**
- * jQuery/JS code needed for channels
+ * JavaScript/jQuery code needed for channels
  */
 
 monthAbbrs = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -19,8 +19,8 @@ function outputNote(note) {
     var noteParagraph = $("<p></p>", {
         html: note.fields.body_text
     });
-
     noteBody.append(noteParagraph);
+
     noteElement.append(noteBody);
 
 
@@ -107,7 +107,8 @@ function outputNote(note) {
         "class": "note-actions"
     });
 
-    if ("author" in note.fields && note.fields.author == user.email) { // This is one of user's notes, display appropriate actions
+    if ("author" in note.fields && (note.fields.author == user.email || user.is_superuser)) {
+        // This is one of user's notes (or user is a superuser), display appropriate actions
         var noteEdit = $("<a></a>", {
             "class": "note-edit fa fa-pencil",
             href: "#", // FIXME: Does nothing, fix in Sprint 3.
@@ -130,4 +131,57 @@ function outputNote(note) {
     noteElement.append(noteMeta);
 
     $('#results').prepend(noteElement);
+}
+
+
+function ajaxLiveUpdate() {
+    $.ajax({
+        url: ajax_url + '?action=load&channel=1&session=all',
+        success: function(notes) {
+            $('#results').html("");
+            for (var i in notes) {
+                outputNote(notes[i]);
+            }
+            applyNoteActions();
+            commonmarkParse();
+        },
+        complete: function() {
+            // Schedule the next request in 5 seconds
+            setTimeout(ajaxLiveUpdate, 5 * 1000);
+        }
+    });
+}
+function ajaxSingleUpdate(action) {
+    $.ajax({
+        url: ajax_url + '?action=load&channel=1&session=all',
+        success: function(notes) {
+            $('#results').html("");
+            for (var i in notes) {
+                outputNote(notes[i]);
+            }
+            applyNoteActions();
+            commonmarkParse();
+        }
+    });
+}
+
+function ajaxDeleteNote(href) {
+    $.ajax({
+        url: href,
+        success: function() {ajaxSingleUpdate();}
+    });
+}
+function applyNoteActions () {
+    $(".note-delete").click( function(event){
+        event.preventDefault();
+        ajaxDeleteNote($(this).prop("href"));
+    });
+}
+function commonmarkParse () {
+    $(".note-body").each(function(i, obj) {
+        var reader = new commonmark.Parser();
+        var writer = new commonmark.HtmlRenderer({smart: true, safe: true});
+        var parsed = reader.parse($(this).text());
+        $(this).html(writer.render(parsed));
+    });
 }

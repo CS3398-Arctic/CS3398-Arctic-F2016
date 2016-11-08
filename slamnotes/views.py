@@ -11,7 +11,6 @@ from django.contrib.auth import logout as auth_logout
 from django.core.serializers import serialize
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.core.urlresolvers import reverse
 
 from .models import Note, NoteForm, SignupForm, LoginForm, User
 
@@ -88,9 +87,10 @@ def ajax(request):
         except KeyError:
             return
         note = get_object_or_404(Note, pk=note_id)
-        if note.author == request.user:
+        if note.author == request.user or request.user.is_superuser:
             note.delete()
-        return HttpResponse('Note Deleted')
+            return HttpResponse('Note Deleted')
+        return HttpResponse('No changes occurred')
     elif request.GET.get('action', '') == 'load':
         fields = ['body_text', 'created_date']
         if request.user.is_authenticated:
