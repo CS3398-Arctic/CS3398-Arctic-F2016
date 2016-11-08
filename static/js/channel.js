@@ -102,7 +102,7 @@ function outputNote(note) {
         "class": "note-actions"
     });
 
-    if (note.fields.author == user.email) { // This is one of user's notes, display appropriate actions
+    if ("author" in note.fields && note.fields.author == user.email) { // This is one of user's notes, display appropriate actions
         var noteEdit = $("<a></a>", {
             "class": "note-edit fa fa-pencil",
             href: "#", // FIXME: Does nothing, fix in Sprint 3.
