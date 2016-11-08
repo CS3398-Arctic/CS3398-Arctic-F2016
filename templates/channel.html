@@ -13,7 +13,7 @@
         <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
 
         <link rel="stylesheet" href="{% static 'css/normalize.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/main.css' %}?1478204657">
+        <link rel="stylesheet" href="{% static 'css/main.css' %}?1478595279">
         <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
         <script src="{% static 'js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
     </head>
@@ -51,7 +51,7 @@
                 <div id="results">
                     {% for note in notes %} {# Display all notes. #}
                     <article id="note-{{ note.id }}" tabindex="0" class="note">
-                        <p>{{ note.body_text }}</p> {# Display note text. #}
+                        <div class="note-body"><p>{{ note.body_text }}</p></div> {# Display note text. #}
                         <p class="note-meta clearfix">
                             {% if user.is_authenticated %}
                                 {% if note.author == user %}
@@ -127,10 +127,11 @@
                             outputNote(notes[i]);
                         }
                         applyNoteActions();
+                        commonmarkParse();
                     },
                     complete: function() {
-                        // Schedule the next request in 60 seconds
-                        setTimeout(ajaxLiveUpdate, 60 * 1000);
+                        // Schedule the next request in 5 seconds
+                        setTimeout(ajaxLiveUpdate, 5 * 1000);
                     }
                 });
             }
@@ -143,25 +144,34 @@
                             outputNote(notes[i]);
                         }
                         applyNoteActions();
+                        commonmarkParse();
                     }
                 });
             }
-            function ajaxDeleteNote(href, id) {
+
+            function ajaxDeleteNote(href) {
                 $.ajax({
-                    url: href + "?action=delete&note=" + id,
+                    url: href,
                     success: function() {ajaxSingleUpdate();}
                 });
             }
             function applyNoteActions () {
                 $(".note-delete").click( function(event){
                     event.preventDefault();
-                    ajaxDeleteNote($(this).prop("href"), $(this).parent().parent().parent().prop("id").substring(5));
-                    // FIXME parent parent parent, really? please fix this...
+                    ajaxDeleteNote($(this).prop("href"));
                 });
             }
-
+            function commonmarkParse () {
+                $(".note-body").each(function(i, obj) {
+                    var reader = new commonmark.Parser();
+                    var writer = new commonmark.HtmlRenderer({smart: true, safe: true});
+                    var parsed = reader.parse($(this).text());
+                    $(this).html(writer.render(parsed));
+                });
+            }
             applyNoteActions();
         </script>
         <script src="{% static 'js/channel.js' %}" onload="setTimeout(ajaxLiveUpdate, 5 * 1000)"></script>
+        <script src="{% static 'js/vendor/commonmark.js' %}" onload="commonmarkParse()"></script>
     </body>
 </html>

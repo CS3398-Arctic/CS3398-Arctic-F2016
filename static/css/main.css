@@ -232,6 +232,19 @@ body.full-height {
     outline: none;
 }
 
+.note-body p {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.note-meta {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 .note-date, .note-author, .note-comments {
     display: block;
     float: left;
@@ -374,7 +387,7 @@ form#login-form {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none;;
+    user-select: none;
 
     -webkit-transition: left 0.2s;
     -moz-transition: left 0.2s;
