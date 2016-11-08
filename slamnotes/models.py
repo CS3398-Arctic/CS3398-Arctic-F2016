@@ -43,6 +43,9 @@ class UserManager(BaseUserManager):
 
         return self._create_user(email, password, **extra_fields)
 
+    def natural_key(self):
+        return self.email
+
 
 def validate_txstate_email(value):
     if '@txstate.edu' not in value:

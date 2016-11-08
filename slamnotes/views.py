@@ -81,5 +81,8 @@ def logout(request):
 def ajax(request):
     """Ajax view"""
     # later on support GET parameters like so: /ajax?action=load&channel=1&session=0
-    data = serialize('json', Note.objects.all())
-    return HttpResponse(data, content_type="application/json")
+    fields = ['body_text', 'created_date']
+    if request.user.is_authenticated:
+        fields.append('author')
+    data = serialize('json', Note.objects.all(), fields=fields, use_natural_foreign_keys=True)
+    return HttpResponse(data, content_type="application/json; charset=utf-8")
