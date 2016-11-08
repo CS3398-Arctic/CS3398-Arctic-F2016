@@ -12,10 +12,15 @@ function outputNote(note) {
     });
 
     // Generate the note body
-    var noteBody = $("<p></p>", {
+    var noteBody = $("<div></div>", {
+        "class": "note-body"
+    });
+
+    var noteParagraph = $("<p></p>", {
         html: note.fields.body_text
     });
 
+    noteBody.append(noteParagraph);
     noteElement.append(noteBody);
 
 

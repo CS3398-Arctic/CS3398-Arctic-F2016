@@ -51,7 +51,7 @@
                 <div id="results">
                     {% for note in notes %} {# Display all notes. #}
                     <article id="note-{{ note.id }}" tabindex="0" class="note">
-                        <p>{{ note.body_text }}</p> {# Display note text. #}
+                        <div class="note-body"><p>{{ note.body_text }}</p></div> {# Display note text. #}
                         <p class="note-meta clearfix">
                             {% if user.is_authenticated %}
                                 {% if note.author == user %}
@@ -127,10 +127,11 @@
                             outputNote(notes[i]);
                         }
                         applyNoteActions();
+                        commonmarkParse();
                     },
                     complete: function() {
                         // Schedule the next request in 60 seconds
-                        setTimeout(ajaxLiveUpdate, 60 * 1000);
+                        setTimeout(ajaxLiveUpdate, 30 * 1000);
                     }
                 });
             }
@@ -143,9 +144,11 @@
                             outputNote(notes[i]);
                         }
                         applyNoteActions();
+                        commonmarkParse();
                     }
                 });
             }
+
             function ajaxDeleteNote(href, id) {
                 $.ajax({
                     url: href + "?action=delete&note=" + id,
@@ -159,9 +162,17 @@
                     // FIXME parent parent parent, really? please fix this...
                 });
             }
-
+            function commonmarkParse () {
+                $(".note-body").each(function(i, obj) {
+                    var reader = new commonmark.Parser();
+                    var writer = new commonmark.HtmlRenderer({smart: true, safe: true});
+                    var parsed = reader.parse($(this).text());
+                    $(this).html(writer.render(parsed));
+                });
+            }
             applyNoteActions();
         </script>
-        <script src="{% static 'js/channel.js' %}" onload="setTimeout(ajaxLiveUpdate, 5 * 1000)"></script>
+        <script src="{% static 'js/channel.js' %}" onload="setTimeout(ajaxLiveUpdate, 30 * 1000)"></script>
+        <script src="{% static 'js/vendor/commonmark.js' %}" onload="commonmarkParse()"></script>
     </body>
 </html>
