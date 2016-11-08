@@ -130,8 +130,8 @@
                         commonmarkParse();
                     },
                     complete: function() {
-                        // Schedule the next request in 60 seconds
-                        setTimeout(ajaxLiveUpdate, 30 * 1000);
+                        // Schedule the next request in 5 seconds
+                        setTimeout(ajaxLiveUpdate, 5 * 1000);
                     }
                 });
             }
@@ -172,7 +172,7 @@
             }
             applyNoteActions();
         </script>
-        <script src="{% static 'js/channel.js' %}" onload="setTimeout(ajaxLiveUpdate, 30 * 1000)"></script>
+        <script src="{% static 'js/channel.js' %}" onload="setTimeout(ajaxLiveUpdate, 5 * 1000)"></script>
         <script src="{% static 'js/vendor/commonmark.js' %}" onload="commonmarkParse()"></script>
     </body>
 </html>
