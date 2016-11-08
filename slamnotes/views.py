@@ -10,7 +10,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as auth_logout
 from django.core.serializers import serialize
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.core.urlresolvers import reverse
 
 from .models import Note, NoteForm, SignupForm, LoginForm, User
 
@@ -81,8 +82,19 @@ def logout(request):
 def ajax(request):
     """Ajax view"""
     # later on support GET parameters like so: /ajax?action=load&channel=1&session=0
-    fields = ['body_text', 'created_date']
-    if request.user.is_authenticated:
-        fields.append('author')
-    data = serialize('json', Note.objects.all(), fields=fields, use_natural_foreign_keys=True)
-    return HttpResponse(data, content_type="application/json; charset=utf-8")
+    if request.GET.get('action', '') == 'delete':
+        try:
+            note_id = request.GET['note']
+        except KeyError:
+            return
+        note = get_object_or_404(Note, pk=note_id)
+        if note.author == request.user:
+            note.delete()
+        return HttpResponse('Note Deleted')
+    elif request.GET.get('action', '') == 'load':
+        fields = ['body_text', 'created_date']
+        if request.user.is_authenticated:
+            fields.append('author')
+        data = serialize('json', Note.objects.all(), fields=fields, use_natural_foreign_keys=True)
+        return HttpResponse(data, content_type="application/json; charset=utf-8")
+

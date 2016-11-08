@@ -76,7 +76,7 @@
                             <span class="note-actions">
                                 {% if note.author == user %} {# Show the edit/delete buttons to the author #}
                                 <a class="note-edit fa fa-pencil" href="#" role="button" aria-label="edit"></a>
-                                <a class="note-delete fa fa-trash" href="#" role="button" aria-label="delete"></a>
+                                <a class="note-delete fa fa-trash" href="{% url 'ajax' %}?action=delete&note={{ note.id }}" role="button" aria-label="delete"></a>
                                 {% endif %}
                             </span>
                             {% endif %}
