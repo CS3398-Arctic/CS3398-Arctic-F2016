@@ -177,6 +177,7 @@ class Note(models.Model):
     channel = models.ForeignKey(Channel, null=True, blank=True)
     session = models.ForeignKey(Session, null=True, blank=True)
     created_date = models.DateTimeField('date created', default=timezone.now)
+    modified_date = models.DateTimeField('date modified', default=timezone.now)
 
     def __str__(self):
         return self.body_text
