@@ -86,7 +86,10 @@ def ajax(request):
         try:
             note_id = request.GET['note']
         except KeyError:
-            return HttpResponse('No changes occurred')
+            return
+        # if 'note' not in request.GET:
+        #    return
+        # note_id = request.GET['note']
         note = get_object_or_404(Note, pk=note_id)
         if note.author == request.user or request.user.is_superuser:
             note.delete()
