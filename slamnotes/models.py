@@ -13,6 +13,10 @@ from django.utils import timezone
 
 
 class UserManager(BaseUserManager):
+    """
+    A custom user manager class based on UserManager in django.contrib.auth.models
+    implementing a user manager that requires an email and a password.
+    """
     use_in_migrations = True
 
     def _create_user(self, email, password, **extra_fields):
@@ -48,6 +52,7 @@ class UserManager(BaseUserManager):
 
 
 def validate_txstate_email(value):
+    """Checks that the email input during user creation is a @txstate.edu, returns error if not."""
     if '@txstate.edu' not in value:
         raise ValidationError('Must be a @txstate.edu address')
 
