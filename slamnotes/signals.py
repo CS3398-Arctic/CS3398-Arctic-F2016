@@ -8,7 +8,7 @@ from .models import User
 @receiver(pre_save, sender=User)
 def confirmation_handler(sender, instance, **kwargs):
     """Generates a confirmation code based on the user's email and current time."""
-    if not instance.email:
+    if not instance.confirmation_code:
         signer = TimestampSigner()
         signed_email = signer.sign(instance.email)
 
