@@ -41,7 +41,10 @@ def index(request):
             account_created = True
             new_user.email_user(
                 'Email Verification',
-                'Welcome to Slam eNotes!',
+                'Welcome to Slam eNotes!'
+                'Visit <a href="http://slamenotes.com/activate?%s">http://slamenotes.com/activate?%s</a>'
+                ' to activate your account.'
+                % (new_user.confirmation_code, new_user.confirmation_code),
                 'account@slamenotes.com',
                 fail_silently=False,
             )
