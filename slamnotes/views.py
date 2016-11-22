@@ -37,8 +37,14 @@ def index(request):
 
         elif "signup-form" in request.POST and form_signup.is_valid():
             # Create new account
-            User.objects.create_user(**form_signup.cleaned_data)
+            new_user = User.objects.create_user(**form_signup.cleaned_data)
             account_created = True
+            new_user.email_user(
+                'Email Verification',
+                'Welcome to Slam eNotes!',
+                'account@slamenotes.com',
+                fail_silently=False,
+            )
     else:
         form_login = LoginForm()
         form_signup = SignupForm()
