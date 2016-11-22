@@ -88,7 +88,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField('date joined', default=timezone.now)
     confirmation_code = models.CharField(
         'confirmation code',
-        default=generate_confirmation_code(self.email),
+        default=generate_confirmation_code(email),
         unique=True,
         error_messages={
             'unique': "Error during confirmation code generation.",
