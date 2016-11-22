@@ -50,6 +50,7 @@ class UserManager(BaseUserManager):
     def natural_key(self):
         return self.email
 
+
 def validate_txstate_email(value):
     """Checks that the email input during user creation is a @txstate.edu, returns error if not."""
     if '@txstate.edu' not in value:
@@ -88,8 +89,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField('date joined', default=timezone.now)
     confirmation_code = models.CharField(
         'confirmation code',
-        default=generate_confirmation_code(email),
-        unique=True,
+        max_length=60,
         error_messages={
             'unique': "Error during confirmation code generation.",
         },
@@ -120,11 +120,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         Sends an email to this User.
         """
         send_mail(subject, message, from_email, [self.email], **kwargs)
-
-    
-def generate_confirmation_code(email):
-    """Generates a confimation code based on the user's email and current time."""
-    return ""
 
 
 class School(models.Model):

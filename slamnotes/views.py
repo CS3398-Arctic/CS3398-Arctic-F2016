@@ -46,7 +46,7 @@ def index(request):
                 ' to activate your account.'
                 % (new_user.confirmation_code, new_user.confirmation_code),
                 'account@slamenotes.com',
-                fail_silently=False,
+                fail_silently=True,
             )
     else:
         form_login = LoginForm()

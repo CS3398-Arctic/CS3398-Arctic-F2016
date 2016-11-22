@@ -6,7 +6,7 @@ This project is hosted online at [Slam eNotes](slamenotes.com) (slamenotes.com).
 
 It is built on Django 1.10, and aims to follow naming conventions for locations of static files and templates.
 
-
+Built with MariaDB 10.1 (but this can easily be changed).
 
 ### External JS/jQuery libraries used:
 - [jQuery](https://jquery.com/)
