@@ -88,8 +88,9 @@ def activate(request):
             user.confirmation_code = ''
             user.save()
 
-    return redirect(reverse('index') + '?activated')
+            return redirect(reverse('index') + '?activated')
 
+    return redirect(index)
 
 def channel(request):
     """Channel view"""
