@@ -6,6 +6,7 @@ Several class-based models. For more information please see:
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.core.mail import send_mail
+from django.core.signing import TimestampSigner
 from django.core.validators import MinValueValidator, MaxValueValidator, URLValidator
 from django.db import models
 from django.forms import ModelForm, Textarea, PasswordInput, EmailInput, ValidationError
@@ -28,6 +29,14 @@ class UserManager(BaseUserManager):
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
+
+        # Generate a confirmation code based on the user's email and current time.
+        signer = TimestampSigner()
+        signed_email = signer.sign(user.email)
+
+        # Strip original string and colons
+        user.confirmation_code = signed_email.split(":", 1)[1].replace(':', '')
+
         user.save(using=self._db)
         return user
 
