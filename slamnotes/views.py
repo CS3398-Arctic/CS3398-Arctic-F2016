@@ -89,7 +89,7 @@ def activate(request):
 
             return redirect(reverse('index') + '?activated')
         except User.DoesNotExist:
-            return redirect(index)
+            pass
 
     return redirect(index)
 
