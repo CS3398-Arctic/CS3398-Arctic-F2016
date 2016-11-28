@@ -81,16 +81,18 @@ def activate(request):
     """Account activation view"""
 
     if request.META['QUERY_STRING']:
-        user = User.objects.get(confirmation_code=request.META['QUERY_STRING'][1:])
-
-        if user is not None:
+        try:
+            user = User.objects.get(confirmation_code=request.META['QUERY_STRING'][1:])
             # Set user's confirmation code to an empty string, signifying the account has been activated.
             user.confirmation_code = ''
             user.save()
 
             return redirect(reverse('index') + '?activated')
+        except User.DoesNotExist:
+            return redirect(index)
 
     return redirect(index)
+
 
 def channel(request):
     """Channel view"""
