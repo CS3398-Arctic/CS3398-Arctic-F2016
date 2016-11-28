@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as auth_logout
 from django.core.serializers import serialize
 from django.http import HttpResponse
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 
 from .models import Note, NoteForm, SignupForm, LoginForm, User
 
@@ -19,6 +19,8 @@ def index(request):
     """Home page view"""
     account_created = False
     invalid_login = False
+    account_not_activated = False
+    account_just_activated = False
 
     if request.method == 'POST':
         form_login = LoginForm(request.POST) if "login-form" in request.POST else LoginForm()
@@ -30,7 +32,11 @@ def index(request):
             password = request.POST.get('password')
             user = authenticate(email=email, password=password)
             if user is not None:
-                login(request, user)
+                if not user.confirmation_code:
+                    login(request, user)
+                else:
+                    # Return an 'account not activated' error message.
+                    account_not_activated = True
             else:
                 # Return an 'invalid login' error message.
                 invalid_login = True
@@ -57,6 +63,8 @@ This message was sent to you because your email was used to register an account 
     else:
         form_login = LoginForm()
         form_signup = SignupForm()
+        if request.META['QUERY_STRING'] == '?activated':
+            account_just_activated = True
 
     return render(request, 'index.html',
                   {
@@ -64,7 +72,23 @@ This message was sent to you because your email was used to register an account 
                       'form_signup': form_signup,
                       'account_created': account_created,
                       'invalid_login': invalid_login,
+                      'account_not_activated': account_not_activated,
+                      'account_just_activated': account_just_activated,
                   })
+
+
+def activate(request):
+    """Account activation view"""
+
+    if request.META['QUERY_STRING']:
+        user = User.objects.get(confirmation_code=request.META['QUERY_STRING'][1:])
+
+        if user is not None:
+            # Set user's confirmation code to an empty string, signifying the account has been activated.
+            user.confirmation_code = ''
+            user.save()
+
+    return redirect(reverse('index') + '?activated')
 
 
 def channel(request):

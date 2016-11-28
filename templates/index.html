@@ -74,12 +74,20 @@
                     <p>
                         Account created successfully. Activate your account using the link sent to your email address.
                     </p>
+                        {% elif account_just_activated %}
+                    <p>
+                        Account successfully activated.
+                    </p>
                         {% endif %}
                     <form id="login-form" method="post">
                         <h3>Log In</h3>
                         {% if invalid_login %}
                         <p>
                             Invalid email/password combination entered.
+                        </p>
+                        {% elif account_not_activated %}
+                        <p>
+                            Specified account has not been activated yet. Activate your account using the link sent to your email address.
                         </p>
                         {% endif %}
                         {% csrf_token %}
