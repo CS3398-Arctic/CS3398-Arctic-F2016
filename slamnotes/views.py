@@ -37,14 +37,20 @@ def index(request):
 
         elif "signup-form" in request.POST and form_signup.is_valid():
             # Create new account
-            new_user = User.objects.create_user(**form_signup.cleaned_data)
+            User.objects.create_user(**form_signup.cleaned_data)
             account_created = True
+            new_user = User.objects.get(email=form_signup.cleaned_data['email'])
             new_user.email_user(
-                'Email Verification',
-                'Welcome to Slam eNotes!'
-                'Visit <a href="http://slamenotes.com/activate?%s">http://slamenotes.com/activate?%s</a>'
-                ' to activate your account.'
-                % (new_user.confirmation_code, new_user.confirmation_code),
+                'Activate your account',
+                '''Welcome to Slam eNotes!
+
+Visit http://slamenotes.com/activate?%s to activate your account.
+
+Best,
+Slam eNotes Team
+
+This message was sent to you because your email was used to register an account at slamenotes.com.'''
+                % new_user.confirmation_code,
                 'account@slamenotes.com',
                 fail_silently=True,
             )

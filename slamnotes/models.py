@@ -90,9 +90,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     confirmation_code = models.CharField(
         'confirmation code',
         max_length=60,
-        error_messages={
-            'unique': "Error during confirmation code generation.",
-        },
     )
 
     objects = UserManager()
@@ -102,7 +99,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = 'user'
         verbose_name_plural = 'users'
-        abstract = False # Used to output emails in JSON instead of
+        abstract = False  # Used to output emails in JSON instead of ids
 
     def get_full_name(self):
         """
