@@ -82,7 +82,7 @@ def activate(request):
 
     if request.META['QUERY_STRING']:
         try:
-            user = User.objects.get(confirmation_code=request.META['QUERY_STRING'][1:])
+            user = User.objects.get(confirmation_code=request.META['QUERY_STRING'])
             # Set user's confirmation code to an empty string, signifying the account has been activated.
             user.confirmation_code = ''
             user.save()
