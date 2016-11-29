@@ -63,7 +63,7 @@ This message was sent to you because your email was used to register an account 
     else:
         form_login = LoginForm()
         form_signup = SignupForm()
-        if request.META['QUERY_STRING'] == '?activated':
+        if request.META['QUERY_STRING'] == 'activated':
             account_just_activated = True
 
     return render(request, 'index.html',
