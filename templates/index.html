@@ -13,41 +13,36 @@
         <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
 
         <link rel="stylesheet" href="{% static 'css/normalize.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/main.css' %}?1478595279">
+        <link rel="stylesheet" href="{% static 'css/main.css' %}?1478595280">
         <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
         <script src="{% static 'js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
     </head>
     <body>
 		<!-- Banner -->
-			<section id="banner">
-				<div class="inner split">
-					<section>
-						<h2>A note-sharing app built for you.</h2>
-					    <img src="{% static 'images/logo-alternate.png' %}" alt="Slam eNotes"  height="65">
-                    </section>
-					<section>
-						<p>Welcome to Slam eNotes! Built by students, for students. With Slam eNotes, it's easy to share digital lecture notes with your classmates.</p>
-						<ul class="actions">
-							<li><a href="{% url 'channel'  %}" class="button special">Take Notes</a></li>
-						</ul>
-					</section>
-				</div>
-			</section>
+        <section id="banner">
+            <div class="inner split">
+                <section>
+                    <img src="{% static 'images/logo-bright.png' %}" alt="Slam eNotes"  height="110">
+                    <h2>A note-sharing app built for you.</h2>
+                </section>
+                <section>
+                    <p>Built by students, for students. With Slam eNotes, it&rsquo;s easy to share digital lecture notes with your classmates.</p>
+                    <ul class="actions">
+                        <li><a href="{% url 'channel'  %}" class="button special">{% if user.is_authenticated %}Take notes{% else %}Get started{% endif %}</a></li>
+                    </ul>
+                </section>
+            </div>
+        </section>
 
 
-		<!-- Contact -->
-			<section id="contact" class="wrapper">
-				<div class="inner split">
-					 <aside>
+		<!-- Registration -->
+        <section id="registration" class="wrapper">
+            <div class="inner {% if user.is_authenticated %}logged-in{% else %}split{% endif %}">
                     {% if user.is_authenticated %}
-                    <p>
-                        Welcome, {{ user.email }}.
-                        {% if user.email == 'cgw21@txstate.edu' %}
-                            <a href="http://tinyurl.com/jymbaj9">IMPORTANT: click here first to verify login</a> {# Pulling a jape #}
-                        {% endif %}
-                        <a href="{% url 'logout' %}">Log out.</a>
-                    </p>
+                <h2>Welcome, {{ user.email }}.</h2>
+                <a class="button" href="{% url 'logout' %}">Log out</a>
                     {% else %}
+                <section>
                         {% if account_created %}
                     <p>
                         Account created successfully. Activate your account using the link sent to your email address.
@@ -58,7 +53,7 @@
                     </p>
                         {% endif %}
                     <form id="login-form" method="post" action="{% url 'index' %}">
-                        <h3>Log In</h3>
+                        <h3>Log in</h3>
                         {% if invalid_login %}
                         <p>
                             Invalid email/password combination entered.
@@ -77,52 +72,56 @@
                         </p>
                         <input type="submit" name="login-form" value="Log in" />
                     </form>
+                </section>
+                <section>
                     <form id="signup-form" method="post" action="{% url 'index' %}">
-                        <h3>Sign Up With Texas State Email</h3>
+                        <h3>Sign up with Texas State email</h3>
                         {% csrf_token %}
                         {{ form_signup.as_p }}
                         <input type="submit" name="signup-form" value="Create Account" />
                     </form>
                     {% endif %}
-                 </aside>
-                    <section>
-                        <h2>Planned Features:</h2>
-						<ul class="checklist">
-							<li>Create User Accounts</li>
-							<li>Upload and edit text notes</li>
-						</ul>
-                        <ul>
-                            <li>Search by notes</li>
-                            <li>Create rating system</li>
-                            <li>Sort notes by class section</li>
-                            <li>Upload handwritten notes</li>
-                        </ul>
-                        <br><br><br>
-						<ul class="contact">
-							<li class="fa-github"><a href="https://github.com/CS3398-Arctic">Follow our development on Github!</a></li>
+                </section>
+            </div>
+        </section>
 
-						</ul>
-					</section>
-
-				</div>
-			</section>
+        <!-- Information -->
+        <section id="information" class="wrapper">
+            <div class="inner split">
+                <section>
+                    <h2>Planned Features:</h2>
+                    <ul class="checklist">
+                        <li>Create User Accounts</li>
+                        <li>Upload text notes</li>
+                    </ul>
+                    <ul>
+                        <li>Edit text notes</li>
+                        <li>Upload handwritten notes</li>
+                        <li>Search for notes</li>
+                        <li>Sort notes by class session</li>
+                        <li>Create new channels</li>
+                        <li>Rate notes</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Follow our development</h2>
+                    <ul class="contact">
+                        <li class="fa-github"><a href="https://github.com/CS3398-Arctic">CS3398-Arctic on Github</a></li>
+                    </ul>
+                </section>
+            </div>
+        </section>
 
 		<!-- Footer -->
-			<footer id="footer">
-				<div class="copyright">
-					&copy; Texas State Univsersity Software Engineering Team Arctic 2016</a>.
-				</div>
-			</footer>
+        <footer id="footer">
+            <div class="copyright">
+                &copy; Texas State University Software Engineering - Team Arctic 2016</a>.
+            </div>
+        </footer>
 
 		<!-- Scripts -->
-            <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-             <script>window.jQuery || document.write('<script src="{% static 'js/vendor/jquery-1.11.2.min.js' %}"><\/script>')</script>
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
-         <script src="{% static 'js/main.js' %}"></script>
-
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="{% static 'js/vendor/jquery-1.11.2.min.js' %}"><\/script>')</script>
+        <script src="{% static 'js/main.js' %}"></script>
 	</body>
 </html>
