@@ -8,7 +8,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Slam eNotes - Share notes with classmates</title>
-        <meta name="description" content="">
+        <meta name="description" content="A note-sharing app for students">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
 
@@ -18,49 +18,27 @@
         <script src="{% static 'js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
     </head>
     <body>
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        
-        <div class="header-container">
-            <header class="wrapper clearfix">
-                <h1 class="title">
-                    <img src="{% static 'images/logo-alternate.png' %}" alt="Slam eNotes"  height="65">
-                </h1>
-
-                <nav>
-                    <ul>
-                        <li><a href="{% url 'channel' %}">Take Notes</a></li>
-                    </ul>
-                </nav>
-            </header>
-        </div>
-
-        <div class="main-container">
-            <div class="main wrapper clearfix">
-                <article>
-                    <header>
-                        <h1>A note-sharing app built for you</h1>
-                        <p>Slam eNotes is built by students, for students. With Slam eNotes, it's easy to share digital lecture notes with your classmates.</p>
-                    </header>
-                    <section>
-                        <h2>Start using Slam eNotes</h2>
-                        <p>Can't wait to get started? We're preparing for a general release soon, stay tuned!</p>
+		<!-- Banner -->
+			<section id="banner">
+				<div class="inner split">
+					<section>
+						<h2>A note-sharing app built for you.</h2>
+					    <img src="{% static 'images/logo-alternate.png' %}" alt="Slam eNotes"  height="65">
                     </section>
-                    <section>
-                        <h2>Planned Features</h2>
-                        <ul>
-                            <li>Create a user account.</li>
-                            <li>Create channels for your classes.</li>
-                            <li>Sort notes by class session.</li>
-                            <li>Search through notes.</li>
-                            <li>Upload handwritten notes.</li>
-                        </ul>
-                        <h3>About Us</h3>
-                    <p>Hi, we're Team Arctic. <a href="https://github.com/CS3398-Arctic/CS3398-Arctic-F2016/">Follow development on GitHub!</a></p>
-                    </section>
-                </article>
-                <aside>
+					<section>
+						<p>Welcome to Slam eNotes! Built by students, for students. With Slam eNotes, it's easy to share digital lecture notes with your classmates.</p>
+						<ul class="actions">
+							<li><a href="{% url 'channel'  %}" class="button special">Take Notes</a></li>
+						</ul>
+					</section>
+				</div>
+			</section>
+
+
+		<!-- Contact -->
+			<section id="contact" class="wrapper">
+				<div class="inner split">
+					 <aside>
                     {% if user.is_authenticated %}
                     <p>
                         Welcome, {{ user.email }}.
@@ -107,18 +85,44 @@
                     </form>
                     {% endif %}
                  </aside>
-            </div> <!-- #main -->
-        </div> <!-- #main-container -->
+                    <section>
+                        <h2>Planned Features:</h2>
+						<ul class="checklist">
+							<li>Create User Accounts</li>
+							<li>Upload and edit text notes</li>
+						</ul>
+                        <ul>
+                            <li>Search by notes</li>
+                            <li>Create rating system</li>
+                            <li>Sort notes by class section</li>
+                            <li>Upload handwritten notes</li>
+                        </ul>
+                        <br><br><br>
+						<ul class="contact">
+							<li class="fa-github"><a href="https://github.com/CS3398-Arctic">Follow our development on Github!</a></li>
 
-        <div class="footer-container">
-            <footer class="wrapper">
-                <p>&copy; Team Arctic 2016</p>
-            </footer>
-        </div>
+						</ul>
+					</section>
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="{% static 'js/vendor/jquery-1.11.2.min.js' %}"><\/script>')</script>
+				</div>
+			</section>
 
-        <script src="{% static 'js/main.js' %}"></script>
-    </body>
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="copyright">
+					&copy; Texas State Univsersity Software Engineering Team Arctic 2016</a>.
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+             <script>window.jQuery || document.write('<script src="{% static 'js/vendor/jquery-1.11.2.min.js' %}"><\/script>')</script>
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+         <script src="{% static 'js/main.js' %}"></script>
+
+	</body>
 </html>
