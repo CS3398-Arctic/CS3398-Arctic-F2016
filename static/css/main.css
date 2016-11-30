@@ -1,5 +1,3 @@
-@import url(font-awesome.min.css);
-
 /*
 	Prism by TEMPLATED
 	templated.co @templatedco
@@ -1484,7 +1482,7 @@
 	}
 
 		a:hover {
-			color: #00BC8A !important;
+			color: #008DCF !important;
 			text-decoration: none;
 		}
 
@@ -1600,7 +1598,7 @@
 	}
 
 	a {
-		color: #00BC8A;
+		color: #008DCF;
 	}
 
 	strong, b {
@@ -1757,6 +1755,8 @@
 	.button {
 		background-color: #fafafa;
 		color: #666 !important;
+		margin-left: auto;
+		display: block;
 	}
 
 		input[type="submit"]:hover,
@@ -1814,7 +1814,7 @@
 		input[type="button"].special,
 		button.special,
 		.button.special {
-			background-color: #00BC8A;
+			background-color: #008DCF;
 			color: #ffffff !important;
 		}
 
@@ -1823,7 +1823,7 @@
 			input[type="button"].special:hover,
 			button.special:hover,
 			.button.special:hover {
-				background-color: #00d69d;
+				background-color: #23acda;
 			}
 
 			input[type="submit"].special:active,
@@ -1831,7 +1831,7 @@
 			input[type="button"].special:active,
 			button.special:active,
 			.button.special:active {
-				background-color: #00a377;
+				background-color: #217eb1;
 			}
 
 /* Form */
@@ -2020,8 +2020,8 @@
 		input[type="email"]:focus,
 		select:focus,
 		textarea:focus {
-			border-color: #00BC8A;
-			box-shadow: 0 0 0 1px #00BC8A;
+			border-color: #008DCF;
+			box-shadow: 0 0 0 1px #008DCF;
 		}
 
 	.select-wrapper:before {
@@ -2041,15 +2041,15 @@
 
 	input[type="checkbox"]:checked + label:before,
 	input[type="radio"]:checked + label:before {
-		background-color: #00BC8A;
-		border-color: #00BC8A;
+		background-color: #008DCF;
+		border-color: #008DCF;
 		color: #ffffff;
 	}
 
 	input[type="checkbox"]:focus + label:before,
 	input[type="radio"]:focus + label:before {
-		border-color: #00BC8A;
-		box-shadow: 0 0 0 1px #00BC8A;
+		border-color: #008DCF;
+		box-shadow: 0 0 0 1px #008DCF;
 	}
 
 	::-webkit-input-placeholder {
@@ -2170,7 +2170,7 @@
 	ul {
 		list-style: disc;
 		margin: 0 0 2em 0;
-		padding-left: 1em;
+		padding-left: 1.2em;
 	}
 
 		ul li {
@@ -2199,11 +2199,12 @@
 		ul.checklist {
 			list-style: none;
 			padding-left: 0;
+			margin-bottom: 0;
 		}
 
 			ul.checklist li {
 				text-decoration: none;
-				margin-bottom: 1.5em;
+				/*! margin-bottom: 1.5em; */
 				padding-left: 0;
 			}
 
@@ -2403,13 +2404,32 @@
 	}
 
 	ul.contact li:before {
-		color: #00BC8A;
+		color: black;
 	}
 
 /* Section/Article */
 
 	section.special, article.special {
 		text-align: center;
+	}
+
+    section#registration .logged-in h2 {
+        float: left;
+    }
+
+    section#registration .logged-in a.button {
+        float: right;
+    }
+
+    @media screen and (max-width: 480px) {
+        section#registration .logged-in h2,
+        section#registration .logged-in a.button {
+            float: none;
+        }
+    }
+
+	section#information.wrapper {
+    	padding-top: 0;
 	}
 
 	header p {
@@ -2688,7 +2708,7 @@
 		}
 
 		.wrapper.style1 {
-			background-color: #00BC8A;
+			background-color: #008DCF;
 			color: #bfeee1;
 		}
 
@@ -2790,7 +2810,7 @@
 				.wrapper.style1 button.special,
 				.wrapper.style1 .button.special {
 					background-color: #ffffff;
-					color: #00BC8A !important;
+					color: #008DCF !important;
 				}
 
 			.wrapper.style1 label {
@@ -2834,7 +2854,7 @@
 			.wrapper.style1 input[type="radio"]:checked + label:before {
 				background-color: #ffffff;
 				border-color: #ffffff;
-				color: #00BC8A;
+				color: #008DCF;
 			}
 
 			.wrapper.style1 input[type="checkbox"]:focus + label:before,
@@ -2876,11 +2896,11 @@
 			}
 
 			.wrapper.style1 ul.checklist li:before {
-				color: #00BC8A;
+				color: #008DCF;
 			}
 
 			.wrapper.style1 ul.contact li:before {
-				color: #00BC8A;
+				color: #008DCF;
 			}
 
 			.wrapper.style1 header p {
@@ -2934,7 +2954,7 @@
 			}
 
 			.wrapper.style2 a {
-				color: #00BC8A;
+				color: #008DCF;
 			}
 
 			.wrapper.style2 strong, .wrapper.style2 b {
@@ -3010,7 +3030,7 @@
 				.wrapper.style2 input[type="button"].special,
 				.wrapper.style2 button.special,
 				.wrapper.style2 .button.special {
-					background-color: #00BC8A;
+					background-color: #008DCF;
 					color: #ffffff !important;
 				}
 
@@ -3048,8 +3068,8 @@
 				.wrapper.style2 input[type="email"]:focus,
 				.wrapper.style2 select:focus,
 				.wrapper.style2 textarea:focus {
-					border-color: #00BC8A;
-					box-shadow: 0 0 0 1px #00BC8A;
+					border-color: #008DCF;
+					box-shadow: 0 0 0 1px #008DCF;
 				}
 
 			.wrapper.style2 .select-wrapper:before {
@@ -3069,15 +3089,15 @@
 
 			.wrapper.style2 input[type="checkbox"]:checked + label:before,
 			.wrapper.style2 input[type="radio"]:checked + label:before {
-				background-color: #00BC8A;
-				border-color: #00BC8A;
+				background-color: #008DCF;
+				border-color: #008DCF;
 				color: #ffffff;
 			}
 
 			.wrapper.style2 input[type="checkbox"]:focus + label:before,
 			.wrapper.style2 input[type="radio"]:focus + label:before {
-				border-color: #00BC8A;
-				box-shadow: 0 0 0 1px #00BC8A;
+				border-color: #008DCF;
+				box-shadow: 0 0 0 1px #008DCF;
 			}
 
 			.wrapper.style2 ::-webkit-input-placeholder {
@@ -3113,11 +3133,11 @@
 			}
 
 			.wrapper.style2 ul.checklist li:before {
-				color: #00BC8A;
+				color: #008DCF;
 			}
 
 			.wrapper.style2 ul.contact li:before {
-				color: #00BC8A;
+				color: #008DCF;
 			}
 
 			.wrapper.style2 header p {
@@ -3196,12 +3216,12 @@
 /* Banner */
 
 	#banner {
-		background-image: url("images/overlay.png"), -moz-linear-gradient(45deg, #4A4771 0%, #7C3875 100%);
-		background-image: url("images/overlay.png"), -webkit-linear-gradient(45deg, #4A4771 0%, #7C3875 100%);
-		background-image: url("images/overlay.png"), -ms-linear-gradient(45deg, #4A4771 0%, #7C3875 100%);
-		background-image: url("images/overlay.png"), linear-gradient(45deg, #4A4771 0%, #7C3875 100%);
+		background-image: url("../images/overlay.png"), -moz-linear-gradient(45deg, #1E4378 0%, #4C98B1 100%);
+		background-image: url("../images/overlay.png"), -webkit-linear-gradient(45deg, #1E4378 0%, #4C98B1 100%);
+		background-image: url("../images/overlay.png"), -ms-linear-gradient(45deg, #1E4378 0%, #4C98B1 100%);
+		background-image: url("../images/overlay.png"), linear-gradient(45deg, #1E4378 0%, #4C98B1 100%);
 		background-size: 100px 100px, cover;
-		color: rgba(255, 255, 255, 0.5);
+		color: rgba(255, 255, 255, 0.8);
 		padding: 14em 0 4em;
 	}
 
@@ -3210,6 +3230,10 @@
 			line-height: 1.4;
 			margin-bottom: 0;
 			color: #fff;
+            max-width: 55%;
+            float: right;
+            text-align: right;
+            padding-top: 1rem;
 		}
 
 		#banner p {
@@ -3238,11 +3262,23 @@
 
 		}
 
+		@media screen and (max-width: 1040px) {
+
+			#banner {
+			}
+
+		}
+
 		@media screen and (max-width: 980px) {
 
 			#banner {
 				padding: 10em 2em 2em;
 			}
+
+				#banner h2 {
+					font-size: 1.5em;
+					max-width: 100%;
+				}
 
 		}
 
@@ -3254,6 +3290,7 @@
 
 				#banner h2 {
 					font-size: 1.75em;
+					max-width: 55%;
 				}
 
 				#banner p {
@@ -3267,6 +3304,10 @@
 			#banner {
 				padding: 8em 2em 2em;
 			}
+
+				#banner h2 {
+					max-width: 100%;
+				}
 
 		}
 
