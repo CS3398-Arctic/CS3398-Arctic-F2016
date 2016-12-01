@@ -147,6 +147,11 @@ def ajax(request):
                          use_natural_foreign_keys=True)
         return HttpResponse(data, content_type="application/json; charset=utf-8")
 
+    elif request.GET.get('action', '') == 'edit':
+        # Edit note
+        edit = note_edit(request)
+        return HttpResponse('Note Edited' if edit else 'No changes occurred')
+
     elif request.method == 'POST':
         # Create note
         note_create(request)
