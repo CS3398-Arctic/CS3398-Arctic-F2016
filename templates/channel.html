@@ -88,6 +88,17 @@
                 </div>
             </div> <!-- #main -->
             <span id="update-indicator">Notes changed. <a href="#">Update</a></span>
+            <div id="invis-edit-form" class="visuallyhidden">
+                {% if user.is_authenticated %}
+                <form id="note-edit-form" method="post" action="{% url 'ajax' %}?action=edit">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <p>
+                        <input id="note-edit-post" type="submit" value="Post">
+                    </p>
+                </form>
+                {% endif %}
+            </div>
         </div> <!-- #main-container -->
 
         <aside class="sidebar-container">

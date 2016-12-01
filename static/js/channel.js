@@ -204,13 +204,25 @@ $("#update-indicator a").click( function(event){
     updateNotes(notes_changes);
 });
 
+function noteEdit (id) {
+    var the_note = $('#note-' + id);
+    the_note.toggleClass('editing');
+
+    $('#note-edit-form').appendTo(the_note);
+}
+
 function ajaxDeleteNote(href) {
     $.ajax({
         url: href,
         success: function() {ajaxSingleUpdate();}
     });
 }
+
 function applyNoteActions () {
+    $(".note-edit").click( function(event){
+        event.preventDefault();
+        noteEdit($(this).closest('.note').attr('id').split("note-")[1]);
+    });
     $(".note-delete").click( function(event){
         event.preventDefault();
         ajaxDeleteNote($(this).prop("href"));
