@@ -4,13 +4,15 @@ Several function-based views. For more information please see:
     https://docs.djangoproject.com/en/1.10/topics/http/views/
 """
 
-# import datetime
+from urllib import parse
 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as auth_logout
 from django.core.serializers import serialize
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.utils import timezone
+from django.utils.dateparse import parse_datetime
 
 from .models import Note, NoteForm, SignupForm, LoginForm, User
 
@@ -130,7 +132,19 @@ def ajax(request):
         fields = ['body_text', 'created_date']
         if request.user.is_authenticated:
             fields.append('author')
-        data = serialize('json', Note.objects.all(), fields=fields, use_natural_foreign_keys=True)
+
+        if 'modified_date' not in request.GET:
+            return HttpResponse('{}')
+
+        try:
+            later_than = parse_datetime(parse.unquote(request.GET['modified_date']))
+            if later_than is None:
+                return HttpResponse('{}')
+        except ValueError:
+            return HttpResponse('{}')
+
+        data = serialize('json', Note.objects.filter(modified_date__gte=later_than), fields=fields,
+                         use_natural_foreign_keys=True)
         return HttpResponse(data, content_type="application/json; charset=utf-8")
 
     elif request.method == 'POST':
@@ -176,6 +190,8 @@ def note_delete(request):
         return False
     note = get_object_or_404(Note, pk=note_id)
     if note.author == request.user or request.user.is_superuser:
-        note.delete()
+        note.body_text = ""
+        note.modified_date = timezone.now()
+        note.save()
         return True
     return False

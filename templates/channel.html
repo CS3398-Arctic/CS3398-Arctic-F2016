@@ -54,6 +54,7 @@
                 {% now "M d, Y" as current_date %}
                 <div id="results">
                     {% for note in notes %} {# Display all notes. #}
+                        {% if note.body_text %}
                     <article id="note-{{ note.id }}" tabindex="0" class="note">
                         <div class="note-body"><p>{{ note.body_text }}</p></div> {# Display note text. #}
                         <p class="note-meta clearfix">
@@ -85,9 +86,11 @@
                             {% endif %}
                         </p>
                     </article>
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div> <!-- #main -->
+            <span id="update-indicator">Notes changed. <a href="#">Update</a></span>
         </div> <!-- #main-container -->
 
         <aside class="sidebar-container">
@@ -109,7 +112,6 @@
         <script>window.jQuery || document.write('<script src="{% static 'js/vendor/jquery-1.11.2.min.js' %}"><\/script>')</script>
         <script src="{% static 'js/vendor/jquery.ns-autogrow.min.js' %}"></script>
 
-        <script src="{% static 'js/main.js' %}"></script>
         <script>
             $('#id_body_text').autogrow({vertical: true, horizontal: false, flickering: false});
             $("#courses-menu-toggle").click(function() {$("#courses").toggleClass('courses-menu-open');});
@@ -118,12 +120,14 @@
 
             ajax_url = "{% url 'ajax' %}";
 
+            var notes_changes = new Object();
+            var last_update = new Date();
             var user = new Object();
             user.is_authenticated = {% if user.is_authenticated %}true;
             user.is_superuser = {% if user.is_superuser %}true;{% else %}false;{% endif %}
             user.email = "{{ user.email }}";{% else %}false;{% endif %}
         </script>
         <script src="{% static 'js/channel.js' %}?1478645337" onload="applyNoteActions();setTimeout(ajaxLiveUpdate, 5 * 1000);"></script>
-        <script src="{% static 'js/vendor/commonmark.js' %}" onload="commonmarkParse();"></script>
+        <script src="{% static 'js/vendor/commonmark.js' %}" onload="commonmarkParseAll();"></script>
     </body>
 </html>

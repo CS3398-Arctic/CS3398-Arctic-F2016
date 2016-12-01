@@ -192,12 +192,20 @@ body.full-height {
     height: calc(100vh - 51px);
     margin-left: 232px;
     overflow-y: scroll;
+    position: relative;
 
     -webkit-transition: margin-left 0.2s;
     -moz-transition: margin-left 0.2s;
     -ms-transition: margin-left 0.2s;
     -o-transition: margin-left 0.2s;
     transition: margin-left 0.2s;
+}
+
+.full-height > .main-container #update-indicator {
+    display: none;
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
 }
 
 .full-height .main {
