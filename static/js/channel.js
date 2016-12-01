@@ -114,9 +114,16 @@ function outputNote(note) {
             // This is one of user's notes (or user is a superuser), display appropriate actions
             var noteEdit = $("<a></a>", {
                 "class": "note-edit fa fa-pencil",
-                href: "#", // FIXME: Does nothing, fix in Sprint 3.
+                href: "#",
                 role: "button",
                 "aria-label": "edit"
+            });
+            noteActions.append(noteEdit);
+            var noteEditCancel = $("<a></a>", {
+                "class": "note-edit-cancel fa fa-times",
+                href: "#",
+                role: "button",
+                "aria-label": "cancel edit"
             });
             noteActions.append(noteEdit);
 
@@ -206,10 +213,44 @@ $("#update-indicator a").click( function(event){
 
 function noteEdit (id) {
     var the_note = $('#note-' + id);
+    $('.editing').removeClass('editing');
     the_note.toggleClass('editing');
-    var the_edit_form = $('#note-edit-form');
-    the_edit_form.appendTo(the_note);
-    the_edit_form.attr('action', ajax_url + '?action=edit&note=' + id);
+
+    var edit_form = $('#note-edit-form');
+    var edit_form_textarea = $('#edit_body_text');
+
+    edit_form.appendTo(the_note);
+    edit_form.attr('action', ajax_url + '?action=edit&note=' + id);
+    edit_form_textarea.autogrow({vertical: true, horizontal: false, flickering: false});
+    $("#note-edit-post").click( function(event){
+        event.preventDefault();
+        ajaxEditNote(ajax_url + '?action=edit&note=' + id);
+    });
+
+
+    edit_form_textarea.val(the_note.find(".note-body").data("raw"));
+}
+
+function noteEditCancel () {
+    var invis_holder = $('#invis-edit-form');
+    $('.editing').removeClass('editing');
+
+    var edit_form = $('#note-edit-form');
+    var edit_form_textarea = $('#edit_body_text');
+    edit_form.appendTo(invis_holder);
+    edit_form_textarea.val('');
+}
+
+function ajaxEditNote(href) {
+    $.ajax({
+       type: "POST",
+       url: href,
+       data: $("#note-edit-form").serialize(),
+       success: function() {
+           ajaxSingleUpdate();
+           noteEditCancel();
+       }
+     });
 }
 
 function ajaxDeleteNote(href) {
@@ -228,6 +269,10 @@ function applyNoteActions () {
         event.preventDefault();
         ajaxDeleteNote($(this).prop("href"));
     });
+    $(".note-edit-cancel").click( function(event){
+        event.preventDefault();
+        noteEditCancel();
+    });
 }
 function commonmarkParse (element) {
     var reader = new commonmark.Parser();
@@ -237,6 +282,7 @@ function commonmarkParse (element) {
 }
 function commonmarkParseAll () {
     $(".note-body").each(function (i, obj) {
+        $(this).data('raw', $(this).text());
         commonmarkParse(this);
     });
 }

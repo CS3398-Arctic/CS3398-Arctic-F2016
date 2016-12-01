@@ -77,7 +77,7 @@
                             {% if user.is_authenticated %}
                             <span class="note-actions">
                                 {% if note.author == user or user.is_superuser %} {# Show the edit/delete buttons to the author, or a superuser #}
-                                <a class="note-edit fa fa-pencil" href="#" role="button" aria-label="edit"></a><a class="note-delete fa fa-trash" href="{% url 'ajax' %}?action=delete&note={{ note.id }}" role="button" aria-label="delete"></a>
+                                <a class="note-edit fa fa-pencil" href="#" role="button" aria-label="edit"></a><a class="note-delete fa fa-trash" href="{% url 'ajax' %}?action=delete&note={{ note.id }}" role="button" aria-label="delete"></a><a class="note-edit-cancel fa fa-times" href="#" role="button" aria-label="cancel edit"></a>
                                 {% endif %}
                             </span>
                             {% endif %}
@@ -92,9 +92,11 @@
                 {% if user.is_authenticated %}
                 <form id="note-edit-form" method="post">
                     {% csrf_token %}
-                    {{ form.as_p }}
                     <p>
-                        <input id="note-edit-post" type="submit" value="Post">
+                        <textarea cols="" id="edit_body_text" name="body_text" placeholder="Write a note..." rows="" required=""></textarea>
+                    </p>
+                    <p>
+                        <input id="note-edit-post" type="submit" value="Update">
                     </p>
                 </form>
                 {% endif %}

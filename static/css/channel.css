@@ -240,6 +240,13 @@ body.full-height {
     background-color: #ffffd6;
 }
 
+.full-height .main-container .note form {
+    background: inherit;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
 .note:focus, .full-height .main-container form:focus {
     box-shadow: 0 0 12px rgba(150, 150, 150, 0.2);
     outline: none;
@@ -317,6 +324,21 @@ body.full-height {
 .note-actions a:hover.note-delete, .note-actions a:active.note-delete {
     color: rgba(255, 0, 0, 0.7);
 }
+.note-actions a.note-edit-cancel {
+    display: none;
+}
+
+.editing .note-author,
+.editing .note-body,
+.editing .note-date,
+.editing .note-comments,
+.editing .note-actions a.note-edit,
+.editing .note-actions a.note-delete {
+    display: none;
+}
+.editing .note-actions a.note-edit-cancel {
+    display: inline;
+}
 
 .full-height > .footer-container {
     border-top-width: 10px;
@@ -334,6 +356,10 @@ body.full-height {
 }
 
 #note-form {
+    text-align: right;
+}
+
+#note-edit-form {
     text-align: right;
 }
 
