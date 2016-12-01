@@ -9,7 +9,7 @@ Several function-based views. For more information please see:
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as auth_logout
 from django.core.serializers import serialize
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 
 from .models import Note, NoteForm, SignupForm, LoginForm, User
@@ -84,7 +84,7 @@ def activate(request):
         try:
             user = User.objects.get(confirmation_code=request.META['QUERY_STRING'])
             # Set user's confirmation code to an empty string, signifying the account has been activated.
-            user.confirmation_code = ''
+            #user.confirmation_code = ''
             user.save()
 
             return redirect(reverse('index') + '?activated')
@@ -150,9 +150,18 @@ def note_create(request):
     return False
 
 
-def note_edit():
+def note_edit(request):
     """Edits a requested note if user has sufficient permissions."""
-    pass
+    posted_form = NoteForm(request.POST, request.FILES)
+    try:
+        note_id = request.GET['note']
+    except KeyError:
+        return False
+    note = get_object_or_404(Note, pk=note_id)
+    if note.author == request.user or request.user.is_superuser:
+        if request.user.is_authenticated() and posted_form.is_valid():
+            return HttpResponseRedirect(note.get_absolute_url())
+
 
 
 def note_delete(request):

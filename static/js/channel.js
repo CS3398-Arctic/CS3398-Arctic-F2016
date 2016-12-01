@@ -200,3 +200,12 @@ function commonmarkParse () {
         $(this).html(writer.render(parsed));
     });
 }
+
+
+$("#note-search").on("keyup", function() {
+    var g = $(this).val().toLowerCase();
+    $(".note .note-body p").each(function() {
+        var s = $(this).text().toLowerCase();
+        $(this).closest('.note')[ s.indexOf(g) !== -1 ? 'show' : 'hide' ]();
+    });
+});
