@@ -159,9 +159,13 @@ def note_edit(request):
         return False
     note = get_object_or_404(Note, pk=note_id)
     if note.author == request.user or request.user.is_superuser:
-        if request.user.is_authenticated() and posted_form.is_valid():
-            return HttpResponseRedirect(note.get_absolute_url())
-
+        if request.method == "POST":
+            note = NoteForm(instance=note)
+            if request.user.is_authenticated() and posted_form.is_valid():
+                note.body_text = posted_form.cleaned_data['body_text']
+                note.save()
+                return True
+    return False
 
 
 def note_delete(request):
