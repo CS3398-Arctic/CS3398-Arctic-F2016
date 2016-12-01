@@ -257,6 +257,15 @@ body.full-height {
     word-wrap: break-word;
 }
 
+.note-image {
+    width: 100%;
+    margin: 1.5rem 0 0;
+}
+
+.note-image img {
+    width: 100%;
+}
+
 .note-meta {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -361,6 +370,16 @@ body.full-height {
 
 #note-edit-form {
     text-align: right;
+}
+
+.full-height .main-container input[type=url] {
+    border: none;
+    box-sizing: border-box;
+    padding: 6px 12px;
+    width: 100%;
+
+    background-color: #f7ecbe;
+    color: #333;
 }
 
 .full-height .main-container textarea {

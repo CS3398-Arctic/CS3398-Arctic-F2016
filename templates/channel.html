@@ -37,6 +37,10 @@
                 <form id="note-form" method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
+                    <p style="display:none">
+                        Post a handwritten note (upload to <a href="http://imgur.com" target="_blank">Imgur</a> and submit link)
+                        <input id="id_url" name="url" type="url" placeholder="http://i.imgur.com/...">
+                    </p>
                     <p>
                         <input id="note-post" type="submit" value="Post">
                     </p>
@@ -51,9 +55,13 @@
                 {% now "M d, Y" as current_date %}
                 <div id="results">
                     {% for note in notes %} {# Display all notes. #}
-                        {% if note.body_text %}
+                        {% if note.body_text %} {# or note.url TODO: Enable this for handwritten notes #}
                     <article id="note-{{ note.id }}" tabindex="0" class="note">
+                            {% if note.body_text %}
                         <div class="note-body"><p>{{ note.body_text }}</p></div> {# Display note text. #}
+                            {% else %}
+                        <figure class="note-image"><img src="{{ note.url }}"></figure> {# Display note image. #}
+                            {% endif %}
                         <p class="note-meta clearfix">
                             {% if user.is_authenticated %}
                                 {% if note.author == user %}

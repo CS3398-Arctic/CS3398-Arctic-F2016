@@ -4,6 +4,8 @@ Several function-based views. For more information please see:
     https://docs.djangoproject.com/en/1.10/topics/http/views/
 """
 
+from itertools import chain
+from operator import attrgetter
 from urllib import parse
 
 from django.contrib.auth import authenticate, login
@@ -14,7 +16,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.utils import timezone
 from django.utils.dateparse import parse_datetime
 
-from .models import Note, NoteForm, SignupForm, LoginForm, User
+from .models import Note, NoteForm, HandwrittenNote, HandwrittenNoteForm, SignupForm, LoginForm, User
 
 
 def index(request):
@@ -98,7 +100,10 @@ def activate(request):
 
 def channel(request):
     """Channel view"""
-    all_notes = Note.objects.order_by('-id')
+    notes = Note.objects.order_by('-created_date')
+    handwritten_notes = HandwrittenNote.objects.order_by('-created_date')
+
+    all_notes = sorted(chain(notes, handwritten_notes), key=attrgetter('created_date'), reverse=True)
 
     if request.method == 'POST':
         note_create(request)
@@ -143,7 +148,12 @@ def ajax(request):
         except ValueError:
             return HttpResponse('{}')
 
-        data = serialize('json', Note.objects.filter(modified_date__gte=later_than), fields=fields,
+        notes = Note.objects.filter(modified_date__gte=later_than)
+        handwritten_notes = HandwrittenNote.objects.filter(modified_date__gte=later_than)
+
+        all_notes = sorted(chain(notes, handwritten_notes), key=attrgetter('created_date'), reverse=True)
+
+        data = serialize('json', all_notes, fields=fields,
                          use_natural_foreign_keys=True)
         return HttpResponse(data, content_type="application/json; charset=utf-8")
 
@@ -161,10 +171,20 @@ def ajax(request):
 
 def note_create(request):
     """Create a requested note if user is registered."""
-    posted_form = NoteForm(request.POST, request.FILES)
+    handwritten_note = 'url' in request.POST and request.POST['url'] != ''
+
+    if handwritten_note:
+        posted_form = HandwrittenNoteForm(request.POST, request.FILES)
+    else:
+        posted_form = NoteForm(request.POST, request.FILES)
+
     if request.user.is_authenticated() and posted_form.is_valid():
-        body_text = posted_form.cleaned_data['body_text']
-        Note.objects.create(body_text=body_text, author=request.user)
+        if handwritten_note:
+            url = posted_form.cleaned_data['url']
+            HandwrittenNote.objects.create(url=url, author=request.user)
+        else:
+            body_text = posted_form.cleaned_data['body_text']
+            Note.objects.create(body_text=body_text, author=request.user)
         return True
     return False
 

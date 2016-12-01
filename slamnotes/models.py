@@ -201,6 +201,18 @@ class Note(models.Model):
         return self.body_text
 
 
+def validate_imgur_url(value):
+    """Checks that the url is a valid i.imgur.com, returns error if not."""
+    if (not value.startswith('http://i.imgur.com/') and not value.startswith('https://i.imgur.com/')) \
+            or (not value.endswith('.png') and not value.endswith('.jpg')):
+        raise ValidationError('Must be a valid i.imgur.com url')
+
+
+class HandwrittenNote(Note):
+    """Handwritten Note model"""
+    url = models.URLField(validators=[validate_imgur_url])
+
+
 class NoteForm(ModelForm):
     """Note model form"""
     class Meta:
@@ -211,6 +223,16 @@ class NoteForm(ModelForm):
         }
         widgets = {
             'body_text': Textarea(attrs={'placeholder': 'Write a note...', 'cols': '', 'rows': ''}),
+        }
+
+
+class HandwrittenNoteForm(ModelForm):
+    """Handwritten note model form"""
+    class Meta:
+        model = HandwrittenNote
+        fields = ['url']
+        labels = {
+            'url': '',
         }
 
 
