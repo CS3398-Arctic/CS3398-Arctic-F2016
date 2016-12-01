@@ -183,6 +183,11 @@ body.full-height {
     font-size: 1.5rem;
 }
 
+.full-height .header-container #note-search {
+	float: right;
+	margin-top: 0.8rem;
+}
+
 .full-height .header-container .wrapper {
     max-width: 100%;
     margin: 0 auto;
