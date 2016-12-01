@@ -1,4 +1,6 @@
+{% load ratings %}
 {% load static from staticfiles %}
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -11,6 +13,8 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+        <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+        <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 
         <link rel="stylesheet" href="{% static 'css/normalize.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/channel.css' %}?1478595279">
@@ -50,6 +54,7 @@
                 {% now "M d, Y" as current_date %}
                 <div id="results">
                     {% for note in notes %} {# Display all notes. #}
+                        {% ratings object %}
                     <article id="note-{{ note.id }}" tabindex="0" class="note">
                         <div class="note-body"><p>{{ note.body_text }}</p></div> {# Display note text. #}
                         <p class="note-meta clearfix">
