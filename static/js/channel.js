@@ -207,8 +207,9 @@ $("#update-indicator a").click( function(event){
 function noteEdit (id) {
     var the_note = $('#note-' + id);
     the_note.toggleClass('editing');
-
-    $('#note-edit-form').appendTo(the_note);
+    var the_edit_form = $('#note-edit-form');
+    the_edit_form.appendTo(the_note);
+    the_edit_form.attr('action', ajax_url + '?action=edit&note=' + id);
 }
 
 function ajaxDeleteNote(href) {
