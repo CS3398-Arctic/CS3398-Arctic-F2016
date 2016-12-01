@@ -128,7 +128,7 @@
             $("#collapse-menu").click(function() {$(document.body).toggleClass('menu-closed');});
             $("#expand-menu").click(function() {$(document.body).toggleClass('menu-closed');});
 
-            ajax_url = "{% url 'ajax' %}";
+            var ajax_url = "{% url 'ajax' %}";
 
             var notes_changes = new Object();
             var last_update = new Date();

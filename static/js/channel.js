@@ -143,8 +143,10 @@ function outputNote(note) {
         $('#results').prepend(noteElement);
     }
     else if (note.fields.body_text !== "") { // Update note
-        var the_note = $("#note-" + note.pk + " .note-body p");
-        the_note.html(note.body_text);
+        var the_note = $("#note-" + note.pk + " .note-body");
+        var the_note_p = the_note.find("p");
+        the_note_p.html(note.fields.body_text);
+        the_note.data('raw', the_note_p.text());
         commonmarkParse(the_note);
     }
     else { // Delete note
@@ -261,15 +263,15 @@ function ajaxDeleteNote(href) {
 }
 
 function applyNoteActions () {
-    $(".note-edit").click( function(event){
+    $(".note-edit").unbind( "click" ).click( function(event){
         event.preventDefault();
         noteEdit($(this).closest('.note').attr('id').split("note-")[1]);
     });
-    $(".note-delete").click( function(event){
+    $(".note-delete").unbind( "click" ).click( function(event){
         event.preventDefault();
         ajaxDeleteNote($(this).prop("href"));
     });
-    $(".note-edit-cancel").click( function(event){
+    $(".note-edit-cancel").unbind( "click" ).click( function(event){
         event.preventDefault();
         noteEditCancel();
     });
