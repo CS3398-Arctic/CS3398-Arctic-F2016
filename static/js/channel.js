@@ -263,15 +263,15 @@ function ajaxDeleteNote(href) {
 }
 
 function applyNoteActions () {
-    $(".note-edit").unbind( "click" ).click( function(event){
+    $(".note-edit").off( "click" ).click( function(event){
         event.preventDefault();
         noteEdit($(this).closest('.note').attr('id').split("note-")[1]);
     });
-    $(".note-delete").unbind( "click" ).click( function(event){
+    $(".note-delete").off( "click" ).click( function(event){
         event.preventDefault();
         ajaxDeleteNote($(this).prop("href"));
     });
-    $(".note-edit-cancel").unbind( "click" ).click( function(event){
+    $(".note-edit-cancel").off( "click" ).click( function(event){
         event.preventDefault();
         noteEditCancel();
     });
