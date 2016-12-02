@@ -184,6 +184,7 @@ $("#note-post").click( function(event){
 });
 
 function ajaxLiveUpdate() {
+    var potential_new_update_time = new Date();
     $.ajax({
         url: ajax_url
             + '?action=load&channel=1&session=all&modified_date='
@@ -194,6 +195,8 @@ function ajaxLiveUpdate() {
 
             var empty = $.isEmptyObject(notes_changes);
             $("#update-indicator")[ !empty ? 'show' : 'hide' ]();
+            if (empty)
+                last_update = potential_new_update_time;
         },
         complete: function() {
             // Schedule the next request in 5 seconds
@@ -201,14 +204,14 @@ function ajaxLiveUpdate() {
         }
     });
 }
-function ajaxSingleUpdate(action) {
+
+function ajaxSingleUpdate() {
     $.ajax({
         url: ajax_url
             + '?action=load&channel=1&session=all&modified_date='
-            + encodeURIComponent(last_update.toISOString()),
+            + encodeURIComponent(new Date(last_update - 60000).toISOString()), // 60000ms = 1min
         dataType: 'json',
         success: function(notes) {
-            console.log(notes);
             updateNotes(notes);
         }
     });
@@ -216,11 +219,11 @@ function ajaxSingleUpdate(action) {
 
 function updateNotes(notes) {
     $("#update-indicator")['hide']();
+    last_update = new Date();
     for (var i in notes) {
         outputNote(notes[i]);
     }
     applyNoteActions();
-    last_update = new Date();
 }
 $("#update-indicator a").click( function(event){
     event.preventDefault();
