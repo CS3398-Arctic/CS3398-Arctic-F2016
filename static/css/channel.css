@@ -746,7 +746,7 @@ body.dark.full-height .main-container textarea {
 body.dark.full-height .main-container textarea:focus {
     color: #DDD;
 }
-body.dark .note-date, .note-author, .note-comments {
+body.dark .note-date, body.dark .note-author, body.dark .note-comments {
     color: rgba(255, 255, 255, 0.5);
 }
 body.dark .note-actions a, body.dark .note-actions a:link, body.dark .note-actions a:visited {
@@ -762,7 +762,7 @@ body.dark.full-height .main-container input[type="submit"] {
 body.dark .note-actions a.note-delete:hover, body.dark .note-actions a.note-delete:active {
     color: rgba(255, 30, 30, 0.7);
 }
-body.dark .note:focus, .dark.full-height .main-container form:focus {
+body.dark .note:focus, body.dark.full-height .main-container form:focus {
     box-shadow: 0 0 12px rgba(120, 120, 120, 0.2);
 }
 
