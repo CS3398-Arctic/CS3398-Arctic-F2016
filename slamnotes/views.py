@@ -170,7 +170,8 @@ def ajax(request):
 
     elif request.method == 'POST':
         # Create note
-        note_create(request)
+        created = note_create(request)
+        return HttpResponse('Note created' if created else 'No changes occurred')
 
     return HttpResponse('No changes occurred')
 

@@ -194,7 +194,7 @@ function ajaxLiveUpdate() {
 
             var empty = $.isEmptyObject(notes_changes);
             $("#update-indicator")[ !empty ? 'show' : 'hide' ]();
-            },
+        },
         complete: function() {
             // Schedule the next request in 5 seconds
             setTimeout(ajaxLiveUpdate, 5 * 1000);
@@ -208,6 +208,7 @@ function ajaxSingleUpdate(action) {
             + encodeURIComponent(last_update.toISOString()),
         dataType: 'json',
         success: function(notes) {
+            console.log(notes);
             updateNotes(notes);
         }
     });
@@ -215,11 +216,11 @@ function ajaxSingleUpdate(action) {
 
 function updateNotes(notes) {
     $("#update-indicator")['hide']();
-    last_update = new Date();
     for (var i in notes) {
         outputNote(notes[i]);
     }
     applyNoteActions();
+    last_update = new Date();
 }
 $("#update-indicator a").click( function(event){
     event.preventDefault();
