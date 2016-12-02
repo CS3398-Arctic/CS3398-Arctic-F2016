@@ -157,7 +157,7 @@ def ajax(request):
         notes = Note.objects.filter(modified_date__gte=later_than)
         handwritten_notes = HandwrittenNote.objects.filter(modified_date__gte=later_than)
 
-        all_notes = sorted(chain(notes, handwritten_notes), key=attrgetter('created_date'), reverse=True)
+        all_notes = sorted(chain(notes, handwritten_notes), key=attrgetter('created_date'))
 
         data = serialize('json', all_notes, fields=fields,
                          use_natural_foreign_keys=True)

@@ -5,7 +5,10 @@
 monthAbbrs = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 function outputNote(note) {
-    if ($("#note-" + note.pk).length === 0) { // Create new note element
+    var already_exists = $("#note-" + note.pk).length !== 0; // Note in question exists in the DOM
+    var have_text = note.fields.body_text !== ""; // We have text for the note in question
+
+    if (!already_exists && have_text) { // Create new note element
         var noteElement = $("<article></article>", {
             id: "note-" + note.pk,
             "class": "note",
@@ -144,7 +147,7 @@ function outputNote(note) {
 
         $('#results').prepend(noteElement);
     }
-    else if (note.fields.body_text !== "") { // Update note
+    else if (already_exists && have_text) { // Update note
         var theNote = $("#note-" + note.pk + " .note-body");
         theNote.empty();
 
@@ -157,8 +160,10 @@ function outputNote(note) {
 
         commonmarkParse(theNote);
     }
-    else { // Delete note
+    else if (already_exists && !have_text) { // Delete note
         $("#note-" + note.pk).remove();
+    }
+    else { // Do nothing, note was created and deleted before update occurred.
     }
 }
 
@@ -224,7 +229,7 @@ $("#update-indicator a").click( function(event){
 function noteEdit (id) {
     var the_note = $('#note-' + id);
     $('.editing').removeClass('editing');
-    the_note.toggleClass('editing');
+    the_note.addClass('editing');
 
     var edit_form = $('#note-edit-form');
     var edit_form_textarea = $('#edit_body_text');
@@ -263,6 +268,29 @@ function ajaxEditNote(href) {
      });
 }
 
+function noteDelete (id) {
+    var the_note = $('#note-' + id);
+    $('.deleting').removeClass('deleting');
+    the_note.addClass('deleting');
+
+    var prompt = $('#note-delete-prompt');
+    prompt.appendTo(the_note);
+
+    $("#note-delete-proceed").off('click').click( function(event){
+        event.preventDefault();
+        prompt.appendTo($('#invis-deletion-container'));
+        ajaxDeleteNote(ajax_url + '?action=delete&note=' + id);
+    });
+}
+
+function noteDeleteCancel () {
+    var invis_holder = $('#invis-deletion-container');
+    $('.deleting').removeClass('deleting');
+
+    $('#note-delete-prompt').appendTo(invis_holder);
+}
+$("#note-delete-cancel").click(noteDeleteCancel);
+
 function ajaxDeleteNote(href) {
     $.ajax({
         url: href,
@@ -277,7 +305,7 @@ function applyNoteActions () {
     });
     $(".note-delete").off( "click" ).click( function(event){
         event.preventDefault();
-        ajaxDeleteNote($(this).prop("href"));
+        noteDelete($(this).closest('.note').attr('id').split("note-")[1]);
     });
     $(".note-edit-cancel").off( "click" ).click( function(event){
         event.preventDefault();

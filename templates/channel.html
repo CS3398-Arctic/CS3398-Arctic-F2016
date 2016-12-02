@@ -13,7 +13,7 @@
         <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
 
         <link rel="stylesheet" href="{% static 'css/normalize.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/channel.css' %}?1480653905">
+        <link rel="stylesheet" href="{% static 'css/channel.css' %}?1480657759">
         <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
         <script src="{% static 'js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
     </head>
@@ -25,7 +25,7 @@
         <div class="header-container">
             <header class="wrapper clearfix">
                 <h1 class="title">
-                    <a href="{% url 'index' %}"><img src="{% static 'images/logo-short.png' %}" alt="Slam eNotes" height="38" /></a>
+                    <a href="{% url 'index' %}"><img src="{% if theme == 'dark' %}{% static 'images/logo-short-bright.png' %}{% else %}{% static 'images/logo-short.png' %}{% endif %}" alt="Slam eNotes" height="38" /></a>
                 </h1>
                 <input id="note-search" type="text" placeholder="search notes" />
             </header>
@@ -109,6 +109,17 @@
                 </form>
                 {% endif %}
             </div>
+            <div id="invis-deletion-container" class="visuallyhidden">
+                <div id="note-delete-prompt">
+                    <p>
+                        Are you sure you want to delete this note?
+                    </p>
+                    <p id="note-delete-options">
+                        <a id="note-delete-cancel" href="#" role="button" aria-label="cancel deletion">Cancel</a>
+                        <a id="note-delete-proceed" href="#" role="button" aria-label="confirm deletion">Delete</a>
+                    </p>
+                </div>
+            </div>
         </div> <!-- #main-container -->
 
         <aside class="sidebar-container">
@@ -146,7 +157,7 @@
             user.is_superuser = {% if user.is_superuser %}true;{% else %}false;{% endif %}
             user.email = "{{ user.email }}";{% else %}false;{% endif %}
         </script>
-        <script src="{% static 'js/channel.js' %}?1480637434" onload="applyNoteActions();setTimeout(ajaxLiveUpdate, 5 * 1000);"></script>
+        <script src="{% static 'js/channel.js' %}?1480657759" onload="applyNoteActions();setTimeout(ajaxLiveUpdate, 5 * 1000);"></script>
         <script src="{% static 'js/vendor/commonmark.js' %}" onload="commonmarkParseAll();"></script>
     </body>
 </html>
