@@ -16,6 +16,7 @@ function outputNote(note) {
         var noteBody = $("<div></div>", {
             "class": "note-body"
         });
+        noteBody.data('raw', note.fields.body_text);
 
         var noteParagraph = $("<p></p>", {
             html: note.fields.body_text
@@ -119,13 +120,14 @@ function outputNote(note) {
                 "aria-label": "edit"
             });
             noteActions.append(noteEdit);
+
             var noteEditCancel = $("<a></a>", {
                 "class": "note-edit-cancel fa fa-times",
                 href: "#",
                 role: "button",
                 "aria-label": "cancel edit"
             });
-            noteActions.append(noteEdit);
+            noteActions.append(noteEditCancel);
 
             var noteDelete = $("<a></a>", {
                 "class": "note-delete fa fa-trash",
