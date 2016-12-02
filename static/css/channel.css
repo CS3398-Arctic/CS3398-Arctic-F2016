@@ -709,6 +709,64 @@ form#login-form {
 }
 
 /* ==========================================================================
+   Dark theme
+   ========================================================================== */
+
+body.dark {
+  background-color: #222;
+  color: #DDD;
+}
+body.dark .header-container {
+  background-color: #333;
+  border-bottom-color: #222;
+  box-shadow: 0 1px 2px rgba(20, 20, 20, 0.70);
+}
+body.dark #note-search {
+  background-color: #333;
+  border-color: #666;
+}
+#note-search {
+  border: 0.1rem solid #CCC;
+}
+body.dark #expand-menu {
+  color: #DDD;
+}
+body.dark .sidebar-container {
+    box-shadow: 0 -1px 2px rgba(20, 20, 20, 0.70);
+}
+
+body.dark.full-height .note, body.dark.full-height .main-container form {
+    background-color: #333;
+    border-color: #444;
+}
+
+body.dark.full-height .main-container textarea {
+    color: rgba(255, 255, 255, 0.5);
+}
+body.dark.full-height .main-container textarea:focus {
+    color: #DDD;
+}
+body.dark .note-date, .note-author, .note-comments {
+    color: rgba(255, 255, 255, 0.5);
+}
+body.dark .note-actions a, body.dark .note-actions a:link, body.dark .note-actions a:visited {
+    color: rgba(255, 255, 255, 0.4);
+}
+body.dark .note-actions a:hover, body.dark .note-actions a:active {
+    color: rgba(255, 255, 255, 0.7);
+}
+body.dark.full-height .main-container input[type="submit"] {
+    background-color: #222;
+    color: #BBB;
+}
+body.dark .note-actions a.note-delete:hover, body.dark .note-actions a.note-delete:active {
+    color: rgba(255, 30, 30, 0.7);
+}
+body.dark .note:focus, .dark.full-height .main-container form:focus {
+    box-shadow: 0 0 12px rgba(120, 120, 120, 0.2);
+}
+
+/* ==========================================================================
    Helper classes
    ========================================================================== */
 

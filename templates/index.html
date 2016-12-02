@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
         <script src="{% static 'js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
     </head>
-    <body>
+    <body{% if theme == 'dark' %} class="dark"{% endif %}>
 		<!-- Banner -->
         <section id="banner">
             <div class="inner split">
@@ -108,6 +108,9 @@
                     <ul class="contact">
                         <li class="fa-github"><a href="https://github.com/CS3398-Arctic">CS3398-Arctic on Github</a></li>
                     </ul>
+                    <h3>Switch theme</h3>
+                    <input id="theme-selection" type="checkbox" value="on"{% if theme == 'dark' %} checked{% endif %}>
+                    <label for="theme-selection"><span id="theme-indicator-dark" class="fa fa-moon-o"></span><span id="theme-indicator-light" class="fa fa-sun-o"></span>Theme</label>
                 </section>
             </div>
         </section>

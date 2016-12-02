@@ -143,11 +143,17 @@ function outputNote(note) {
         $('#results').prepend(noteElement);
     }
     else if (note.fields.body_text !== "") { // Update note
-        var the_note = $("#note-" + note.pk + " .note-body");
-        var the_note_p = the_note.find("p");
-        the_note_p.html(note.fields.body_text);
-        the_note.data('raw', the_note_p.text());
-        commonmarkParse(the_note);
+        var theNote = $("#note-" + note.pk + " .note-body");
+        theNote.empty();
+
+        var noteParagraph = $("<p></p>", {
+            html: note.fields.body_text
+        });
+
+        theNote.data('raw', noteParagraph.text());
+        theNote.append(noteParagraph);
+
+        commonmarkParse(theNote);
     }
     else { // Delete note
         $("#note-" + note.pk).remove();
@@ -224,6 +230,7 @@ function noteEdit (id) {
     edit_form.appendTo(the_note);
     edit_form.attr('action', ajax_url + '?action=edit&note=' + id);
     edit_form_textarea.autogrow({vertical: true, horizontal: false, flickering: false});
+    edit_form_textarea.trigger( "onkeyup" );
     $("#note-edit-post").click( function(event){
         event.preventDefault();
         ajaxEditNote(ajax_url + '?action=edit&note=' + id);

@@ -70,6 +70,8 @@ This message was sent to you because your email was used to register an account 
         if request.META['QUERY_STRING'] == 'activated':
             account_just_activated = True
 
+    theme = request.COOKIES.get('theme', '')
+
     return render(request, 'index.html',
                   {
                       'form_login': form_login,
@@ -78,6 +80,7 @@ This message was sent to you because your email was used to register an account 
                       'invalid_login': invalid_login,
                       'account_not_activated': account_not_activated,
                       'account_just_activated': account_just_activated,
+                      'theme': theme,
                   })
 
 
@@ -110,11 +113,14 @@ def channel(request):
     
     form = NoteForm()
 
+    theme = request.COOKIES.get('theme', '')
+
     return render(request, 'channel.html',
                   {
                       'form': form,
                       'notes': all_notes,
                       'user': request.user,
+                      'theme': theme,
                   })
 
 

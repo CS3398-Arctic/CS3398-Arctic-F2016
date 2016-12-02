@@ -4,6 +4,20 @@
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 */
 
+$('#theme-selection').change(function() {
+    var date = new Date();
+    date.setTime(date.getTime() + (20 * 365 * 24 * 60 * 60 * 1000));
+
+    if (this.checked) {
+        $("body").addClass( "dark" );
+        document.cookie = "theme=dark; expires=" + date.toUTCString();
+    }
+    else {
+        $("body").removeClass( "dark" );
+        document.cookie = "theme=light; expires=" + date.toUTCString();
+    }
+});
+
 (function($) {
 
 	skel.breakpoints({

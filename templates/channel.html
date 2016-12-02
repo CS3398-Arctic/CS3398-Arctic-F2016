@@ -13,11 +13,11 @@
         <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
 
         <link rel="stylesheet" href="{% static 'css/normalize.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/channel.css' %}?1480626966">
+        <link rel="stylesheet" href="{% static 'css/channel.css' %}?1480653339">
         <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
         <script src="{% static 'js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
     </head>
-    <body class="full-height">
+    <body class="full-height{% if theme == 'dark' %} dark{% endif %}">
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -145,7 +145,7 @@
             user.is_superuser = {% if user.is_superuser %}true;{% else %}false;{% endif %}
             user.email = "{{ user.email }}";{% else %}false;{% endif %}
         </script>
-        <script src="{% static 'js/channel.js' %}?1480626966" onload="applyNoteActions();setTimeout(ajaxLiveUpdate, 5 * 1000);"></script>
+        <script src="{% static 'js/channel.js' %}?1480637434" onload="applyNoteActions();setTimeout(ajaxLiveUpdate, 5 * 1000);"></script>
         <script src="{% static 'js/vendor/commonmark.js' %}" onload="commonmarkParseAll();"></script>
     </body>
 </html>
