@@ -96,7 +96,7 @@
                 </div>
             </div> <!-- #main -->
             <span id="update-indicator">Notes changed. <a href="#">Update</a></span>
-            <div id="invis-edit-form" class="visuallyhidden">
+            <div id="invis-edit-form" class="invisible">
                 {% if user.is_authenticated %}
                 <form id="note-edit-form" method="post">
                     {% csrf_token %}
@@ -132,6 +132,7 @@
 
         <script>
             $('#id_body_text').autogrow({vertical: true, horizontal: false, flickering: false});
+            $('#edit_body_text').autogrow({vertical: true, horizontal: false, flickering: false});
             $("#courses-menu-toggle").click(function() {$("#courses").toggleClass('courses-menu-open');});
             $("#collapse-menu").click(function() {$(document.body).toggleClass('menu-closed');});
             $("#expand-menu").click(function() {$(document.body).toggleClass('menu-closed');});

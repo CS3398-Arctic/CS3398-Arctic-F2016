@@ -231,15 +231,14 @@ function noteEdit (id) {
 
     edit_form.appendTo(the_note);
     edit_form.attr('action', ajax_url + '?action=edit&note=' + id);
-    edit_form_textarea.autogrow({vertical: true, horizontal: false, flickering: false});
-    edit_form_textarea.trigger( "onkeyup" );
-    $("#note-edit-post").click( function(event){
+
+    $("#note-edit-post").off('click').click( function(event){
         event.preventDefault();
         ajaxEditNote(ajax_url + '?action=edit&note=' + id);
     });
 
-
     edit_form_textarea.val(the_note.find(".note-body").data("raw"));
+    edit_form_textarea.change();
 }
 
 function noteEditCancel () {

@@ -349,6 +349,18 @@ body.full-height {
     display: inline;
 }
 
+.deleting .note-author,
+.deleting .note-body,
+.deleting .note-date,
+.deleting .note-comments,
+.deleting .note-actions a.note-edit,
+.deleting .note-actions a.note-delete {
+    display: none;
+}
+.deleting .note-actions a.note-edit-cancel {
+    display: inline;
+}
+
 .full-height > .footer-container {
     border-top-width: 10px;
     height: 102px;
