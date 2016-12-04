@@ -2,7 +2,9 @@
  * JavaScript/jQuery code needed for channels
  */
 
-monthAbbrs = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+/** Note output **/
+
+var MONTH_ABBRS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 function outputNote(note) {
     var already_exists = $("#note-" + note.pk).length !== 0; // Note in question exists in the DOM
@@ -84,7 +86,7 @@ function outputNote(note) {
             }
         }
         else {  // Note was not created today
-            timeHTML += monthAbbrs[createdDate.getMonth()] + " ";
+            timeHTML += MONTH_ABBRS[createdDate.getMonth()] + " ";
             if (createdDate.getDay() < 10) // Precede day number with 0 if single digit
                 timeHTML += "0";
             timeHTML += createdDate.getDay();
@@ -167,6 +169,8 @@ function outputNote(note) {
     }
 }
 
+/** AJAX functionality **/
+
 function ajaxPostForm() {
     $.ajax({
        type: "POST",
@@ -229,6 +233,8 @@ $("#update-indicator a").click( function(event){
     event.preventDefault();
     updateNotes(notes_changes);
 });
+
+/** Note buttons **/
 
 function noteEdit (id) {
     var the_note = $('#note-' + id);
@@ -316,6 +322,9 @@ function applyNoteActions () {
         noteEditCancel();
     });
 }
+
+/** Commonmark functionality **/
+
 function commonmarkParse (element) {
     var reader = new commonmark.Parser();
     var writer = new commonmark.HtmlRenderer({smart: true, safe: true});
@@ -329,6 +338,7 @@ function commonmarkParseAll () {
     });
 }
 
+/** Search functionality **/
 
 $("#note-search").on("keyup", function() {
     var g = $(this).val().toLowerCase();
