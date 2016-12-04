@@ -1483,12 +1483,11 @@
 		-webkit-transition: color 0.2s ease;
 		-ms-transition: color 0.2s ease;
 		transition: color 0.2s ease;
-		text-decoration: underline;
+		text-decoration: none;
 	}
 
 		a:hover {
-			color: #008DCF !important;
-			text-decoration: none;
+			text-decoration: underline;
 		}
 
 	strong, b {
@@ -1767,7 +1766,6 @@
 		background-color: #fafafa;
 		color: #666 !important;
 		margin-left: auto;
-		display: block;
 	}
 
 		input[type="submit"]:hover,
@@ -1775,7 +1773,7 @@
 		input[type="button"]:hover,
 		button:hover,
 		.button:hover {
-			background-color: white;
+			text-decoration: none;
 		}
 
 		input[type="submit"]:active,
@@ -1783,7 +1781,6 @@
 		input[type="button"]:active,
 		button:active,
 		.button:active {
-			background-color: #ededed;
 		}
 
 		input[type="submit"].alt,
@@ -2215,7 +2212,6 @@
 
 			ul.checklist li {
 				text-decoration: none;
-				/*! margin-bottom: 1.5em; */
 				padding-left: 0;
 			}
 
@@ -2282,7 +2278,6 @@
 
 				ul.contact li a {
 					color: inherit;
-					text-decoration: none;
 
                     -webkit-transition: color 1s;
                     -moz-transition: color 1s;
@@ -2448,6 +2443,7 @@
         -ms-transition: background-color 1s, color 1s;
         -o-transition: background-color 1s, color 1s;
         transition: background-color 1s, color 1s;
+        display: block;
     }
 
     @media screen and (max-width: 480px) {
@@ -3489,7 +3485,6 @@ body.dark #theme-selection + label {
     opacity: 1.0;
     top: 0.5rem;
 
-    /* if cool sliding effect is wanted, mess with padding's transition time and remove padding's step-ends */
     -webkit-transition: color 0.2s, opacity 0.2s, top 0.5s 0s, max-height 1ms 0s step-end;
     -moz-transition: color 0.2s, opacity 0.2s, top 0.5s 0s, max-height 1ms 0s step-end;
     -ms-transition: color 0.2s, opacity 0.2s, top 0.5s 0s, max-height 1ms 0s step-end;
