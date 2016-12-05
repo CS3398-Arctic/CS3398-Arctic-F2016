@@ -16,7 +16,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.utils import timezone
 from django.utils.dateparse import parse_datetime
 
-from .models import Note, NoteForm, HandwrittenNote, HandwrittenNoteForm, SignupForm, LoginForm, User
+from .models import Note, NoteForm, HandwrittenNote, HandwrittenNoteForm, SignupForm, LoginForm, ChannelForm, User
 
 
 def index(request):
@@ -113,11 +113,14 @@ def channel(request):
     
     form = NoteForm()
 
+    channel_form = ChannelForm()
+
     theme = request.COOKIES.get('theme', '')
 
     return render(request, 'channel.html',
                   {
                       'form': form,
+                      'channel_form': channel_form,
                       'notes': all_notes,
                       'user': request.user,
                       'theme': theme,

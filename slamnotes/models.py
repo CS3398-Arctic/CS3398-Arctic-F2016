@@ -286,5 +286,5 @@ class ChannelForm(ModelForm):
         fields = ['title']
 
         labels = {
-            'title': '',
+            'title': 'Class Title',
         }
