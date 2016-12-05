@@ -351,36 +351,29 @@ function commonmarkParseAll () {
                 time = $el.find( "datetime" ).text(),
                 date = new Date( $.trim( time ) ),
                 timestamp = date.getTime();
-
                 obj.html = $el[0].outerHTML;
                 obj.time = timestamp;
-
                 arr.push( obj );
         });
-
-        var sorted = arr.sort(function( a, b ) {
-
-            if( order == "ASC" ) {
-                return a.time > b.time;
-            } else {
-                return b.time > a.time;
+        var sorted = arr.sort(function( first, second ) {
+            if ( order == "ASC" ) {
+                return first.time > second.time;
             }
-
+            else {
+                return first.time < second.time;
+            }
         });
-
         return sorted;
     };
-
     $(function() {
         var $newer = $( "#newer" ),
             $older = $( "#older" ),
             $content = $( "#results" ),
             $elements = $( ".note" );
-
             $newer.click(function() {
                 var elements = $.sortByDate( $elements, "DESC" );
                 var html = "";
-                for( var i = 0; i < elements.length; ++i ) {
+                for ( var i = 0; i < elements.length; ++i ) {
                     html += elements[i].html;
                 }
                 $content[0].innerHTML = html;
@@ -388,13 +381,11 @@ function commonmarkParseAll () {
                 siblings().
                 removeClass( "selected" );
                 return false;
-
             });
-
             $older.click(function() {
                 var elements = $.sortByDate( $elements, "ASC" );
                 var html = "";
-                for( var i = 0; i < elements.length; ++i ) {
+                for ( var i = 0; i < elements.length; ++i ) {
                     html += elements[i].html;
                 }
                 $content[0].innerHTML = html;
@@ -402,10 +393,8 @@ function commonmarkParseAll () {
                 siblings().
                 removeClass( "selected" );
                 return false;
-
             });
     });
-
 })( jQuery );
 
 /** Search functionality **/
