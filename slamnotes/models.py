@@ -283,8 +283,43 @@ class ChannelForm(ModelForm):
     """Channel model form"""
     class Meta:
         model = Channel
-        fields = ['title']
-
+        fields = [
+            'title',
+            'instructor',
+            'prefix',
+            'course_number',
+            'section_number',
+            'postfix',
+            'first_class_day',
+            'last_class_day',
+            'meeting_day_mon',
+            'meeting_day_tue',
+            'meeting_day_wed',
+            'meeting_day_thu',
+            'meeting_day_fri',
+            'meeting_day_sat',
+            'start_time_h',
+            'start_time_m',
+            'end_time_h',
+            'end_time_m',
+        ]
         labels = {
             'title': 'Class Title',
+            'instructor': 'Instructor',
+            'prefix': 'Prefix',
+            'course_number': 'Course Number',
+            'section_number': 'Section Number',
+            'postfix': 'Postfix',
+            'first_class_day': 'Class Start Day',
+            'last_class_day': 'Last Class Day',
+            'meeting_day_mon': 'Monday',
+            'meeting_day_tue': 'Tuesday',
+            'meeting_day_wed': 'Wednesday',
+            'meeting_day_thu': 'Thursday',
+            'meeting_day_fri': 'Friday',
+            'meeting_day_sat': 'Saturday',
+            'start_time_h': 'Start Time (Hour)',
+            'start_time_m': 'Start Time (Mins)',
+            'end_time_h': 'End Time (Hour)',
+            'end_time_m': 'End Time (Mins)',
         }
