@@ -848,6 +848,8 @@ body.overlay-active .channel-overlay {
 .channel-overlay section {
     clear: both;
     padding: 1rem;
+    overflow-y: scroll;
+    height: calc(100vh - 4.5rem);
 }
 
 /* Selected section */
