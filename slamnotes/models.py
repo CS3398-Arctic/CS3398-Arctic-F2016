@@ -277,3 +277,14 @@ class LoginForm(ModelForm):
             'email': EmailInput(attrs={'placeholder': 'Email'}),
             'password': PasswordInput(attrs={'placeholder': 'Password'}),
         }
+
+
+class ChannelForm(ModelForm):
+    """Channel model form"""
+    class Meta:
+        model = Channel
+        fields = ['title']
+
+        labels = {
+            'title': '',
+        }
