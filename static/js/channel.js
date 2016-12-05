@@ -347,3 +347,37 @@ $("#note-search").on("keyup", function() {
         $(this).closest('.note')[ s.indexOf(g) !== -1 ? 'show' : 'hide' ]();
     });
 });
+
+/** Sidebar button functionality **/
+
+$("#courses-menu-toggle").click(function() {
+    $(".sidebar-container").toggleClass('courses-menu-open');
+});
+
+$("#collapse-menu").click(function() {
+    $(document.body).toggleClass('menu-closed');
+});
+
+$("#expand-menu").click(function() {
+    $(document.body).toggleClass('menu-closed');
+});
+
+/** Add class overlay functionality **/
+
+$("#courses-add").on("click", function () {
+    $("body").addClass("overlay-active");
+});
+
+$("#channel-overlay-close").on("click", function () {
+    $("body").removeClass("overlay-active");
+});
+
+var channel_overlay = $(".channel-overlay");
+
+$("#overlay-tab-search").on("click", function () {
+    channel_overlay.removeClass("channel-creating");
+});
+
+$("#overlay-tab-create").on("click", function () {
+    channel_overlay.addClass("channel-creating");
+});

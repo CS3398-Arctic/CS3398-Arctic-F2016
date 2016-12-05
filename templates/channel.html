@@ -13,7 +13,7 @@
         <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
 
         <link rel="stylesheet" href="{% static 'css/normalize.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/channel.css' %}?1480657759">
+        <link rel="stylesheet" href="{% static 'css/channel.css' %}?1480904394">
         <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
         <script src="{% static 'js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
     </head>
@@ -123,6 +123,7 @@
         </div> <!-- #main-container -->
 
         <aside class="sidebar-container">
+            <div id="channel-overlay-circle"></div>
             <div id="courses">
                 <h2 id="courses-menu-toggle" title="CS 3398.002 - Software Engineering">CS 3398.002 - Software Engineering</h2>
                 <div class="courses-other">
@@ -133,8 +134,22 @@
             <div class="session-list">
                 <h3 class="viewing">All Sessions</h3>
             </div>
-            <a id="collapse-menu" class="fa fa-chevron-circle-left" href="#">Collapse Menu</a>
-            <a id="expand-menu" class="fa fa-chevron-circle-right" href="#">Expand Menu</a>
+            <button id="collapse-menu" class="fa fa-chevron-circle-left">Collapse Menu</button>
+            <button id="expand-menu" class="fa fa-chevron-circle-right">Expand Menu</button>
+        </aside>
+
+        <aside class="channel-overlay">
+            <nav id="overlay-tabs">
+                <button id="overlay-tab-search"><span class="fa fa-search"></span> Search classes</button>
+                <button id="overlay-tab-create">+ Create new class</button>
+            </nav>
+            <button id="channel-overlay-close"></button>
+            <section id="channel-overlay-search">
+                Search existing channels...
+            </section>
+            <section id="channel-overlay-create">
+                Create a new channel...
+            </section>
         </aside>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -144,9 +159,10 @@
         <script>
             $('#id_body_text').autogrow({vertical: true, horizontal: false, flickering: false});
             $('#edit_body_text').autogrow({vertical: true, horizontal: false, flickering: false});
-            $("#courses-menu-toggle").click(function() {$("#courses").toggleClass('courses-menu-open');});
-            $("#collapse-menu").click(function() {$(document.body).toggleClass('menu-closed');});
-            $("#expand-menu").click(function() {$(document.body).toggleClass('menu-closed');});
+
+            if ($( window ).width() < 800) // 50rem
+                $("body").addClass("menu-closed");
+
 
             var ajax_url = "{% url 'ajax' %}";
 
@@ -157,7 +173,7 @@
             user.is_superuser = {% if user.is_superuser %}true;{% else %}false;{% endif %}
             user.email = "{{ user.email }}";{% else %}false;{% endif %}
         </script>
-        <script src="{% static 'js/channel.js' %}?1480892066" onload="applyNoteActions();setTimeout(ajaxLiveUpdate, 5 * 1000);"></script>
+        <script src="{% static 'js/channel.js' %}?1480904394" onload="applyNoteActions();setTimeout(ajaxLiveUpdate, 5 * 1000);"></script>
         <script src="{% static 'js/vendor/commonmark.js' %}" onload="commonmarkParseAll();"></script>
     </body>
 </html>

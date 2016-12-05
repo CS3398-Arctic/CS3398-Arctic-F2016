@@ -2,7 +2,7 @@
 
 html {
     color: #222;
-    font-size: 1em;
+    font-size: 16px;
     line-height: 1.4;
 }
 
@@ -200,6 +200,8 @@ body.full-height {
     border: 0.1rem solid #CCC;
 	float: right;
 	margin-top: 0.8rem;
+    position: fixed;
+    right: 5%;
 }
 
 .full-height .header-container .wrapper {
@@ -209,7 +211,7 @@ body.full-height {
 
 .full-height > .main-container {
     height: calc(100vh - 51px);
-    margin-left: 232px;
+    margin-left: 14.5rem;
     overflow-y: scroll;
     position: relative;
 
@@ -304,7 +306,7 @@ body.full-height {
     width: 100%;
 
     display: block;
-    padding: 2px 2px 0 0;
+    padding: 0.15rem 0.15rem 0 0;
     position: absolute;
     right: 0;
     top: 0;
@@ -477,7 +479,7 @@ form#login-form {
 
 .sidebar-container {
     height: 100vh;
-    width: 232px;
+    width: 14.5rem;
 
     position: fixed;
     top: 0;
@@ -530,7 +532,7 @@ form#login-form {
     color: #6f8898;
     content: '▼';
 }
-#courses.courses-menu-open #courses-menu-toggle::after {
+.courses-menu-open #courses-menu-toggle::after {
     content: '✕';
 }
 #courses-menu-toggle:hover {
@@ -544,10 +546,10 @@ form#login-form {
     display: none;
     padding: 0 20px 20px 10px;
 }
-#courses.courses-menu-open > h2 {
+.courses-menu-open #courses > h2 {
     border-bottom:none;
 }
-#courses.courses-menu-open > * > h2 {
+.courses-menu-open #courses > * > h2 {
     display: block;
 }
 
@@ -557,12 +559,13 @@ form#login-form {
     width: 100%;
 }
 
-#courses.courses-menu-open .courses-other {
+.courses-menu-open .courses-other {
     height: 100vh;
 }
 
 #courses-add {
     color: #DDD;
+    position: relative;
 }
 #courses-add::before {
     content: '+';
@@ -581,10 +584,11 @@ form#login-form {
 }
 
 .class-title {
-    padding: 10px 0 10px 10px;
-    margin: 0 10px 0 0;
-    font-size: 13px;
-    border-bottom: 2px solid #6f8898;
+    border-bottom: 0.15rem solid #6f8898;
+    padding: 0.65rem 0 0.65rem 0.65rem;
+    margin: 0 0.65rem 0 0;
+
+    font-size: 0.8rem;
     font-family: Segoe UI, sans-serif;
     font-weight: 600;
     color: #DDD;
@@ -609,34 +613,13 @@ form#login-form {
 }
 
 #collapse-menu, #expand-menu {
+    background: none;
+    border: none;
     color: #DDD;
-    font-family: FontAwesome, Segoe UI, sans-serif;
+    font-family: Segoe UI, sans-serif;
     font-size: 16px;
+    text-align: left;
     text-decoration: none;
-}
-
-#collapse-menu {
-    border-top: 2px solid #6f8898;
-    display: block;
-    margin: 0 10px 0 0;
-    padding: 10px 0 10px 10px;
-
-    font-family: FontAwesome, Segoe UI, sans-serif;
-}
-#collapse-menu::before, #expand-menu::before {
-    font-size: 1.1em;
-    padding-right: 10px;
-}
-
-#expand-menu {
-    bottom: 0;
-    left: -232px;
-    padding: 10px;
-    position: fixed;
-    text-decoration: none;
-
-    color: #333;
-    font-family: FontAwesome, Segoe UI, sans-serif;
 
     -webkit-transition: left 0.2s;
     -moz-transition: left 0.2s;
@@ -645,12 +628,62 @@ form#login-form {
     transition: left 0.2s;
 }
 
+#collapse-menu {
+    border-top: 0.15rem solid #6f8898;
+    display: block;
+    padding: 0.65rem 0 0.65rem 0.65rem;
+
+    width: 13.2rem;
+
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
+#collapse-menu::before, #expand-menu::before {
+    font-family: FontAwesome;
+    font-size: 1.1rem;
+    padding-right: 0.65rem;
+}
+
+.courses-menu-open #collapse-menu {
+    display: none;
+}
+
+#expand-menu {
+    bottom: 0;
+    left: -14.5rem;
+    padding: 0.65rem;
+    position: fixed;
+    text-decoration: none;
+
+    color: #333;
+}
+
+@media screen and (max-width: 50rem) {
+    #expand-menu::before {
+        margin-left: -0.35rem;
+    }
+    #expand-menu {
+        padding-left: 1rem;
+        width: 0;
+        overflow: hidden;
+        text-indent: 100%;
+        white-space: nowrap;
+    }
+    .full-height > .header-container {
+        padding-left: 0;
+    }
+    .full-height > .main-container {
+        margin-left: 0;
+    }
+}
+
 .menu-closed .header-container {
     padding-left: 0;
 }
 
 .menu-closed .sidebar-container {
-    left: -232px;
+    left: -14.5rem;
 }
 
 .menu-closed .main-container {
@@ -659,6 +692,171 @@ form#login-form {
 
 .menu-closed #expand-menu {
     left: 0;
+}
+
+.menu-closed #collapse-menu {
+    left: -14.5rem;
+}
+
+/* ==========================================================================
+   Add Class Overlay
+   ========================================================================== */
+
+#channel-overlay-circle {
+    background-color: #415568;
+    display: block;
+
+    -webkit-border-radius: 100vw;
+    -moz-border-radius: 100vw;
+    border-radius: 100vw;
+
+    height: 0;
+    width: 0;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    z-index: 2;
+
+    -webkit-transition: height 0.5s 0.1s, width 0.5s 0.1s, left 0.5s 0.1s, top 0.5s 0.1s;
+    -moz-transition: height 0.5s 0.1s, width 0.5s 0.1s, left 0.5s 0.1s, top 0.5s 0.1s;
+    -ms-transition: height 0.5s 0.1s, width 0.5s 0.1s, left 0.5s 0.1s, top 0.5s 0.1s;
+    -o-transition: height 0.5s 0.1s, width 0.5s 0.1s, left 0.5s 0.1s, top 0.5s 0.1s;
+    transition: height 0.5s 0.1s, width 0.5s 0.1s, left 0.5s 0.1s, top 0.5s 0.1s;
+}
+
+body.overlay-active #channel-overlay-circle {
+    height: 300vmax;
+    width: 300vmax;
+
+    left: -150vmax;
+    top: -150vmax;
+
+    -webkit-transition: height 0.5s, width 0.5s, left 0.5s, top 0.5s;
+    -moz-transition: height 0.5s, width 0.5s, left 0.5s, top 0.5s;
+    -ms-transition: height 0.5s, width 0.5s, left 0.5s, top 0.5s;
+    -o-transition: height 0.5s, width 0.5s, left 0.5s, top 0.5s;
+    transition: height 0.5s, width 0.5s, left 0.5s, top 0.5s;
+}
+
+.channel-overlay {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    height: 100vh;
+    width: 100vw;
+
+    z-index: 3;
+
+    color: #DDD;
+    font-family: Segoe UI Light, sans-serif;
+
+    transition: visibility 0s 0.5s, opacity 0.25s;
+}
+
+body.overlay-active .channel-overlay {
+    opacity: 1;
+    visibility: visible;
+
+    transition: visibility 0s, opacity 0.25s 0.25s;
+}
+
+#overlay-tabs {
+    display: block;
+    overflow: hidden;
+
+    height: 2.5rem;
+    width: 100%;
+
+    box-shadow: 0 -0.05rem 0 #6f8898 inset;
+}
+
+#overlay-tabs button {
+    border: 0.1rem solid #6f8898;
+    border-bottom: none;
+    border-radius: 0.15rem 0.15rem 0 0;
+
+    margin: 0.5rem 0.2rem 0;
+    padding: 0.2rem 0.4rem;
+
+    background-color: transparent;
+    color: #DDD;
+    font-size: 1.2rem;
+
+    display: block;
+    float: left;
+
+    position: relative;
+    z-index: 4;
+}
+
+#overlay-tabs button:hover,
+#overlay-tabs button:active {
+    color: white;
+}
+
+/* Active tab */
+#overlay-tabs #overlay-tab-search,
+.channel-creating #overlay-tabs #overlay-tab-create{
+    border-bottom: 0.1rem solid #415568;
+    margin-bottom: -0.1rem;
+    box-shadow: 0 0 0.2rem #111;
+    background-color: #415568;
+}
+
+/* Inactive tab */
+.channel-creating #overlay-tabs #overlay-tab-search,
+#overlay-tabs #overlay-tab-create{
+    border-bottom: none;
+    margin-bottom: 0;
+    box-shadow: none;
+    background: none;
+}
+
+#channel-overlay-close {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0.4rem;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+
+    color: #6f8898;
+    font-size: 1.5rem;
+}
+
+#channel-overlay-close::after {
+    display: block;
+    content: '✕';
+}
+
+#channel-overlay-close:hover::after {
+    color: #809aab;
+}
+
+.channel-overlay section {
+    clear: both;
+    padding: 1rem;
+}
+
+/* Selected section */
+#channel-overlay-search,
+.channel-creating #channel-overlay-create {
+    display: block;
+}
+
+/* Unselected section */
+#channel-overlay-create,
+.channel-creating #channel-overlay-search {
+    display: none;
 }
 
 /* ==========================================================================
@@ -748,6 +946,11 @@ form#login-form {
     .wrapper {
         width: 1026px; /* 1140px - 10% for margins */
         margin: 0 auto;
+    }
+
+    .full-height .header-container #note-search {
+        position: static;
+        right: auto;
     }
 
     .full-height .wrapper {
