@@ -706,9 +706,9 @@ form#login-form {
     background-color: #415568;
     display: block;
 
-    -webkit-border-radius: 100vw;
-    -moz-border-radius: 100vw;
-    border-radius: 100vw;
+    -webkit-border-radius: 150vmax;
+    -moz-border-radius: 150vmax;
+    border-radius: 150vmax;
 
     height: 0;
     width: 0;
@@ -784,6 +784,9 @@ body.overlay-active .channel-overlay {
 
     margin: 0.5rem 0.2rem 0;
     padding: 0.2rem 0.4rem;
+
+    max-width: 44%;
+    max-width: calc(50% - 1.3rem);
 
     background-color: transparent;
     color: #DDD;
