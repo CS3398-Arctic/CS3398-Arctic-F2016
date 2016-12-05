@@ -7,7 +7,7 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.core.mail import send_mail
 from django.core.signing import TimestampSigner
-from django.core.validators import MinValueValidator, MaxValueValidator, URLValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.forms import ModelForm, Textarea, PasswordInput, EmailInput, ValidationError
 from django.utils import timezone
@@ -128,51 +128,62 @@ class User(AbstractBaseUser, PermissionsMixin):
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
 
-class School(models.Model):
-    """School model"""
-    name = models.CharField(max_length=100)
-    website = models.CharField(max_length=100, validators=[URLValidator, ])
+class Channel(models.Model):
+    """Channel model"""
+    school = models.CharField(max_length=50, default="Texas State University")
 
-    def __str__(self):
-        return self.name
-
-
-class Instructor(models.Model):
-    """Instructor model"""
-    name_first = models.CharField(max_length=30)
-    name_last = models.CharField(max_length=40)
-
-    def __str__(self):
-        return self.name_first + self.name_last
-
-
-class Course(models.Model):
-    """Course model"""
-    school = models.ForeignKey(School, blank=True)
-    instructor = models.ForeignKey(Instructor, blank=True)
-    title = models.CharField(max_length=100)
     prefix = models.CharField(max_length=2)
-    number = models.PositiveIntegerField(
+    course_number = models.PositiveIntegerField(
         validators=[
             MaxValueValidator(9999),
             MinValueValidator(0)
         ])
-    postfix = models.CharField(max_length=1)
-
-    def __str__(self):
-        return self.title
-
-
-class Channel(models.Model):
-    """Channel model"""
-    course = models.ForeignKey(Course, blank=True)
-    instructor = models.ForeignKey(Instructor, blank=True)
-    number = models.PositiveIntegerField(
+    section_number = models.PositiveIntegerField(
         validators=[
             MaxValueValidator(999),
             MinValueValidator(0)
         ])
-    special = models.CharField(max_length=8)
+    postfix = models.CharField(max_length=1, blank=True)
+
+    title = models.CharField(max_length=50)
+    instructor = models.CharField(max_length=50)
+
+    first_class_day = models.DateField(default=timezone.now)
+    last_class_day = models.DateField(default=timezone.now)
+
+    meeting_day_mon = models.BooleanField(default=False)
+    meeting_day_tue = models.BooleanField(default=False)
+    meeting_day_wed = models.BooleanField(default=False)
+    meeting_day_thu = models.BooleanField(default=False)
+    meeting_day_fri = models.BooleanField(default=False)
+    meeting_day_sat = models.BooleanField(default=False)
+
+    # Start and end times for class periods, stored in 24-hour time
+    start_time_h = models.PositiveIntegerField(
+        default=00,
+        validators=[
+            MaxValueValidator(23),
+            MinValueValidator(0)
+        ])
+    start_time_m = models.PositiveIntegerField(
+        default=00,
+        validators=[
+            MaxValueValidator(59),
+            MinValueValidator(0)
+        ])
+
+    end_time_h = models.PositiveIntegerField(
+        default=00,
+        validators=[
+            MaxValueValidator(23),
+            MinValueValidator(0)
+        ])
+    end_time_m = models.PositiveIntegerField(
+        default=00,
+        validators=[
+            MaxValueValidator(59),
+            MinValueValidator(0)
+        ])
 
     def __str__(self):
         if not self.special:
