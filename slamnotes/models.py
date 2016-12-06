@@ -132,7 +132,7 @@ class Channel(models.Model):
     """Channel model"""
     school = models.CharField(max_length=50, default="Texas State University")
 
-    prefix = models.CharField(max_length=2)
+    prefix = models.CharField(max_length=4)
     course_number = models.PositiveIntegerField(
         validators=[
             MaxValueValidator(9999),
