@@ -125,6 +125,7 @@ def channel(request, pk):
     return render(request, 'channel.html',
                   {
                       'channel': the_channel,
+                      'section_number': "%03d" % (the_channel.section_number,),  # leading zeroes.
                       'form': form,
                       'channel_form': channel_form,
                       'notes': all_notes,
