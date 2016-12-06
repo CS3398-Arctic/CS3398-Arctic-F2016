@@ -147,7 +147,7 @@
         <aside class="channel-overlay">
             <nav id="overlay-tabs">
                 <button id="overlay-tab-search"><span class="fa fa-search"></span> Search channels</button>
-                <button id="overlay-tab-create">+ Create new channel</button>
+                {% if user.is_authenticated %}<button id="overlay-tab-create">+ Create new channel</button>{% endif %}
             </nav>
             <button id="channel-overlay-close"></button>
             <section id="channel-overlay-search">
@@ -158,12 +158,12 @@
                     <p class="channel">
                         <a href="/channel/{{ a_channel.pk }}">
                             {{ a_channel.prefix }} {{ a_channel.course_number }}.{{ a_channel.section_number|leading_zeros:3 }} - {{ a_channel.title }}<br>
-                            {{ a_channel.instructor }}
+                            Instructor: {{ a_channel.instructor }}
                         </a>
                     </p>
                 {% endfor %}
                 </div>
-            </section>
+            </section>{% if user.is_authenticated %}
             <section id="channel-overlay-create">
                 Create a new channel...
                 <form id="channel-creation-form" method="post">
@@ -204,7 +204,7 @@
                         <input type="submit" value="Create channel">
                     </p>
                 </form>
-            </section>
+            </section>{% endif %}
         </aside>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>

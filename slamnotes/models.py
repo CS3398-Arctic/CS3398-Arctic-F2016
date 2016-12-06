@@ -146,7 +146,7 @@ class Channel(models.Model):
     postfix = models.CharField(max_length=1, blank=True)
 
     title = models.CharField(max_length=50)
-    instructor = models.CharField(max_length=50)
+    instructor = models.CharField(max_length=122)
 
     first_class_day = models.DateField(default=timezone.now)
     last_class_day = models.DateField(default=timezone.now)
