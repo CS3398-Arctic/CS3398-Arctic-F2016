@@ -8,7 +8,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Software Engineering - Slam eNotes</title>
+        <title>{{ channel.title }} - Slam eNotes</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
@@ -37,7 +37,10 @@
                 {% if user.is_authenticated %}
                 <form id="note-form" method="post">
                     {% csrf_token %}
-                    {{ form.as_p }}
+                    <p>
+                        <textarea cols="" id="id_body_text" name="body_text" placeholder="Write a note..." rows="" required></textarea>
+                        <input id="id_channel" name="channel" type="hidden" value="1" />
+                    </p>
                     <p style="display:none">
                         Post a handwritten note (upload to <a href="http://imgur.com" target="_blank">Imgur</a> and submit link)
                         <input id="id_url" name="url" type="url" placeholder="http://i.imgur.com/...">
@@ -126,7 +129,7 @@
         <aside class="sidebar-container">
             <div id="channel-overlay-circle"></div>
             <div id="courses">
-                <h2 id="courses-menu-toggle" title="CS 3398.002 - Software Engineering">CS 3398.002 - Software Engineering</h2>
+                <h2 id="courses-menu-toggle" title="{{ channel.prefix }} {{ channel.course_number }}.{{ channel.section_number }} - {{ channel.title }}">{{ channel.prefix }} {{ channel.course_number }}.{{ channel.section_number }} - {{ channel.title }}</h2>
                 <div class="courses-other">
                     <h2 id="courses-add">Add new class</h2>
                 </div>

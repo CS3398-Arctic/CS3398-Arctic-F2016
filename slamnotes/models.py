@@ -9,7 +9,7 @@ from django.core.mail import send_mail
 from django.core.signing import TimestampSigner
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-from django.forms import ModelForm, Textarea, PasswordInput, EmailInput, ValidationError
+from django.forms import ModelForm, Textarea, PasswordInput, EmailInput, ValidationError, HiddenInput
 from django.utils import timezone
 
 
@@ -228,12 +228,13 @@ class NoteForm(ModelForm):
     """Note model form"""
     class Meta:
         model = Note
-        fields = ['body_text']
+        fields = ['body_text', 'channel']
         labels = {
             'body_text': '',
         }
         widgets = {
             'body_text': Textarea(attrs={'placeholder': 'Write a note...', 'cols': '', 'rows': ''}),
+            'channel': HiddenInput()
         }
 
 

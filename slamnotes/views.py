@@ -102,10 +102,10 @@ def activate(request):
     return redirect(index)
 
 
-def channel(request, id):
+def channel(request, pk):
     """Channel view"""
-    channel = get_object_or_404(Channel, pk=id)
-    notes = Note.objects.order_by('-created_date')
+    the_channel = get_object_or_404(Channel, pk=pk)
+    notes = Note.objects.order_by('-created_date').filter(channel=pk)
     handwritten_notes = HandwrittenNote.objects.order_by('-created_date')
 
     all_notes = sorted(chain(notes, handwritten_notes), key=attrgetter('created_date'), reverse=True)
@@ -116,14 +116,15 @@ def channel(request, id):
         else:
             channel_create(request)
     
-    form = NoteForm()
+    form = NoteForm({'channel': pk})
 
-    channel_form = ChannelForm()#{'channel': })
+    channel_form = ChannelForm()
 
     theme = request.COOKIES.get('theme', '')
 
     return render(request, 'channel.html',
                   {
+                      'channel': the_channel,
                       'form': form,
                       'channel_form': channel_form,
                       'notes': all_notes,
@@ -194,12 +195,13 @@ def note_create(request):
         posted_form = NoteForm(request.POST, request.FILES)
 
     if request.user.is_authenticated() and posted_form.is_valid():
+        the_channel = posted_form.cleaned_data['channel']
         if handwritten_note:
             url = posted_form.cleaned_data['url']
-            HandwrittenNote.objects.create(url=url, author=request.user)
+            HandwrittenNote.objects.create(url=url, channel=the_channel, author=request.user)
         else:
             body_text = posted_form.cleaned_data['body_text']
-            Note.objects.create(body_text=body_text, author=request.user)
+            Note.objects.create(body_text=body_text, channel=the_channel, author=request.user)
         return True
     return False
 
