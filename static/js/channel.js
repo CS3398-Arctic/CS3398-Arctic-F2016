@@ -407,6 +407,14 @@ $("#note-search").on("keyup", function() {
     });
 });
 
+$("#channel-search").on("keyup", function() {
+    var g = $(this).val().toLowerCase();
+    $(".channel").each(function() {
+        var s = $(this).text().toLowerCase();
+        $(this)[ s.indexOf(g) !== -1 ? 'show' : 'hide' ]();
+    });
+});
+
 /** Sidebar button functionality **/
 
 $("#courses-menu-toggle").click(function() {

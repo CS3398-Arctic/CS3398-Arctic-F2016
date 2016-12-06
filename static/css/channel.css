@@ -196,6 +196,20 @@ body.full-height {
     font-size: 1.5rem;
 }
 
+.debug .title::after {
+    content: 'DEV';
+    background-color: #ff6666;
+    -webkit-border-radius: 0.2rem;
+    -moz-border-radius: 0.2rem;
+    border-radius: 0.2rem;
+    color: white;
+    cursor: default;
+    font-size: 0.7rem;
+    padding: 0.2rem;
+    position: relative;
+    top: -0.5rem;
+}
+
 .full-height .header-container #note-search {
     border: 0.1rem solid #CCC;
 	float: right;
@@ -864,14 +878,37 @@ body.overlay-active .channel-overlay {
     display: none;
 }
 
+.channel-overlay a:link,
+.channel-overlay a:visited {
+    color: #DDD;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.channel-overlay a:hover,
+.channel-overlay a:active {
+    color: white;
+}
+
 .channel-overlay input {
     color: #222;
 }
 
-.channel-overlay section p {
+.channel-overlay form p {
     float: left;
     padding: 1rem 2rem;
     width: 12rem;
+}
+
+.channel-overlay #channel-overlay-search p {
+    border-top: 0.15rem solid #6f8898;
+    float: left;
+    padding: 1rem 2rem;
+}
+
+#channel-search {
+    display: block;
+    margin-top: 0.5rem;
 }
 
 .channel-overlay .channel-numbers label {

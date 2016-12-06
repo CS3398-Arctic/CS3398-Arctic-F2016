@@ -18,6 +18,7 @@ from django.utils.dateparse import parse_datetime
 
 from .models import Note, HandwrittenNote, User, Channel, \
     NoteForm, HandwrittenNoteForm, SignupForm, LoginForm, ChannelForm
+from .settings import DEBUG
 
 
 def index(request):
@@ -119,13 +120,15 @@ def channel(request, pk):
     form = NoteForm({'channel': pk})
 
     channel_form = ChannelForm()
+    channels = Channel.objects.all()
 
     theme = request.COOKIES.get('theme', '')
 
     return render(request, 'channel.html',
                   {
+                      'debug': DEBUG,
                       'channel': the_channel,
-                      'section_number': "%03d" % (the_channel.section_number,),  # leading zeroes.
+                      'channels': channels,
                       'form': form,
                       'channel_form': channel_form,
                       'notes': all_notes,

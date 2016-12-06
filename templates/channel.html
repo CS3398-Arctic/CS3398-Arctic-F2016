@@ -1,5 +1,4 @@
-{% load static from staticfiles %}
-<!DOCTYPE html>
+{% load static from staticfiles %}{% load filters %}<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
@@ -18,7 +17,7 @@
         <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
         <script src="{% static 'js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
     </head>
-    <body class="full-height{% if theme == 'dark' %} dark{% endif %}">
+    <body class="full-height{% if theme == 'dark' %} dark{% endif %}{% if debug %} debug{% endif %}">
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -26,7 +25,7 @@
         <div class="header-container">
             <header class="wrapper clearfix">
                 <h1 class="title">
-                    <a href="{% url 'index' %}"><img src="{% if theme == 'dark' %}{% static 'images/logo-short-bright.png' %}{% else %}{% static 'images/logo-short.png' %}{% endif %}" alt="Slam eNotes" height="38" /></a>
+                    <a href="{% url 'index' %}"><img id="logo" src="{% if theme == 'dark' %}{% static 'images/logo-short-bright.png' %}{% else %}{% static 'images/logo-short.png' %}{% endif %}" alt="Slam eNotes" height="38" /></a>
                 </h1>
                 <input id="note-search" type="text" placeholder="search notes" />
             </header>
@@ -106,6 +105,7 @@
                     {% csrf_token %}
                     <p>
                         <textarea cols="" id="edit_body_text" name="body_text" placeholder="Write a note..." rows="" required=""></textarea>
+                        <input id="edit_channel" name="channel" type="hidden" value="{{ channel.pk }}" />
                     </p>
                     <p>
                         <input id="note-edit-post" type="submit" value="Update">
@@ -129,9 +129,11 @@
         <aside class="sidebar-container">
             <div id="channel-overlay-circle"></div>
             <div id="courses">
-                <h2 id="courses-menu-toggle" title="{{ channel.prefix }} {{ channel.course_number }}.{{ section_number }} - {{ channel.title }}">{{ channel.prefix }} {{ channel.course_number }}.{{ section_number }} - {{ channel.title }}</h2>
+                <h2 id="courses-menu-toggle" title="{{ channel.prefix }} {{ channel.course_number }}.{{ channel.section_number|leading_zeros:3 }} - {{ channel.title }}">
+                    {{ channel.prefix }} {{ channel.course_number }}.{{ channel.section_number|leading_zeros:3 }} - {{ channel.title }}
+                </h2>
                 <div class="courses-other">
-                    <h2 id="courses-add">Add new class</h2>
+                    <h2 id="courses-add">Add new channel</h2>
                 </div>
             </div>
             <h3 class="class-title">CLASS SESSIONS</h3>
@@ -144,12 +146,23 @@
 
         <aside class="channel-overlay">
             <nav id="overlay-tabs">
-                <button id="overlay-tab-search"><span class="fa fa-search"></span> Search classes</button>
-                <button id="overlay-tab-create">+ Create new class</button>
+                <button id="overlay-tab-search"><span class="fa fa-search"></span> Search channels</button>
+                <button id="overlay-tab-create">+ Create new channel</button>
             </nav>
             <button id="channel-overlay-close"></button>
             <section id="channel-overlay-search">
                 Search existing channels...
+                <input id="channel-search" placeholder="search channel" type="text">
+                <div>
+                {% for a_channel in channels %}
+                    <p class="channel">
+                        <a href="/channel/{{ a_channel.pk }}">
+                            {{ a_channel.prefix }} {{ a_channel.course_number }}.{{ a_channel.section_number|leading_zeros:3 }} - {{ a_channel.title }}<br>
+                            {{ a_channel.instructor }}
+                        </a>
+                    </p>
+                {% endfor %}
+                </div>
             </section>
             <section id="channel-overlay-create">
                 Create a new channel...
