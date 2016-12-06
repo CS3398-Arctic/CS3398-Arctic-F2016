@@ -153,17 +153,19 @@ def ajax(request):
         if request.user.is_authenticated:
             fields.append('author')
 
-        if 'modified_date' not in request.GET:
+        if 'modified_date' not in request.GET or 'channel' not in request.GET:
             return HttpResponse('{}')
 
         try:
+            the_channel = Channel.objects.get(pk=request.GET['channel'])
+
             later_than = parse_datetime(parse.unquote(request.GET['modified_date']))
             if later_than is None:
                 return HttpResponse('{}')
-        except ValueError:
+        except (ValueError, Channel.DoesNotExist):
             return HttpResponse('{}')
 
-        notes = Note.objects.filter(modified_date__gte=later_than)
+        notes = Note.objects.filter(channel=the_channel, modified_date__gte=later_than)
         handwritten_notes = HandwrittenNote.objects.filter(modified_date__gte=later_than)
 
         all_notes = sorted(chain(notes, handwritten_notes), key=attrgetter('created_date'))

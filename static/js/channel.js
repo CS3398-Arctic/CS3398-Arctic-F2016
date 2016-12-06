@@ -136,7 +136,7 @@ function outputNote(note) {
 
             var noteDelete = $("<a></a>", {
                 "class": "note-delete fa fa-trash",
-                href: ajax_url + "?action=delete&note=" + note.pk,
+                href: AJAX_URL + "?action=delete&note=" + note.pk,
                 role: "button",
                 "aria-label": "delete"
             });
@@ -174,7 +174,7 @@ function outputNote(note) {
 function ajaxPostForm() {
     $.ajax({
        type: "POST",
-       url: ajax_url,
+       url: AJAX_URL,
        data: $("#note-form").serialize(),
        success: function() {
            ajaxSingleUpdate();
@@ -190,8 +190,8 @@ $("#note-post").click( function(event){
 function ajaxLiveUpdate() {
     var potential_new_update_time = new Date();
     $.ajax({
-        url: ajax_url
-            + '?action=load&channel=1&session=all&modified_date='
+        url: AJAX_URL
+            + '?action=load&channel=' + CHANNEL + '&session=all&modified_date='
             + encodeURIComponent(last_update.toISOString()),
         dataType: 'json',
         success: function(notes) {
@@ -211,8 +211,8 @@ function ajaxLiveUpdate() {
 
 function ajaxSingleUpdate() {
     $.ajax({
-        url: ajax_url
-            + '?action=load&channel=1&session=all&modified_date='
+        url: AJAX_URL
+            + '?action=load&channel=' + CHANNEL + '&session=all&modified_date='
             + encodeURIComponent(new Date(last_update - 60000).toISOString()), // 60000ms = 1min
         dataType: 'json',
         success: function(notes) {
@@ -245,11 +245,11 @@ function noteEdit (id) {
     var edit_form_textarea = $('#edit_body_text');
 
     edit_form.appendTo(the_note);
-    edit_form.attr('action', ajax_url + '?action=edit&note=' + id);
+    edit_form.attr('action', AJAX_URL + '?action=edit&note=' + id);
 
     $("#note-edit-post").off('click').click( function(event){
         event.preventDefault();
-        ajaxEditNote(ajax_url + '?action=edit&note=' + id);
+        ajaxEditNote(AJAX_URL + '?action=edit&note=' + id);
     });
 
     edit_form_textarea.val(the_note.find(".note-body").data("raw"));
@@ -289,7 +289,7 @@ function noteDelete (id) {
     $("#note-delete-proceed").off('click').click( function(event){
         event.preventDefault();
         prompt.appendTo($('#invis-deletion-container'));
-        ajaxDeleteNote(ajax_url + '?action=delete&note=' + id);
+        ajaxDeleteNote(AJAX_URL + '?action=delete&note=' + id);
     });
 }
 
