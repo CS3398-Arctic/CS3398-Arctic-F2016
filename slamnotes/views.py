@@ -198,7 +198,13 @@ def note_create(request):
         posted_form = NoteForm(request.POST, request.FILES)
 
     if request.user.is_authenticated() and posted_form.is_valid():
-        the_channel = posted_form.cleaned_data['channel']
+        if 'channel' in request.GET:
+            if not Channel.objects.filter(pk=request.GET['channel']).exists():
+                return False
+            the_channel = request.GET['channel']
+        else:
+            the_channel = posted_form.cleaned_data['channel']
+
         if handwritten_note:
             url = posted_form.cleaned_data['url']
             HandwrittenNote.objects.create(url=url, channel=the_channel, author=request.user)
