@@ -16,7 +16,8 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.utils import timezone
 from django.utils.dateparse import parse_datetime
 
-from .models import Note, NoteForm, HandwrittenNote, HandwrittenNoteForm, SignupForm, LoginForm, ChannelForm, User
+from .models import Note, HandwrittenNote, User, Channel, \
+    NoteForm, HandwrittenNoteForm, SignupForm, LoginForm, ChannelForm
 
 
 def index(request):
@@ -109,7 +110,10 @@ def channel(request):
     all_notes = sorted(chain(notes, handwritten_notes), key=attrgetter('created_date'), reverse=True)
 
     if request.method == 'POST':
-        note_create(request)
+        if request.POST.get('body_text', '') != '':
+            note_create(request)
+        else:
+            channel_create(request)
     
     form = NoteForm()
 
@@ -227,5 +231,16 @@ def note_delete(request):
         note.body_text = ""
         note.modified_date = timezone.now()
         note.save()
+        return True
+    return False
+
+
+def channel_create(request):
+    """Create a requested channel if user is registered."""
+
+    posted_form = ChannelForm(request.POST, request.FILES)
+    if request.user.is_authenticated() and posted_form.is_valid():
+        body_text = posted_form.cleaned_data['body_text']
+        Channel.objects.create(body_text=body_text, author=request.user)
         return True
     return False
