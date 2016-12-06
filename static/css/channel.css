@@ -868,6 +868,48 @@ body.overlay-active .channel-overlay {
     color: #222;
 }
 
+.channel-overlay section p {
+    float: left;
+    padding: 1rem 2rem;
+    width: 12rem;
+}
+
+.channel-overlay .channel-numbers label {
+    display: block;
+    float: left;
+    width: 5.5rem;
+}
+
+.channel-overlay .channel-numbers input {
+    display: block;
+    float: left;
+    margin-right: 0.7rem;
+    width: 4.5rem;
+}
+
+.channel-overlay .channel-days label {
+    display: block;
+    float: left;
+    width: 2rem;
+}
+
+.channel-overlay .channel-days input {
+    display: block;
+    float: left;
+    margin: 0.5rem 0.2rem 0;
+}
+
+.channel-overlay .channel-time input[type=number]{
+    width: 3rem;
+}
+
+.channel-overlay .channel-creation-submit {
+    clear: both;
+    float: none;
+    width: auto;
+    text-align: right;
+}
+
 /* ==========================================================================
    Media Queries
    ========================================================================== */

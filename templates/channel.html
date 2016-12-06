@@ -152,48 +152,39 @@
                 Create a new channel...
                 <form id="channel-creation-form" method="post">
                     {% csrf_token %}
-                    {{ channel_form.as_p }}
-                    <hr>
-                    <p>
-                        <label>Prefix:</label> <input type="text">
+                    <p><label for="id_title">Class Title:</label><br><input id="id_title" maxlength="50" name="title" type="text" required /></p>
+                    <p><label for="id_instructor">Instructor:</label><br><input id="id_instructor" maxlength="50" name="instructor" type="text" required /></p>
+                    <p><label for="id_prefix">Prefix:</label><br><input id="id_prefix" maxlength="2" name="prefix" type="text" required /></p>
+                    <p class="channel-numbers">
+                        <label for="id_course_number">Course #:</label><label for="id_section_number">Section #:</label>
+                        <br><input id="id_course_number" min="0" name="course_number" type="number" required />
+                        <input id="id_section_number" min="0" name="section_number" type="number" required />
                     </p>
-                    <p>
-                        <label>Number:</label> <input type="number" placeholder="Number">
+                    <p><label for="id_postfix">Postfix:</label><br><input id="id_postfix" maxlength="1" name="postfix" type="text" /></p>
+                    <p><label for="id_first_class_day">Class Start Day:</label><br><input id="id_first_class_day" name="first_class_day" type="text" value="" placeholder="YYYY-MM-DD" required /></p>
+                    <p><label for="id_last_class_day">Last Class Day:</label><br><input id="id_last_class_day" name="last_class_day" type="text" value="" placeholder="YYYY-MM-DD" required /></p>
+                    <p class="channel-days">
+                        Meeting Days:
+                        <br><input id="id_meeting_day_mon" name="meeting_day_mon" type="checkbox" /> <label for="id_meeting_day_mon">Mon</label>
+                        <input id="id_meeting_day_tue" name="meeting_day_tue" type="checkbox" /> <label for="id_meeting_day_tue">Tues</label>
+                        <input id="id_meeting_day_wed" name="meeting_day_wed" type="checkbox" /> <label for="id_meeting_day_wed">Wed</label>
+                        <br><input id="id_meeting_day_thu" name="meeting_day_thu" type="checkbox" /> <label for="id_meeting_day_thu">Thu</label>
+                        <input id="id_meeting_day_fri" name="meeting_day_fri" type="checkbox" /> <label for="id_meeting_day_fri">Fri</label>
+                        <input id="id_meeting_day_sat" name="meeting_day_sat" type="checkbox" /> <label for="id_meeting_day_sat">Sat</label>
                     </p>
-                    <p>
-                        <label>Section:</label> <input type="number" placeholder="Section">
+                    <p class="channel-time">
+                        <label for="id_start_time_h">Start Time (24H):</label><br>
+                        <input id="id_start_time_h" min="0" max="23" name="start_time_h" type="number" placeholder="HH" value="" required />
+                        :
+                        <input id="id_start_time_m" min="0" max="59" name="start_time_m" type="number" placeholder="mm" value="" required />
                     </p>
-                    <p>
-                        <label>Postfix:</label> <input type="text">
+                    <p class="channel-time">
+                        <label for="id_start_time_h">End Time (24H):</label><br>
+                        <input id="id_end_time_h" min="0" max="23" name="end_time_h" type="number" placeholder="HH" value="" required />
+                        :
+                        <input id="id_end_time_m" min="0" max="59" name="end_time_m" type="number" placeholder="mm" value="" required />
                     </p>
-                    <p>
-                        <label>Title:</label> <input type="text">
-                    </p>
-                    <p>
-                        <label>Instructor:</label> <input type="text">
-                    </p>
-                    <p>
-                        <label>First class day:</label> <input type="text" placeholder="MM/DD/YYYY">
-                    </p>
-                    <p>
-                        <label>Last class day:</label> <input type="text" placeholder="MM/DD/YYYY">
-                    </p>
-                    <p>
-                        Meeting days:
-                        <input type="checkbox"> <label>Mon</label>
-                        <input type="checkbox"> <label>Tue</label>
-                        <input type="checkbox"> <label>Wed</label>
-                        <input type="checkbox"> <label>Thu</label>
-                        <input type="checkbox"> <label>Fri</label>
-                        <input type="checkbox"> <label>Sat</label>
-                    </p>
-                    <p>
-                        <label>Class start time:</label> <input type="text" placeholder="HH:mm">
-                    </p>
-                    <p>
-                        <label>Class end time:</label> <input type="text" placeholder="HH:mm">
-                    </p>
-                    <p>
+                    <p class="channel-creation-submit">
                         <input type="submit" value="Create channel">
                     </p>
                 </form>
