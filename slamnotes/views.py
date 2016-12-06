@@ -92,7 +92,7 @@ def activate(request):
         try:
             user = User.objects.get(confirmation_code=request.META['QUERY_STRING'])
             # Set user's confirmation code to an empty string, signifying the account has been activated.
-            #user.confirmation_code = ''
+            user.confirmation_code = ''
             user.save()
 
             return redirect(reverse('index') + '?activated')
@@ -199,12 +199,9 @@ def note_create(request):
 
     if request.user.is_authenticated() and posted_form.is_valid():
         if 'channel' in request.GET:
-            if not Channel.objects.filter(pk=request.GET['channel']).exists():
-                return False
             the_channel = request.GET['channel']
         else:
             the_channel = posted_form.cleaned_data['channel']
-
         if handwritten_note:
             url = posted_form.cleaned_data['url']
             HandwrittenNote.objects.create(url=url, channel=the_channel, author=request.user)

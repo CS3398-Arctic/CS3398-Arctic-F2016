@@ -39,7 +39,7 @@
                     {% csrf_token %}
                     <p>
                         <textarea cols="" id="id_body_text" name="body_text" placeholder="Write a note..." rows="" required></textarea>
-                        <input id="id_channel" name="channel" type="hidden" value="1" />
+                        <input id="id_channel" name="channel" type="hidden" value="{{ channel.pk }}" />
                     </p>
                     <p style="display:none">
                         Post a handwritten note (upload to <a href="http://imgur.com" target="_blank">Imgur</a> and submit link)

@@ -98,7 +98,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField('date joined', default=timezone.now)
     confirmation_code = models.CharField(
         'confirmation code',
-        max_length=60, default='    '
+        max_length=60,
     )
 
     objects = UserManager()
