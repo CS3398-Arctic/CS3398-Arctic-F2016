@@ -203,7 +203,7 @@ class Note(models.Model):
     """Note model"""
     body_text = models.TextField()
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
-    channel = models.ForeignKey(Channel, null=True, blank=True)
+    channel = models.ForeignKey(Channel)
     session = models.ForeignKey(Session, null=True, blank=True)
     created_date = models.DateTimeField('date created', default=timezone.now)
     modified_date = models.DateTimeField('date modified', default=timezone.now)

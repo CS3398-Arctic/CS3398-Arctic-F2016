@@ -23,7 +23,7 @@ from . import views
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
-    url(r'^channel/1$', views.channel, name='channel'),
+    url(r'^channel/([0-9]+)/$', views.channel),
     url(r'^activate$', views.activate, name='activate'),
     url(r'^logout$', views.logout, name='logout'),
     url(r'^ajax$', views.ajax, name='ajax'),

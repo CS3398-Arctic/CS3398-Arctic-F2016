@@ -102,8 +102,9 @@ def activate(request):
     return redirect(index)
 
 
-def channel(request):
+def channel(request, id):
     """Channel view"""
+    channel = get_object_or_404(Channel, pk=id)
     notes = Note.objects.order_by('-created_date')
     handwritten_notes = HandwrittenNote.objects.order_by('-created_date')
 
@@ -117,7 +118,7 @@ def channel(request):
     
     form = NoteForm()
 
-    channel_form = ChannelForm()
+    channel_form = ChannelForm()#{'channel': })
 
     theme = request.COOKIES.get('theme', '')
 
