@@ -240,7 +240,6 @@ def channel_create(request):
 
     posted_form = ChannelForm(request.POST, request.FILES)
     if request.user.is_authenticated() and posted_form.is_valid():
-        body_text = posted_form.cleaned_data['body_text']
-        Channel.objects.create(body_text=body_text, author=request.user)
+        posted_form.save()
         return True
     return False
