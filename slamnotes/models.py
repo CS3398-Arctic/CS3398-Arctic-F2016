@@ -35,7 +35,8 @@ class UserManager(BaseUserManager):
         signed_email = signer.sign(user.email)
 
         # Strip original string and colons
-        user.confirmation_code = signed_email.split(":", 1)[1].replace(':', '')
+        if not settings.DEBUG:
+            user.confirmation_code = signed_email.split(":", 1)[1].replace(':', '')
 
         user.save(using=self._db)
         return user

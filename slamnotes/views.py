@@ -51,10 +51,12 @@ def index(request):
             # Create new account
             User.objects.create_user(**form_signup.cleaned_data)
             account_created = True
-            new_user = User.objects.get(email=form_signup.cleaned_data['email'])
-            new_user.email_user(
-                'Activate your account',
-                '''Welcome to Slam eNotes!
+
+            if not DEBUG:
+                new_user = User.objects.get(email=form_signup.cleaned_data['email'])
+                new_user.email_user(
+                    'Activate your account',
+                    '''Welcome to Slam eNotes!
 
 Visit http://slamenotes.com/activate?%s to activate your account.
 
@@ -62,10 +64,9 @@ Best,
 Slam eNotes Team
 
 This message was sent to you because your email was used to register an account at slamenotes.com.'''
-                % new_user.confirmation_code,
-                'account@slamenotes.com',
-                fail_silently=True,
-            )
+                    % new_user.confirmation_code,
+                    'account@slamenotes.com'
+                )
     else:
         form_login = LoginForm()
         form_signup = SignupForm()
@@ -76,6 +77,7 @@ This message was sent to you because your email was used to register an account 
 
     return render(request, 'index.html',
                   {
+                      'debug_enabled': DEBUG,
                       'form_login': form_login,
                       'form_signup': form_signup,
                       'account_created': account_created,
