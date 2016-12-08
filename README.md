@@ -2,11 +2,11 @@
 
 Team Arctic's project for CS 3398, fall 2016: A web app for note-taking and sharing, geared towards students.
 
-This project is hosted online at [Slam eNotes](slamenotes.com) (slamenotes.com).
+This project is hosted online at [Slam eNotes](http://slamenotes.com) (slamenotes.com).
 
 We run our project on a CentOS 7.2 server using Python 3.4, with MariaDB and Apache, but thanks to the flexibility of Django, there are plentiful options when it comes to OS, database, and webserver selection.
 
-Our project is built for Django 1.10 and Python 3.4+, and aims to follow naming conventions for locations of static files and templates.
+Our project is built with Django 1.10 and Python 3.4+, and aims to follow naming conventions for locations of static files and templates.
 
 ## Installation:
 First, [install Django](https://docs.djangoproject.com/en/1.10/intro/install/).
