@@ -53,5 +53,5 @@ Sign-ups require a @txstate.edu email address for account creation.
 - [Initializr](http://www.initializr.com/) (modified)
 
 ### Contributors
-Peter Cassetta
-Tristan Thielemann
+- Peter Cassetta
+- Tristan Thielemann
