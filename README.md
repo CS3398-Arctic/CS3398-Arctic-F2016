@@ -39,6 +39,9 @@ python manage.py runserver
 
 You should see a message in the console with a URL and port number. Now just visit this URL in your web browser!
 
+## Additional Information:
+Sign-ups require a @txstate.edu email address for account creation.
+
 ### External JS/jQuery libraries used:
 - [jQuery](https://jquery.com/)
 - [Modernizr](https://modernizr.com/)
@@ -48,3 +51,7 @@ You should see a message in the console with a URL and port number. Now just vis
 ### HTML/CSS templates used:
 - [Prism by TEMPLATED](https://templated.co/prism) (modified)
 - [Initializr](http://www.initializr.com/) (modified)
+
+### Contributors
+Peter Cassetta
+Tristan Thielemann
