@@ -56,3 +56,4 @@ Sign-ups require a @txstate.edu email address for account creation.
 - Peter Cassetta
 - Tristan Thielemann
 - Paul Lindsey
+- Dillon Rowan
