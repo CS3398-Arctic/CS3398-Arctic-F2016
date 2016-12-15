@@ -57,3 +57,4 @@ Sign-ups require a @txstate.edu email address for account creation.
 - Tristan Thielemann
 - Paul Lindsey
 - Dillon Rowan
+-Juan Ortiz
